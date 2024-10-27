@@ -1,6 +1,6 @@
 package org.example.hsf301;
 
-import hsf301.service.AccountService;
+import org.example.hsf301.service.AccountService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
