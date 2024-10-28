@@ -7,6 +7,7 @@ module org.example.hsf301 {
     requires static lombok;
     requires javax.persistence;
     requires java.sql;
+    requires org.hibernate.orm.core;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires java.net.http;

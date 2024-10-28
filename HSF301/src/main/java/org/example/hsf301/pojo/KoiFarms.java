@@ -18,7 +18,7 @@ public class KoiFarms {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+   Long id;
 
     @Column(name = "farmName")
     private String farmName;

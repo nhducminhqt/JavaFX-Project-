@@ -17,14 +17,13 @@ public class KoiOfFarm {
     private KoiFarms koiFarms;
 
     @JoinColumn(name = "koi_id")
-
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Koi koi;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+   Long id;
 
     @Column(name = "quantity")
     private int quantity;

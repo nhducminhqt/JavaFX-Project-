@@ -14,9 +14,9 @@ import java.util.Set;
 @NoArgsConstructor
 public class Koi {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.AUTO)
         @Column(name = "id")
-        private Long id;
+        Long id;
 
         @Column(name = "koi_name")
         private String koiName;
@@ -36,7 +36,7 @@ public class Koi {
         @Column(name = "is_active")
         private boolean isActive;
 
-        @OneToMany(mappedBy = "kois", cascade = {CascadeType.ALL})
+        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL})
         private Set<KoiOfFarm> koiOfFarmList;
 
         @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL})
