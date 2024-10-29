@@ -1,11 +1,10 @@
 package org.example.hsf301.controllers;
 
-import java.awt.Desktop;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpResponse;
 import java.util.Map;
+import java.util.Objects;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -26,34 +27,62 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.hsf301.constants.APIConstants;
 import org.example.hsf301.exceptions.BadCredentialsException;
 import org.example.hsf301.utils.ApiUtils;
-import org.example.hsf301.utils.EnvUtils;
-import org.example.hsf301.views.base.AppFxBaseResources;
 import org.example.hsf301.views.utils.AppAlert;
 
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class SignupController extends AppFxBaseResources {
+public class SignupController {
 
     @FXML
     public TextField usernameTextField;
+
     @FXML
-    public PasswordField enterPasswordField;
+    public TextField firstNameTextField;
+
+    @FXML
+    public TextField lastNameTextField;
+
+    @FXML
+    public PasswordField passwordField;
+
+    @FXML
+    public PasswordField confirmPasswordField;
+
     @FXML
     public Button loginButton;
+
+
     public static String email = "";
     private String password = "";
 
     @FXML
+    protected ImageView brandingImageView;
+    @FXML
+    protected ImageView logoImageView;
+
+    @FXML
     public void initialize() {
+
+        Image brandingImage = new Image(
+            Objects.requireNonNull(
+                    getClass().getResource("/org/example/hsf301/assets/img/branding.png"))
+                .toExternalForm());
+        brandingImageView.setImage(brandingImage);
+
+        Image logoImage = new Image(
+            Objects.requireNonNull(getClass().getResource("/org/example/hsf301/assets/img/koi.png"))
+                .toExternalForm());
+        logoImageView.setImage(logoImage);
+
         usernameTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 System.out.println("Enter key pressed");
                 loginButtonAction(null);  // Trigger login action when Enter key is pressed
             }
         });
-        enterPasswordField.setOnKeyPressed(event -> {
+        passwordField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 System.out.println("Enter key pressed");
                 loginButtonAction(null);  // Trigger login action when Enter key is pressed
@@ -63,7 +92,7 @@ public class SignupController extends AppFxBaseResources {
 
 
     public void loginButtonAction(ActionEvent event) {
-        if ((!usernameTextField.getText().isBlank()) && (!enterPasswordField.getText().isBlank())) {
+        if ((!usernameTextField.getText().isBlank()) && (!passwordField.getText().isBlank())) {
 //            loginMessageLabel.setText("You tried to login");
             validateLogin();
         } else {
@@ -73,7 +102,7 @@ public class SignupController extends AppFxBaseResources {
 
     public void validateLogin() {
         email = usernameTextField.getText();
-        password = enterPasswordField.getText();
+        password = passwordField.getText();
         if (email.equals("admin") && password.equals("admin")) {
             AppAlert.IS_LOGIN_SUCCESS();
             Platform.runLater(() -> {
@@ -116,38 +145,17 @@ public class SignupController extends AppFxBaseResources {
                         break;
                     case 400:
                         JOptionPane.showMessageDialog(null,
-                            "Username or password is incorrect, please try again!");
+                                                      "Username or password is incorrect, please try again!");
                         throw new BadCredentialsException("Username or password is incorrect");
                     default:
                         JOptionPane.showMessageDialog(null,
-                            "Internal server error, please try again later!");
+                                                      "Internal server error, please try again later!");
                         break;
                 }
             } catch (IOException | InterruptedException | BadCredentialsException ex) {
                 JOptionPane.showMessageDialog(null, "An error occurred: " + ex.getMessage());
             }
         }).start();
-    }
-
-    @FXML
-    private void loginViaGoogleAction() {
-        Platform.runLater(() -> {
-            String googleAuthUrl = EnvUtils.get("GOOGLE_AUTH_URL");
-            try {
-                URI uri = new URI(googleAuthUrl);
-                if (Desktop.isDesktopSupported() && Desktop.getDesktop()
-                    .isSupported(Desktop.Action.BROWSE)) {
-                    Desktop.getDesktop().browse(uri);
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-    }
-
-    @FXML
-    private void loginViaFacebookAction() {
-        Platform.runLater(AppAlert::IS_NOT_SUPPORT);
     }
 
     public void loginHereAction(ActionEvent actionEvent) {
@@ -174,23 +182,5 @@ public class SignupController extends AppFxBaseResources {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
-    public void forgotPasswordAction(ActionEvent actionEvent) {
-        String api = "http://localhost:3000/forgot-password";
-        Platform.runLater(() -> {
-            try {
-                // Specify the URL of the website
-                URI uri = new URI(api);
-                // Open the website in the default browser
-                if (Desktop.isDesktopSupported() && Desktop.getDesktop()
-                    .isSupported(Desktop.Action.BROWSE)) {
-                    Desktop.getDesktop().browse(uri);
-                }
-            } catch (Exception ex) {
-                System.out.println("Error when open frontend forgot password: " + ex.getMessage());
-            }
-        });
-    }
-
 
 }

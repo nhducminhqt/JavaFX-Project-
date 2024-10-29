@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpResponse;
 import java.util.Map;
+import java.util.Objects;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -27,33 +30,67 @@ import org.example.hsf301.constants.APIConstants;
 import org.example.hsf301.exceptions.BadCredentialsException;
 import org.example.hsf301.utils.ApiUtils;
 import org.example.hsf301.utils.EnvUtils;
-import org.example.hsf301.views.base.AppFxBaseResources;
 import org.example.hsf301.views.utils.AppAlert;
 
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class LoginController extends AppFxBaseResources {
+public class LoginController {
 
     @FXML
     public TextField usernameTextField;
     @FXML
-    public PasswordField enterPasswordField;
+    public PasswordField passwordField;
     @FXML
     public Button loginButton;
     public static String email = "";
     private String password = "";
 
     @FXML
+    protected ImageView brandingImageView;
+    @FXML
+    protected ImageView logoImageView;
+    @FXML
+    protected ImageView ggImageView;
+    @FXML
+    protected ImageView fbImageView;
+    @FXML
+    protected ImageView xImageView;
+
+    @FXML
     public void initialize() {
+
+        Image brandingImage = new Image(
+            Objects.requireNonNull(
+                    getClass().getResource("/org/example/hsf301/assets/img/branding.png"))
+                .toExternalForm());
+        brandingImageView.setImage(brandingImage);
+
+        Image logoImage = new Image(
+            Objects.requireNonNull(getClass().getResource("/org/example/hsf301/assets/img/koi.png"))
+                .toExternalForm());
+        logoImageView.setImage(logoImage);
+
+        Image ggImage = new Image(
+            Objects.requireNonNull(
+                    getClass().getResource("/org/example/hsf301/assets/img/google.png"))
+                .toExternalForm());
+        ggImageView.setImage(ggImage);
+
+        Image fbImage = new Image(
+            Objects.requireNonNull(
+                    getClass().getResource("/org/example/hsf301/assets/img/facebook.png"))
+                .toExternalForm());
+        fbImageView.setImage(fbImage);
+
         usernameTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 System.out.println("Enter key pressed");
                 loginButtonAction(null);  // Trigger login action when Enter key is pressed
             }
         });
-        enterPasswordField.setOnKeyPressed(event -> {
+        passwordField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 System.out.println("Enter key pressed");
                 loginButtonAction(null);  // Trigger login action when Enter key is pressed
@@ -63,7 +100,7 @@ public class LoginController extends AppFxBaseResources {
 
 
     public void loginButtonAction(ActionEvent event) {
-        if ((!usernameTextField.getText().isBlank()) && (!enterPasswordField.getText().isBlank())) {
+        if ((!usernameTextField.getText().isBlank()) && (!passwordField.getText().isBlank())) {
 //            loginMessageLabel.setText("You tried to login");
             validateLogin();
         } else {
@@ -73,13 +110,13 @@ public class LoginController extends AppFxBaseResources {
 
     public void validateLogin() {
         email = usernameTextField.getText();
-        password = enterPasswordField.getText();
+        password = passwordField.getText();
         if (email.equals("admin") && password.equals("admin")) {
-            AppAlert.IS_LOGIN_SUCCESS();
+            AppAlert.showAlert("Login Success", "Welcome Admin, We are happy to see you again!");
             Platform.runLater(() -> {
 //                new MenuView().setVisible(true);
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.close();
+//                Stage stage = (Stage) loginButton.getScene().getWindow();
+//                stage.close();
             });
 
         } else {
@@ -116,11 +153,11 @@ public class LoginController extends AppFxBaseResources {
                         break;
                     case 400:
                         JOptionPane.showMessageDialog(null,
-                            "Username or password is incorrect, please try again!");
+                                                      "Username or password is incorrect, please try again!");
                         throw new BadCredentialsException("Username or password is incorrect");
                     default:
                         JOptionPane.showMessageDialog(null,
-                            "Internal server error, please try again later!");
+                                                      "Internal server error, please try again later!");
                         break;
                 }
             } catch (IOException | InterruptedException | BadCredentialsException ex) {
@@ -189,7 +226,7 @@ public class LoginController extends AppFxBaseResources {
                     Desktop.getDesktop().browse(uri);
                 }
             } catch (Exception ex) {
-                System.out.println("Error when open frontend forgot password: " + ex.getMessage());
+                ex.printStackTrace();
             }
         });
     }

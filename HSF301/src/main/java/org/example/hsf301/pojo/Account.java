@@ -2,16 +2,19 @@ package org.example.hsf301.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import lombok.Setter;
 
 @Entity
 @Table(name = "account")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Getter
+@Setter
 public class Account {
     @Id
     @Column(name = "username",nullable = false)

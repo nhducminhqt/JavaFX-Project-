@@ -36,7 +36,7 @@
                <font>
                   <Font size="30.0" />
                </font></TextField>
-        <PasswordField fx:id="enterPasswordField" layoutX="43.0" layoutY="381.0" prefHeight="62.0" prefWidth="439.0" promptText="Password" style="-fx-background-color: #F1F1F1;">
+        <PasswordField fx:id="passwordField" layoutX="43.0" layoutY="381.0" prefHeight="62.0" prefWidth="439.0" promptText="Password" style="-fx-background-color: #F1F1F1;">
                <font>
                   <Font size="30.0" />
                </font></PasswordField>
