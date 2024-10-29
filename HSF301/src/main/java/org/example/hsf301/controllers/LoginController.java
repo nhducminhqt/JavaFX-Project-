@@ -22,9 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.hsf301.constants.APIConstants;
@@ -63,7 +61,7 @@ public class LoginController {
 
     private Account account;
 
-    private IAccountService accountService = new AccountService("hibernate.cfg.xml");;
+    private IAccountService accountService = new AccountService("hibernate.cfg.xml");
 
     @FXML
     public void initialize() {

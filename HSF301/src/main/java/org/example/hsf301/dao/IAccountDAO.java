@@ -9,7 +9,10 @@ public interface IAccountDAO {
     void delete(Integer id);
     Account findById(Integer id);
     List<Account> findByPassword(String password);
+    Account findByUserName(String username);
     void update(Account account);
     Account login(String email, String password);
+    void signup(Account newAccount);
+
 }
 

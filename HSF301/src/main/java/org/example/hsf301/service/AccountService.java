@@ -42,5 +42,15 @@ public class AccountService implements IAccountService{
 		return accountRepo.login(email, password);
 	}
 
+	@Override
+	public Account findByUserName(String username) {
+		return accountRepo.findByUserName(username);
+	}
+
+	@Override
+	public void signup(Account newAccount) {
+		accountRepo.signup(newAccount);
+	}
+
 
 }

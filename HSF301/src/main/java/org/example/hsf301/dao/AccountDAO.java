@@ -119,6 +119,21 @@ public class AccountDAO implements IAccountDAO {
 	}
 
 	@Override
+	public Account findByUserName(String username) {
+		Session session = sessionFactory.openSession();
+		try {
+			String hql = "FROM Account WHERE username = :username";
+			return session.createQuery(hql, Account.class)
+				.setParameter("username", username)
+				.uniqueResult();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
 	public Account login(String email, String password) {
 		Session session = sessionFactory.openSession();
 		try {
@@ -140,6 +155,18 @@ public class AccountDAO implements IAccountDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Override
+	public void signup(Account newAccount) {
+		// Check if the email is already in use
+		Account existingAccount = findByUserName(newAccount.getUsername());
+		if (existingAccount != null) {
+			throw new IllegalArgumentException("Username already in use.");
+		}
+
+		// Save the new account
+		save(newAccount);
 	}
 
 }
