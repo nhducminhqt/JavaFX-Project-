@@ -11,7 +11,7 @@
 			<property name="javax.persistence.jdbc.driver"
 				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:sqlserver://localhost:1433;DatabaseName=abce;encrypt=true;trustServerCertificate=true;" />
+				value="jdbc:sqlserver://localhost:1433;DatabaseName=HSF301_KoiOrderingSystem;encrypt=true;trustServerCertificate=true;" />
 			<property name="javax.persistence.jdbc.user" value="sa" />
 			<property name="javax.persistence.jdbc.password"
 				value="12345" />

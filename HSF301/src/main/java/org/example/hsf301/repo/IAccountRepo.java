@@ -1,5 +1,14 @@
 package org.example.hsf301.repo;
 
+import java.util.List;
+import org.example.hsf301.pojo.Account;
+
 public interface IAccountRepo {
-	public org.example.hsf301.pojo.Account findByUserName(String username);
+
+	void save(Account account);
+	List<Account> findAll();
+	void delete(Integer id);
+	Account findById(Integer id);
+	void update(Account account);
+	Account login(String email, String password);
 }

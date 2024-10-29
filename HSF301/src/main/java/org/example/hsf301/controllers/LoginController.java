@@ -25,17 +25,19 @@ import javax.swing.JOptionPane;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.hsf301.constants.APIConstants;
 import org.example.hsf301.exceptions.BadCredentialsException;
+import org.example.hsf301.pojo.Account;
+import org.example.hsf301.service.IAccountService;
 import org.example.hsf301.utils.ApiUtils;
 import org.example.hsf301.utils.EnvUtils;
 import org.example.hsf301.views.utils.AppAlert;
 
 @Slf4j
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
+@RequiredArgsConstructor
 public class LoginController {
 
     @FXML
@@ -57,6 +59,10 @@ public class LoginController {
     protected ImageView fbImageView;
     @FXML
     protected ImageView xImageView;
+
+    private Account account;
+
+    private IAccountService accountService;
 
     @FXML
     public void initialize() {
@@ -120,7 +126,7 @@ public class LoginController {
             });
 
         } else {
-            login(email, password);
+            loginV2(email, password);
         }
     }
 
@@ -164,6 +170,17 @@ public class LoginController {
                 JOptionPane.showMessageDialog(null, "An error occurred: " + ex.getMessage());
             }
         }).start();
+    }
+
+    private void loginV2(String username, String password) {
+        account = accountService.login(username, password);
+
+        if (account == null) {
+            AppAlert.showAlert("Login Failed", "Invalid email or password");
+        }
+
+        AppAlert.showAlert("Login Success",
+                           "Welcome " + account.getFirstName() + " " + account.getLastName());
     }
 
     @FXML
