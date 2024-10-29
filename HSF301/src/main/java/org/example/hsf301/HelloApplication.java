@@ -22,7 +22,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        AccountService accountService = new AccountService("JPAs");
+        AccountService accountService = new AccountService("hibernate.cfg.xml");
 
         LogsUtils.ensureLogsFolderExists();
 

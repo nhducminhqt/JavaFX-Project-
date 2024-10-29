@@ -3,6 +3,7 @@ module org.example.hsf301 {
     requires javafx.fxml;
 
 //    requires com.dlsc.formsfx;
+    requires java.naming;  // Java Naming and Directory Interface (JNDI) API.
     requires org.kordamp.bootstrapfx.core;
     requires static lombok;
     requires javax.persistence;
