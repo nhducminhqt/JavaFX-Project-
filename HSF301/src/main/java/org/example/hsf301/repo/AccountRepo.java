@@ -44,4 +44,14 @@ public class AccountRepo implements IAccountRepo {
 		return accountDAO.login(email, password);
 	}
 
+	@Override
+	public Account findByUserName(String username) {
+		return accountDAO.findByUserName(username);
+	}
+
+	@Override
+	public void signup(Account newAccount) {
+		accountDAO.signup(newAccount);
+	}
+
 }

@@ -22,14 +22,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.hsf301.constants.APIConstants;
 import org.example.hsf301.exceptions.BadCredentialsException;
 import org.example.hsf301.pojo.Account;
+import org.example.hsf301.service.AccountService;
 import org.example.hsf301.service.IAccountService;
 import org.example.hsf301.utils.ApiUtils;
 import org.example.hsf301.utils.EnvUtils;
@@ -62,7 +61,7 @@ public class LoginController {
 
     private Account account;
 
-    private IAccountService accountService;
+    private IAccountService accountService = new AccountService("hibernate.cfg.xml");
 
     @FXML
     public void initialize() {
@@ -179,8 +178,7 @@ public class LoginController {
             AppAlert.showAlert("Login Failed", "Invalid email or password");
         }
 
-        AppAlert.showAlert("Login Success",
-                           "Welcome " + account.getFirstName() + " " + account.getLastName());
+        AppAlert.showAlert("Login Success", "Welcome " + account.getUsername() + ", We are happy to see you again!");
     }
 
     @FXML

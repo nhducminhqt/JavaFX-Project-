@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,6 +27,9 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.hsf301.constants.APIConstants;
 import org.example.hsf301.exceptions.BadCredentialsException;
+import org.example.hsf301.pojo.Account;
+import org.example.hsf301.service.AccountService;
+import org.example.hsf301.service.IAccountService;
 import org.example.hsf301.utils.ApiUtils;
 import org.example.hsf301.views.utils.AppAlert;
 
@@ -51,16 +55,21 @@ public class SignupController {
     public PasswordField confirmPasswordField;
 
     @FXML
-    public Button loginButton;
+    public Button submitButton;
 
 
     public static String email = "";
     private String password = "";
+    private String firstName = "";
+    private String lastName = "";
+    private String confirmPassword = "";
 
     @FXML
     protected ImageView brandingImageView;
     @FXML
     protected ImageView logoImageView;
+
+    private IAccountService accountService = new AccountService("hibernate.cfg.xml");
 
     @FXML
     public void initialize() {
@@ -79,19 +88,19 @@ public class SignupController {
         usernameTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 System.out.println("Enter key pressed");
-                loginButtonAction(null);  // Trigger login action when Enter key is pressed
+                submitButtonAction(null);  // Trigger login action when Enter key is pressed
             }
         });
         passwordField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 System.out.println("Enter key pressed");
-                loginButtonAction(null);  // Trigger login action when Enter key is pressed
+                submitButtonAction(null);  // Trigger login action when Enter key is pressed
             }
         });
     }
 
 
-    public void loginButtonAction(ActionEvent event) {
+    public void submitButtonAction(ActionEvent event) {
         if ((!usernameTextField.getText().isBlank()) && (!passwordField.getText().isBlank())) {
 //            loginMessageLabel.setText("You tried to login");
             validateLogin();
@@ -102,60 +111,34 @@ public class SignupController {
 
     public void validateLogin() {
         email = usernameTextField.getText();
+        firstName = firstNameTextField.getText();
+        lastName = lastNameTextField.getText();
         password = passwordField.getText();
-        if (email.equals("admin") && password.equals("admin")) {
-            AppAlert.IS_LOGIN_SUCCESS();
-            Platform.runLater(() -> {
-//                new MenuView().setVisible(true);
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.close();
-            });
+        confirmPassword = confirmPasswordField.getText();
 
-        } else {
-            login(email, password);
-        }
-    }
+        try{
 
-    private void login(String email_phone, String password) {
-        // Create a new thread to avoid blocking the Swing event dispatch thread
-        new Thread(() -> {
-            try {
-                // Replace with your API URL
-                String apiUrl = APIConstants.BASE_URL + "/users/login";
-                // Create the payload as a map and convert it to JSON
-                Map<String, String> payload = Map.of(
-                    "email_phone", email_phone, // Replace with actual value
-                    "password", password // Replace with actual value
-                );
-
-                // Send the request and get the response
-                HttpResponse<String> response = ApiUtils.postRequest(apiUrl, payload);
-
-                // Handle the response
-                switch (response.statusCode()) {
-                    case 200:
-                        AppAlert.IS_LOGIN_SUCCESS();
-
-                        Platform.runLater(() -> {
-//                            new MenuView().setVisible(true);
-                            Stage stage = (Stage) loginButton.getScene().getWindow();
-                            stage.close();
-                        });
-
-                        break;
-                    case 400:
-                        JOptionPane.showMessageDialog(null,
-                                                      "Username or password is incorrect, please try again!");
-                        throw new BadCredentialsException("Username or password is incorrect");
-                    default:
-                        JOptionPane.showMessageDialog(null,
-                                                      "Internal server error, please try again later!");
-                        break;
-                }
-            } catch (IOException | InterruptedException | BadCredentialsException ex) {
-                JOptionPane.showMessageDialog(null, "An error occurred: " + ex.getMessage());
+            if (!password.equals(confirmPassword)){
+                throw new BadCredentialsException("Passwords do not match");
             }
-        }).start();
+
+            Account newAccount = Account.builder()
+                .username(email)
+                .firstName(firstName)
+                .lastName(lastName)
+                .password(password)
+                .role("customer") // default role when signing up
+                .build();
+
+            accountService.signup(newAccount);
+
+            AppAlert.showAlert("Success", "Account created successfully");
+
+        }catch (Exception e){
+            log.error("Error: {}", e.getMessage());
+            System.out.println("Error: " + e.getMessage());
+            AppAlert.showAlert("Error", e.getMessage());
+        }
     }
 
     public void loginHereAction(ActionEvent actionEvent) {
