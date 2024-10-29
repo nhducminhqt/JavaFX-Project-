@@ -1,0 +1,11 @@
+package org.example.hsf301.repo;
+
+import java.util.List;
+import org.example.hsf301.pojo.Tours;
+
+public interface ITourRepo {
+    void save(Tours tours);
+    List<Tours> findAll();
+    void delete(Integer id);
+    Tours findById(Integer id);
+}
