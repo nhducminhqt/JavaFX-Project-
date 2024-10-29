@@ -143,12 +143,12 @@
         <targetPath>${project.build.outputDirectory}/META-INF</targetPath>
       </resource>
       <resource>
-        <directory>src/main/resources/org/example/hsf301/</directory>
+        <directory>src/main/resources/org/example/hsf301/fxml</directory>
         <filtering>false</filtering>
         <includes>
           <include>**.fxml</include>
         </includes>
-        <targetPath>${project.build.outputDirectory}/org/example/hsf301</targetPath>
+        <targetPath>${project.build.outputDirectory}/org/example/hsf301/fxml</targetPath>
       </resource>
       <resource>
         <directory>src/main/resources/org/example/hsf301/assets/img</directory>
@@ -156,7 +156,7 @@
         <includes>
           <include>**.png</include>
         </includes>
-        <targetPath>${project.build.outputDirectory}/assets/img</targetPath>
+        <targetPath>${project.build.outputDirectory}/org/example/hsf301/assets/img</targetPath>
       </resource>
       <resource>
         <directory>src/main/resources/org/example/hsf301/assets/sound</directory>
@@ -164,7 +164,7 @@
         <includes>
           <include>**.wav</include>
         </includes>
-        <targetPath>${project.build.outputDirectory}/assets/sound</targetPath>
+        <targetPath>${project.build.outputDirectory}/org/example/hsf301/assets/sound</targetPath>
       </resource>
       <resource>
         <directory>src/main/resources/org/example/hsf301/templates/email</directory>

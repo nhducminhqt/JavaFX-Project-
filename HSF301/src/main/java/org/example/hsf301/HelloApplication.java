@@ -14,7 +14,7 @@ import org.example.hsf301.utils.LogsUtils;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/org/example/hsf301/fxml/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 830, 650);
         stage.setTitle("Hello!");
         stage.setScene(scene);
