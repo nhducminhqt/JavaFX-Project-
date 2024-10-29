@@ -14,18 +14,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.controllers.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.controllers.SignupController">
   <left>
     <AnchorPane prefHeight="634.0" prefWidth="301.0" BorderPane.alignment="CENTER">
       <children>
         <ImageView fx:id="brandingImageView" fitHeight="650.0" fitWidth="303.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@assets/img/branding.png" />
+            <Image url="@../assets/img/branding.png" />
           </image>
         </ImageView>
         <ImageView fx:id="logoImageView" fitHeight="382.0" fitWidth="270.0" layoutX="16.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@assets/img/koi.png" />
+            <Image url="@../assets/img/koi.png" />
           </image>
         </ImageView>
       </children>
@@ -53,7 +53,7 @@
             <Font name="System Bold" size="35.0" />
           </font>
         </Button>
-        <Label layoutX="190.0" layoutY="14.0" text="Log In" textFill="#121212">
+        <Label layoutX="190.0" layoutY="14.0" text="Sign up" textFill="#121212">
           <font>
             <Font name="Roboto Medium" size="60.0" />
           </font>
@@ -65,7 +65,7 @@
                         <Font name="Roboto Light" size="14.0" />
                      </font>
                   </Label>
-              <Button fx:id="signupHere" contentDisplay="TOP" mnemonicParsing="false" onAction="#signupHereAction" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: transparent;" text="Sign up here">
+              <Button fx:id="loginHere" contentDisplay="TOP" mnemonicParsing="false" onAction="#loginHereAction" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: transparent;" text="Login here">
                 <cursor>
                   <Cursor fx:constant="HAND" />
                 </cursor>
@@ -93,7 +93,7 @@
           <children>
             <ImageView fx:id="ggImageView" fitHeight="30.0" fitWidth="30.0" onMousePressed="#loginViaGoogleAction" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@assets/img/google.png" />
+                <Image url="@../assets/img/google.png" />
               </image>
               <cursor>
                 <Cursor fx:constant="HAND" />
@@ -107,7 +107,7 @@
             </ImageView>
             <ImageView fx:id="fbImageView" fitHeight="30.0" fitWidth="30.0" onMousePressed="#loginViaFacebookAction" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@assets/img/facebook.png" />
+                <Image url="@../assets/img/facebook.png" />
               </image>
               <cursor>
                 <Cursor fx:constant="HAND" />

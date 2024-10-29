@@ -34,7 +34,7 @@ import org.example.hsf301.views.utils.AppAlert;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class LoginController extends AppFxBaseResources {
+public class SignupController extends AppFxBaseResources {
 
     @FXML
     public TextField usernameTextField;
@@ -150,11 +150,10 @@ public class LoginController extends AppFxBaseResources {
         Platform.runLater(AppAlert::IS_NOT_SUPPORT);
     }
 
-    @FXML
-    public void signupHereAction(ActionEvent actionEvent) {
+    public void loginHereAction(ActionEvent actionEvent) {
         try {
             // Load the signup.fxml file
-            URL url = getClass().getResource("/org/example/hsf301/fxml/signup.fxml");
+            URL url = getClass().getResource("/org/example/hsf301/fxml/login.fxml");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
 
@@ -175,7 +174,6 @@ public class LoginController extends AppFxBaseResources {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
 
     public void forgotPasswordAction(ActionEvent actionEvent) {
         String api = "http://localhost:3000/forgot-password";

@@ -28,19 +28,19 @@ public abstract class AppFxBaseResources implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image brandingImage = new Image(
-            Objects.requireNonNull(getClass().getResource("/assets/img/branding.png")).toExternalForm());
+            Objects.requireNonNull(getClass().getResource("/org/example/hsf301/assets/img/branding.png")).toExternalForm());
         brandingImageView.setImage(brandingImage);
 
         Image logoImage = new Image(
-            Objects.requireNonNull(getClass().getResource("/assets/img/koi.png")).toExternalForm());
+            Objects.requireNonNull(getClass().getResource("/org/example/hsf301/assets/img/koi.png")).toExternalForm());
         logoImageView.setImage(logoImage);
 
         Image ggImage = new Image(
-            Objects.requireNonNull(getClass().getResource("/assets/img/google.png")).toExternalForm());
+            Objects.requireNonNull(getClass().getResource("/org/example/hsf301/assets/img/google.png")).toExternalForm());
         ggImageView.setImage(ggImage);
 
         Image fbImage = new Image(
-            Objects.requireNonNull(getClass().getResource("/assets/img/facebook.png")).toExternalForm());
+            Objects.requireNonNull(getClass().getResource("/org/example/hsf301/assets/img/facebook.png")).toExternalForm());
         fbImageView.setImage(fbImage);
     }
 }
