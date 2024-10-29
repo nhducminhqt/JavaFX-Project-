@@ -123,7 +123,8 @@ public class AccountDAO implements IAccountDAO {
 		Session session = sessionFactory.openSession();
 		try {
 			// Assuming password is already hashed before calling this method
-			String hql = "FROM Account WHERE email = :email AND password = :password";
+			String hql = "FROM account WHERE username = :email AND password = :password";
+
 			Account account = session.createQuery(hql, Account.class)
 				.setParameter("email", email)
 				.setParameter("password", password)

@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Koi {
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         Long id;
 
