@@ -33,6 +33,7 @@ import org.example.hsf301.service.IAccountService;
 import org.example.hsf301.utils.ApiUtils;
 import org.example.hsf301.utils.EnvUtils;
 import org.example.hsf301.views.utils.AppAlert;
+import org.example.hsf301.views.utils.NavigateUtil;
 
 @Slf4j
 @Getter
@@ -178,7 +179,8 @@ public class LoginController {
             AppAlert.showAlert("Login Failed", "Invalid email or password");
         }
 
-        AppAlert.showAlert("Login Success", "Welcome " + account.getUsername() + ", We are happy to see you again!");
+        NavigateUtil.navigateTo("/org/example/hsf301/fxml/MainLayout.fxml", loginButton, 930, 750
+            , "Booking Tours");
     }
 
     @FXML

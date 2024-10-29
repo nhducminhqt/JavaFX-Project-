@@ -1,13 +1,12 @@
 package org.example.hsf301;
 
-import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.service.AccountService;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.service.AccountService;
 import org.example.hsf301.utils.AudioUtils;
 import org.example.hsf301.utils.LogsUtils;
 
