@@ -1,10 +1,15 @@
-package org.example.hsf301.views.utils;
+package org.example.hsf301.utils;
 
+import java.io.InputStream;
+import java.util.Scanner;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.Node;
+import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.controllers.LoginController;
+import org.example.hsf301.service.AccountService;
 
 public class NavigateUtil {
 
@@ -17,6 +22,12 @@ public class NavigateUtil {
         try {
             // Load the new layout
             FXMLLoader loader = new FXMLLoader(NavigateUtil.class.getResource(fxmlResource));
+
+            //Manually set the controller for the login page
+            if(fxmlResource.equals(ResourcePaths.LOGIN_VIEW)){
+                loader.setController(new LoginController(new AccountService(ResourcePaths.HIBERNATE_CONFIG)));
+            }
+
             Parent root = loader.load();
 
             // Get the current stage (window)

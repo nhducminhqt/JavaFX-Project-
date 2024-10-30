@@ -10,8 +10,6 @@ import org.example.hsf301.controllers.LoginController;
 import org.example.hsf301.service.AccountService;
 
 public class LoginView extends Application {
-    private static final String FXML_PATH = "/org/example/hsf301/fxml/login.fxml";
-
     @Override
     public void start(Stage stage) {
         try {
@@ -22,7 +20,7 @@ public class LoginView extends Application {
             LoginController controller = new LoginController(accountService);
 
             // Create the FXMLLoader
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(ResourcePaths.LOGIN_VIEW));
 
             // Set the controller before loading the FXML
             loader.setController(controller);

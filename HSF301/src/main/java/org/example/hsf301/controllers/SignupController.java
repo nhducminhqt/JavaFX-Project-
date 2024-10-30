@@ -1,18 +1,13 @@
 package org.example.hsf301.controllers;
 
-import java.io.IOException;
 import java.net.URL;
-import java.net.http.HttpResponse;
-import java.util.Map;
 import java.util.Objects;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -20,19 +15,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.hsf301.constants.APIConstants;
+import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.ERole;
 import org.example.hsf301.exceptions.BadCredentialsException;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.service.AccountService;
 import org.example.hsf301.service.IAccountService;
-import org.example.hsf301.utils.ApiUtils;
-import org.example.hsf301.views.utils.AppAlert;
+import org.example.hsf301.utils.AppAlert;
 
 @Slf4j
 @AllArgsConstructor
@@ -145,7 +138,7 @@ public class SignupController {
     public void loginHereAction(ActionEvent actionEvent) {
         try {
             // Load the signup.fxml file
-            URL url = getClass().getResource("/org/example/hsf301/fxml/login.fxml");
+            URL url = getClass().getResource(ResourcePaths.LOGIN_VIEW);
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
 

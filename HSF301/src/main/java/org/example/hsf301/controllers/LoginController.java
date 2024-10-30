@@ -2,11 +2,8 @@ package org.example.hsf301.controllers;
 
 import java.awt.Desktop;
 import java.awt.Desktop.Action;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpResponse;
-import java.util.Map;
 import java.util.Objects;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -22,19 +19,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.hsf301.constants.APIConstants;
-import org.example.hsf301.exceptions.BadCredentialsException;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.service.AccountService;
 import org.example.hsf301.service.IAccountService;
-import org.example.hsf301.utils.ApiUtils;
 import org.example.hsf301.utils.EnvUtils;
-import org.example.hsf301.views.utils.AppAlert;
-import org.example.hsf301.views.utils.NavigateUtil;
+import org.example.hsf301.utils.AppAlert;
+import org.example.hsf301.utils.NavigateUtil;
 
 @Slf4j
 @Getter

@@ -1,6 +1,11 @@
 package org.example.hsf301.constants;
 
 public class ResourcePaths {
+
+    //fxml
+    public static final String LOGIN_VIEW = "/org/example/hsf301/fxml/login.fxml";
+
+
     //hibernate.cfg.xml
     public static final String HIBERNATE_CONFIG = "hibernate.cfg.xml";
 

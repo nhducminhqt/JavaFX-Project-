@@ -2,7 +2,7 @@ package org.example.hsf301.views.info;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.example.hsf301.views.utils.AppAlert;
+import org.example.hsf301.utils.AppAlert;
 
 public class InfoView implements ActionListener {
 

@@ -12,7 +12,8 @@
   <VBox alignment="CENTER" layoutY="3.0" prefHeight="644.0" prefWidth="123.0">
     <Button layoutX="10.0" layoutY="60.0" mnemonicParsing="false" text="Button"/>
     <Button mnemonicParsing="false" text="Button"/>
-    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" text="Button"/>
+    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
+      text="Home" onAction="#navigateHome"/>
     <Button layoutX="10.0" layoutY="85.0" mnemonicParsing="false" text="Button"/>
     <Button layoutX="10.0" layoutY="110.0" mnemonicParsing="false" text="Button"/>
     <Button layoutX="10.0" layoutY="135.0" mnemonicParsing="false" text="Button"/>

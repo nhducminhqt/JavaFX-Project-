@@ -1,10 +1,10 @@
 package org.example.hsf301.layouts;
 
 import java.io.IOException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
-import org.example.hsf301.views.utils.NavigateUtil;
+import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.utils.NavigateUtil;
 
 public class AdminMainController {
 
@@ -13,6 +13,6 @@ public class AdminMainController {
 
     @FXML
     private void navigateLogout() throws IOException {
-        NavigateUtil.navigateTo("/org/example/hsf301/fxml/login.fxml", contentArea, 830, 650, "Hello!");
+        NavigateUtil.navigateTo(ResourcePaths.LOGIN_VIEW, contentArea, 830, 650, "Hello!");
     }
 }
