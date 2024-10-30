@@ -38,4 +38,6 @@ module org.example.hsf301 {
     opens org.example.hsf301.views.base to javafx.fxml;
     exports org.example.hsf301.views.utils;
     opens org.example.hsf301.views.utils to javafx.fxml;
+    exports org.example.hsf301.layouts;
+    opens org.example.hsf301.layouts to javafx.fxml;
 }

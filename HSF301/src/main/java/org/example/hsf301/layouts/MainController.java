@@ -1,20 +1,17 @@
-package org.example.hsf301.controllers;
+package org.example.hsf301.layouts;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
-import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.controllers.TourController;
 import org.example.hsf301.service.TourService;
-import org.example.hsf301.views.utils.AppAlert;
 import org.example.hsf301.views.utils.NavigateUtil;
 
 public class MainController implements Initializable {

@@ -26,6 +26,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.hsf301.constants.APIConstants;
+import org.example.hsf301.enums.ERole;
 import org.example.hsf301.exceptions.BadCredentialsException;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.service.AccountService;
@@ -127,7 +128,7 @@ public class SignupController {
                 .firstName(firstName)
                 .lastName(lastName)
                 .password(password)
-                .role("customer") // default role when signing up
+                .role(ERole.CUSTOMER) // default role when signing up
                 .build();
 
             accountService.signup(newAccount);

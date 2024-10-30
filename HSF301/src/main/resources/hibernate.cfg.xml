@@ -10,7 +10,7 @@
 		<property name="connection.password">12345</property>
 
 		<!-- Hibernate Settings -->
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">validate</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>

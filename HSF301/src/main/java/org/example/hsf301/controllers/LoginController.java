@@ -1,6 +1,7 @@
 package org.example.hsf301.controllers;
 
 import java.awt.Desktop;
+import java.awt.Desktop.Action;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -62,7 +63,11 @@ public class LoginController {
 
     private Account account;
 
-    private IAccountService accountService = new AccountService("hibernate.cfg.xml");
+    private final IAccountService accountService;
+
+    public LoginController(AccountService accountService){
+        this.accountService  = accountService;
+    }
 
     @FXML
     public void initialize() {
@@ -117,70 +122,33 @@ public class LoginController {
     public void validateLogin() {
         email = usernameTextField.getText();
         password = passwordField.getText();
-        if (email.equals("admin") && password.equals("admin")) {
-            AppAlert.showAlert("Login Success", "Welcome Admin, We are happy to see you again!");
-            Platform.runLater(() -> {
-//                new MenuView().setVisible(true);
-//                Stage stage = (Stage) loginButton.getScene().getWindow();
-//                stage.close();
-            });
-
-        } else {
-            loginV2(email, password);
-        }
+        login(email, password);
     }
 
-    private void login(String email_phone, String password) {
-        // Create a new thread to avoid blocking the Swing event dispatch thread
-        new Thread(() -> {
-            try {
-                // Replace with your API URL
-                String apiUrl = APIConstants.BASE_URL + "/users/login";
-                // Create the payload as a map and convert it to JSON
-                Map<String, String> payload = Map.of(
-                    "email_phone", email_phone, // Replace with actual value
-                    "password", password // Replace with actual value
-                );
-
-                // Send the request and get the response
-                HttpResponse<String> response = ApiUtils.postRequest(apiUrl, payload);
-
-                // Handle the response
-                switch (response.statusCode()) {
-                    case 200:
-                        AppAlert.IS_LOGIN_SUCCESS();
-
-                        Platform.runLater(() -> {
-//                            new MenuView().setVisible(true);
-                            Stage stage = (Stage) loginButton.getScene().getWindow();
-                            stage.close();
-                        });
-
-                        break;
-                    case 400:
-                        JOptionPane.showMessageDialog(null,
-                                                      "Username or password is incorrect, please try again!");
-                        throw new BadCredentialsException("Username or password is incorrect");
-                    default:
-                        JOptionPane.showMessageDialog(null,
-                                                      "Internal server error, please try again later!");
-                        break;
-                }
-            } catch (IOException | InterruptedException | BadCredentialsException ex) {
-                JOptionPane.showMessageDialog(null, "An error occurred: " + ex.getMessage());
-            }
-        }).start();
-    }
-
-    private void loginV2(String username, String password) {
+    private void login(String username, String password) {
         account = accountService.login(username, password);
 
         if (account == null) {
             AppAlert.showAlert("Login Failed", "Invalid email or password");
-        }
+        } else {
 
-        NavigateUtil.navigateTo("/org/example/hsf301/fxml/MainLayout.fxml", loginButton, 930, 750
-            , "Booking Tours");
+            String destinationPage = "";
+
+            switch (account.getRole()){
+                case ADMIN -> destinationPage = "AdminMainLayout";
+                case SALE_STAFF -> destinationPage = "StaffMainLayout";
+                case CONSULT_STAFF -> destinationPage = "StaffMainLayout";
+                case DELIVERY_STAFF -> destinationPage = "StaffMainLayout";
+                case CUSTOMER -> destinationPage = "MainLayout";
+                default -> destinationPage = "error";
+            }
+
+            NavigateUtil.navigateTo(String.format("/org/example/hsf301/fxml/%s.fxml",
+                                                  destinationPage),
+                                    loginButton, 930,
+                                    750
+                , "Booking Tours");
+        }
     }
 
     @FXML
@@ -190,7 +158,7 @@ public class LoginController {
             try {
                 URI uri = new URI(googleAuthUrl);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop()
-                    .isSupported(Desktop.Action.BROWSE)) {
+                    .isSupported(Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
                 }
             } catch (Exception ex) {
@@ -239,7 +207,7 @@ public class LoginController {
                 URI uri = new URI(api);
                 // Open the website in the default browser
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop()
-                    .isSupported(Desktop.Action.BROWSE)) {
+                    .isSupported(Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
                 }
             } catch (Exception ex) {
