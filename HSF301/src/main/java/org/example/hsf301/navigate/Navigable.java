@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.controllers.TourController;
+import org.example.hsf301.controllers.TourManagementController;
 import org.example.hsf301.service.TourService;
 import org.example.hsf301.utils.NavigateUtil;
 
@@ -45,12 +46,22 @@ public interface Navigable {
         setContent("my_profile", contentArea);
     }
 
+    //navigateFarm
+    default void navigateFarm(StackPane contentArea) throws IOException {
+        setContent("farm", contentArea);
+    }
+
     default void navigateLogout(StackPane contentArea) throws IOException {
         NavigateUtil.navigateTo(ResourcePaths.LOGIN_VIEW, contentArea, 830, 650, "Hello!");
     }
 
     default void navigateTourHomePage(StackPane contentArea) throws IOException {
         setContent("tours_home_page", contentArea);
+    }
+
+    //Management
+    default void navigateTourManagement(StackPane contentArea) throws IOException {
+        setContent("tours_management", contentArea);
     }
 
     // Method to load and set the content in the provided contentArea
@@ -64,6 +75,13 @@ public interface Navigable {
             TourService tourService = new TourService(ResourcePaths.HIBERNATE_CONFIG);
             TourController tourController = new TourController(tourService);
             loader.setController(tourController);
+        }
+
+        //tours_management
+        if (page.equals("tours_management")) {
+            TourService tourService = new TourService(ResourcePaths.HIBERNATE_CONFIG);
+            TourManagementController tourManagementController = new TourManagementController(tourService);
+            loader.setController(tourManagementController);
         }
 
         //preload data when admin login

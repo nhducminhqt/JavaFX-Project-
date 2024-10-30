@@ -15,13 +15,15 @@
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
       text="My Profile" onAction="#navigateMyProfile"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Tours" onAction="#navigateTour"/>
+      text="Tours Management" onAction="#navigateTour"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Bookings" onAction="#navigateBooking"/>
+      text="Bookings Management" onAction="#navigateBooking"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Kois" onAction="#navigateKoi"/>
+      text="Farms Management" onAction="#navigateFarm"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Staffs" onAction="#navigateStaff"/>
+      text="Kois Management" onAction="#navigateKoi"/>
+    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
+      text="Staffs Management" onAction="#navigateStaff"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
       text="Settings" onAction="#navigateSetting"/>
     <Button layoutX="10.0" layoutY="185.0" mnemonicParsing="false"

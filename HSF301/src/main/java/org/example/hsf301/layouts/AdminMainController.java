@@ -35,7 +35,7 @@ public class AdminMainController implements Initializable, Navigable {
 
     @FXML
     private void navigateTour() throws IOException {
-        navigateTour(contentArea);
+        navigateTourManagement(contentArea);
     }
 
     @FXML
@@ -61,6 +61,11 @@ public class AdminMainController implements Initializable, Navigable {
     @FXML
     private void navigateLogout() throws IOException {
         navigateLogout(contentArea);
+    }
+
+    @FXML
+    private void navigateFarm() throws IOException {
+        navigateFarm(contentArea);
     }
 
 }
