@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
 import org.example.hsf301.navigate.Navigable;
-import org.example.hsf301.utils.NavigateUtil;
 
 public class MainController implements Initializable, Navigable {
 
@@ -30,22 +29,21 @@ public class MainController implements Initializable, Navigable {
         navigateHome(contentArea);
     }
 
+    @FXML
+    private void navigateMyProfile() throws IOException {
+        navigateMyProfile(contentArea);
+    }
+
     // Handler for navigating to the Tours page
     @FXML
-    private void navigateTours() throws IOException {
-        navigateTours(contentArea);
+    private void navigateTour() throws IOException {
+        navigateTourHomePage(contentArea);
     }
 
     // Handler for navigating to the Bookings page
     @FXML
-    private void navigateBookings() throws IOException {
-        navigateBookings(contentArea);
-    }
-
-    // Handler for navigating to the Settings page
-    @FXML
-    private void navigateSettings() throws IOException {
-        navigateSettings(contentArea);
+    private void navigateBooking() throws IOException {
+        navigateBooking(contentArea);
     }
 
     @FXML

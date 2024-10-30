@@ -6,9 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.controllers.LoginController;
 import org.example.hsf301.controllers.TourController;
-import org.example.hsf301.service.AccountService;
 import org.example.hsf301.service.TourService;
 import org.example.hsf301.utils.NavigateUtil;
 
@@ -20,22 +18,39 @@ public interface Navigable {
     }
 
     // Default method to navigate to the Tours page
-    default void navigateTours(StackPane contentArea) throws IOException {
-        setContent("tours", contentArea);
+    default void navigateTour(StackPane contentArea) throws IOException {
+        setContent("tour", contentArea);
     }
 
     // Default method to navigate to the Bookings page
-    default void navigateBookings(StackPane contentArea) throws IOException {
-        setContent("bookings", contentArea);
+    default void navigateBooking(StackPane contentArea) throws IOException {
+        setContent("booking", contentArea);
     }
 
     // Default method to navigate to the Settings page
-    default void navigateSettings(StackPane contentArea) throws IOException {
-        setContent("settings", contentArea);
+    default void navigateSetting(StackPane contentArea) throws IOException {
+        setContent("setting", contentArea);
+    }
+
+    default void navigateKoi(StackPane contentArea) throws IOException {
+        setContent("koi", contentArea);
+    }
+
+    default void navigateStaff(StackPane contentArea) throws IOException {
+        setContent("staff", contentArea);
+    }
+
+    //navigateMyProfile
+    default void navigateMyProfile(StackPane contentArea) throws IOException {
+        setContent("my_profile", contentArea);
     }
 
     default void navigateLogout(StackPane contentArea) throws IOException {
         NavigateUtil.navigateTo(ResourcePaths.LOGIN_VIEW, contentArea, 830, 650, "Hello!");
+    }
+
+    default void navigateTourHomePage(StackPane contentArea) throws IOException {
+        setContent("tours_home_page", contentArea);
     }
 
     // Method to load and set the content in the provided contentArea

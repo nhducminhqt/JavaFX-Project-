@@ -1,18 +1,66 @@
 package org.example.hsf301.layouts;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
-import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.utils.NavigateUtil;
+import org.example.hsf301.navigate.Navigable;
 
-public class AdminMainController {
+public class AdminMainController implements Initializable, Navigable {
 
     @FXML
     private StackPane contentArea;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            // Set tours_home_page as the default content when the app starts
+            setContent("home", contentArea);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void navigateHome() throws IOException {
+        navigateHome(contentArea);
+    }
+
+    @FXML
+    private void navigateMyProfile() throws IOException {
+        navigateMyProfile(contentArea);
+    }
+
+    @FXML
+    private void navigateTour() throws IOException {
+        navigateTour(contentArea);
+    }
+
+    @FXML
+    private void navigateBooking() throws IOException {
+        navigateBooking(contentArea);
+    }
+
+    @FXML
+    private void navigateKoi() throws IOException {
+        navigateKoi(contentArea);
+    }
+
+    @FXML
+    private void navigateStaff() throws IOException {
+        navigateStaff(contentArea);
+    }
+
+    @FXML
+    private void navigateSetting() throws IOException {
+        navigateSetting(contentArea);
+    }
+
     @FXML
     private void navigateLogout() throws IOException {
-        NavigateUtil.navigateTo(ResourcePaths.LOGIN_VIEW, contentArea, 830, 650, "Hello!");
+        navigateLogout(contentArea);
     }
+
 }
