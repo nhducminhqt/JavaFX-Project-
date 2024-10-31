@@ -54,7 +54,7 @@ public class LoginController {
     @FXML
     protected ImageView xImageView;
 
-    private Account account;
+    public static Account account;
 
     private final IAccountService accountService;
 

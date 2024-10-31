@@ -6,7 +6,7 @@ import org.example.hsf301.repo.AccountRepo;
 import org.example.hsf301.repo.IAccountRepo;
 
 public class AccountService implements IAccountService{
-	private IAccountRepo accountRepo;
+	private final IAccountRepo accountRepo;
 
 	public AccountService(String name) {
 		accountRepo = new AccountRepo(name);

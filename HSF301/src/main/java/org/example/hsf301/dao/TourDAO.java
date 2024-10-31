@@ -44,8 +44,6 @@ public class TourDAO  implements  ITourDAO{
             tours = session.createQuery("from Tours ", Tours.class).list();
         } catch (Exception e) {
             System.out.println("Erorr: " + e.getMessage());
-        } finally {
-//			sessionFactory.close();
         }
         return tours;
     }
@@ -56,7 +54,7 @@ public class TourDAO  implements  ITourDAO{
         Transaction t = session.getTransaction();
         try {
             t.begin();
-            Tours tour = (Tours) session.get(Tours.class, id);
+            Tours tour = session.get(Tours.class, id);
             session.delete(tour);
             t.commit();
             System.out.println("Successfully Delete");
@@ -73,7 +71,7 @@ public class TourDAO  implements  ITourDAO{
     public Tours findById(Integer id) {
         Session session = sessionFactory.openSession();
         try {
-            return (Tours) session.get(Tours.class, id);
+            return session.get(Tours.class, id);
         } catch (Exception e) {
             throw e;
         } finally {

@@ -28,6 +28,8 @@ module org.example.hsf301 {
     exports org.example.hsf301.service;
 
     opens org.example.hsf301.pojo to org.hibernate.orm.core;
+    exports org.example.hsf301.pojo;
+
     opens org.example.hsf301.dao to org.hibernate.orm.core;
     exports org.example.hsf301.controllers;
     opens org.example.hsf301.controllers to javafx.fxml;

@@ -6,6 +6,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
+import org.example.hsf301.controllers.LoginController;
 import org.example.hsf301.navigate.Navigable;
 
 public class MainController implements Initializable, Navigable {

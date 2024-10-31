@@ -8,7 +8,7 @@ import org.example.hsf301.pojo.Account;
 
 public class AccountRepo implements IAccountRepo {
 
-	private IAccountDAO accountDAO;
+	private final IAccountDAO accountDAO;
 
 	public AccountRepo(String jpaName) {
 		accountDAO = new AccountDAO(jpaName);

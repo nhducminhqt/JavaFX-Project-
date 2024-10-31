@@ -7,7 +7,7 @@ import org.example.hsf301.repo.TourRepo;
 
 public class TourService implements ITourService{
 
-    private ITourRepo tourRepo;
+    private final ITourRepo tourRepo;
 
     public TourService(String jpaName){
         tourRepo = new TourRepo(jpaName);

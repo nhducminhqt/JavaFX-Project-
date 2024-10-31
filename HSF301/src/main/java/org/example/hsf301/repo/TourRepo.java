@@ -7,7 +7,7 @@ import org.example.hsf301.pojo.Tours;
 
 public class TourRepo implements ITourRepo{
 
-    private ITourDAO tourDAO;
+    private final ITourDAO tourDAO;
 
     public TourRepo(String jpaName){
         tourDAO = new TourDAO(jpaName);

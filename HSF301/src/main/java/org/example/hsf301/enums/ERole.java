@@ -10,6 +10,6 @@ public enum ERole {
     CUSTOMER,
     CONSULT_STAFF,
     DELIVERY_STAFF,
-    SALE_STAFF;
+    SALE_STAFF
 
 }
