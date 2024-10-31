@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,6 +30,8 @@ public class KoiFarms {
     @Column(name = "farmEmail")
     private String farmEmail;
 
+    @Column(name="image")
+    private String image;
     @Column(name = "description",columnDefinition = "TEXT")
     private String description;
 
@@ -40,6 +43,8 @@ public class KoiFarms {
 
     @Column(name = "isActive")
     private boolean isActive;
+
+
 
     @OneToMany(mappedBy = "farm", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Set<TourDetail> tourDetails;
