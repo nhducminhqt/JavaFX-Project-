@@ -7,7 +7,7 @@ import org.example.hsf301.pojo.Tours;
 import java.util.List;
 
 public interface ITourService {
-    Tours addTour(TourRequest tourRequest, Long tourId);
+    Tours addTour(TourRequest tourRequest);
 
     Tours updateTour(Long tourId, TourRequest tourRequest) throws Exception;
 

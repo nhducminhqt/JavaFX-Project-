@@ -12,7 +12,7 @@ public class TourService implements ITourService {
         tourRepository = new TourRepository(name);
     }
     @Override
-    public Tours addTour(TourRequest tourRequest, Long tourId) {
+    public Tours addTour(TourRequest tourRequest) {
         Tours tour = convertToEntity(tourRequest);
         try {
             if (tourRequest == null) {

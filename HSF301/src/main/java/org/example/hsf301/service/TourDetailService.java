@@ -15,7 +15,7 @@ public class TourDetailService implements ITourDetailService {
         koiFarmsRepository = new KoiFarmsRepository(name);
     }
     @Override
-    public TourDetail addTourDetail(TourDetailRequest tourDetailRequest, Long tourDetailId) {
+    public TourDetail addTourDetail(TourDetailRequest tourDetailRequest) {
         TourDetail tourDetail = new TourDetail();
         if (tourDetailRequest == null) {
             throw new IllegalArgumentException("tourDetailRequest can not be null");
