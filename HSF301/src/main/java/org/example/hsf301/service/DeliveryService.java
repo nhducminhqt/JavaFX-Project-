@@ -1,7 +1,5 @@
 package org.example.hsf301.service;
 
-import org.example.hsf301.dao.DeliveryDAO;
-import org.example.hsf301.dao.IDeliveryDAO;
 import org.example.hsf301.model.request.DeliveryRequest;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.pojo.Bookings;
@@ -13,15 +11,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class DeliveryService implements IDeliveryService{
-    private IDeliveryRepo deliveryRepo;
-    private IBookingRepo bookingRepo;
-    private IDepositRepo depositRepo;
+    private IDeliveryRepository deliveryRepo;
+    private IBookingRepository bookingRepo;
+    private IDepositRepository depositRepo;
     private Account account;
     public DeliveryService(String name,Account account) {
-        deliveryRepo = new DeliveryRepo(name);
+        deliveryRepo = new DeliveryRepository(name);
         this.account = account;
-        depositRepo = new DepositRepo(name);
-        bookingRepo = new BookingRepo(name);
+        depositRepo = new DepositRepository(name);
+        bookingRepo = new BookingRepository(name);
     }
 
 

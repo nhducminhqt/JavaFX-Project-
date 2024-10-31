@@ -5,11 +5,11 @@ import org.example.hsf301.dao.ITourDAO;
 import org.example.hsf301.dao.TourDAO;
 import org.example.hsf301.pojo.Tours;
 
-public class TourRepo implements ITourRepo{
+public class TourRepository implements ITourRepository {
 
     private final ITourDAO tourDAO;
 
-    public TourRepo(String jpaName){
+    public TourRepository(String jpaName){
         tourDAO = new TourDAO(jpaName);
     }
 

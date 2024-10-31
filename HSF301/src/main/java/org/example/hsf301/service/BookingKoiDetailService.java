@@ -2,12 +2,12 @@ package org.example.hsf301.service;
 
 import org.example.hsf301.model.request.BookingKoiDetailRequest;
 import org.example.hsf301.pojo.BookingKoiDetail;
-import org.example.hsf301.repo.IBookingKoiDetailRepo;
+import org.example.hsf301.repo.IBookingKoiDetailRepository;
 
 import java.util.List;
 
 public class BookingKoiDetailService implements IBookingKoiDetailService{
-    private IBookingKoiDetailRepo bookingKoiDetailRepo;
+    private IBookingKoiDetailRepository bookingKoiDetailRepo;
 
     @Override
     public BookingKoiDetail createKoiDetail(BookingKoiDetailRequest bookingKoiDetailRequest, Long bookingId) {

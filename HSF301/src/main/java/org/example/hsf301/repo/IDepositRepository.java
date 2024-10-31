@@ -4,7 +4,7 @@ import org.example.hsf301.pojo.Deposit;
 
 import java.util.List;
 
-public interface IDepositRepo {
+public interface IDepositRepository {
     public List<Deposit> getAll();
 
     public void save(Deposit student);

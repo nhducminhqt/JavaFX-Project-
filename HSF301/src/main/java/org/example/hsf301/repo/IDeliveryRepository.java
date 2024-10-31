@@ -4,7 +4,7 @@ import org.example.hsf301.pojo.Delivery;
 
 import java.util.List;
 
-public interface IDeliveryRepo {
+public interface IDeliveryRepository {
     public List<Delivery> getAll();
 
     public void save(Delivery student);

@@ -6,11 +6,11 @@ import org.example.hsf301.dao.IAccountDAO;
 import org.example.hsf301.pojo.Account;
 
 
-public class AccountRepo implements IAccountRepo {
+public class AccountRepository implements IAccountRepository {
 
 	private final IAccountDAO accountDAO;
 
-	public AccountRepo(String jpaName) {
+	public AccountRepository(String jpaName) {
 		accountDAO = new AccountDAO(jpaName);
 	}
 

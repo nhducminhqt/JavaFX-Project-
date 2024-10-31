@@ -4,22 +4,22 @@ import org.example.hsf301.model.request.DeliveryHistoryRequest;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.pojo.Bookings;
 import org.example.hsf301.pojo.DeliveryHistory;
-import org.example.hsf301.repo.BookingRepo;
-import org.example.hsf301.repo.DeliveryHistoryRepo;
-import org.example.hsf301.repo.IBookingRepo;
-import org.example.hsf301.repo.IDeliveryHistoryRepo;
+import org.example.hsf301.repo.BookingRepository;
+import org.example.hsf301.repo.DeliveryHistoryRepository;
+import org.example.hsf301.repo.IBookingRepository;
+import org.example.hsf301.repo.IDeliveryHistoryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class DeliveryHistoryService implements IDeliveryHistoryService {
-    private IDeliveryHistoryRepo deliveryHistoryRepo;
-    private IBookingRepo bookingRepo;
+    private IDeliveryHistoryRepository deliveryHistoryRepo;
+    private IBookingRepository bookingRepo;
     private Account account;
 
     public DeliveryHistoryService(String name,Account account) {
-        deliveryHistoryRepo = new DeliveryHistoryRepo(name);
-        bookingRepo = new BookingRepo(name);
+        deliveryHistoryRepo = new DeliveryHistoryRepository(name);
+        bookingRepo = new BookingRepository(name);
         this.account = account;
     }
     @Override

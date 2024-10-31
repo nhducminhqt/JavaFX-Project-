@@ -6,9 +6,9 @@ import org.example.hsf301.pojo.BookingKoiDetail;
 
 import java.util.List;
 
-public class BookingKoiDetailRepo implements IBookingKoiDetailRepo{
+public class BookingKoiDetailRepository implements IBookingKoiDetailRepository {
     private IBookingKoiDetailDAO dao;
-    public BookingKoiDetailRepo(String name) {
+    public BookingKoiDetailRepository(String name) {
         dao = new BookingKoiDetailDAO(name);
     }
     @Override

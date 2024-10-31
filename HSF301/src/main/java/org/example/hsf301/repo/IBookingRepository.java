@@ -4,7 +4,7 @@ import org.example.hsf301.pojo.Bookings;
 
 import java.util.List;
 
-public interface IBookingRepo {
+public interface IBookingRepository {
     public List<Bookings> getAll();
 
     public void save(Bookings student);

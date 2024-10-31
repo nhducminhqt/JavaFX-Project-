@@ -6,9 +6,9 @@ import org.example.hsf301.pojo.DeliveryHistory;
 
 import java.util.List;
 
-public class DeliveryHistoryRepo implements IDeliveryHistoryRepo{
+public class DeliveryHistoryRepository implements IDeliveryHistoryRepository {
     private IDeliveryHistoryDAO dao;
-    public DeliveryHistoryRepo(String name) {
+    public DeliveryHistoryRepository(String name) {
         dao = new DeliveryHistoryDAO(name);
     }
     @Override
