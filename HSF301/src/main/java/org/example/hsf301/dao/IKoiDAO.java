@@ -26,4 +26,5 @@ public interface IKoiDAO {
 
     // Find Koi records by koiName
     List<Koi> findByKoiName(String koiName);
+    List<Koi> findAllActive();
 }

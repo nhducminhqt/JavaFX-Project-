@@ -1,12 +1,10 @@
 package org.example.hsf301.service;
 
 import org.example.hsf301.model.request.KoiFarmRequest;
-import org.example.hsf301.pojo.KoiFarmImage;
 import org.example.hsf301.pojo.KoiFarms;
 import org.example.hsf301.repo.IKoiFarmsRepository;
 import org.example.hsf301.repo.KoiFarmsRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,6 +74,7 @@ public class KoiFarmService implements IKoiFarmService{
         koiFarm.setDescription(farmRequest.getDescription());
         koiFarm.setFarmAddress(farmRequest.getFarmAddress());
         koiFarm.setWebsite(farmRequest.getWebsite());
+        koiFarm.setImage(farmRequest.getImages());
         iKoiFarmsRepository.update(koiFarm);
         return koiFarm;
     }

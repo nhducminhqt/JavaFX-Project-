@@ -1,5 +1,6 @@
 package org.example.hsf301.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,11 +42,14 @@ public class Koi {
         private boolean isActive;
 
         @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL})
+        @JsonIgnore
         private Set<KoiOfFarm> koiOfFarmList;
 
         @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL})
+        @JsonIgnore
         private Set<BookingKoiDetail> bookingKoiDetails;
 
-        @OneToMany(mappedBy = "kois", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-        private List<KoiImage> koiImageList;
+
+
+
 }

@@ -164,21 +164,5 @@ public class KoiOfFarmService implements IKoiOfFarmService{
     public void updateAvailability(Long id, boolean available) {
 
     }
-    private KoiOfFarm convertToEntity(KoiOfFarmRequest request) {
-        KoiOfFarm koiOfFarm = new KoiOfFarm();
-        if (request == null) {
-            throw new IllegalArgumentException("KoiOfFarmRequest cannot be null");
-        }
 
-        // Set basic properties
-        koiOfFarm.setQuantity(request.getQuantity());
-        koiOfFarm.setAvailable(request.isAvailable());
-
-        // Note: You'll need to set Koi and KoiFarms objects here
-        // This would typically involve looking them up from their respective repositories
-        // For now, we'll leave this as a TODO
-        // TODO: Set Koi and KoiFarms objects based on IDs from request
-
-        return koiOfFarm;
-    }
 }

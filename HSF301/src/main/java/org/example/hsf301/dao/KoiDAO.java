@@ -135,4 +135,19 @@ public class KoiDAO implements IKoiDAO{
         }
     }
 
+    @Override
+    public List<Koi> findAllActive() {
+        Session session = sessionFactory.openSession();
+        List<Koi> activeKoiList = null;
+        try {
+            String hql = "FROM Koi WHERE isActive = true";
+            activeKoiList = session.createQuery(hql, Koi.class).getResultList();
+        } catch (Exception e) {
+            System.out.println("Error finding active koi: " + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return activeKoiList;
+    }
+
 }

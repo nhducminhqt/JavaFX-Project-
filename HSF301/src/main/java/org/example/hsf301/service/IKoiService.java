@@ -30,5 +30,6 @@ public interface IKoiService {
     // Find Koi records by koiName
     List<Koi> findByKoiName(String koiName);
 
+    List<Koi> findAllActive();
     // Additional methods can be defined as needed
 }

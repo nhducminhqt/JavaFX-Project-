@@ -50,4 +50,9 @@ public class KoiRepository implements IKoiRepository {
     public List<Koi> findByKoiName(String koiName) {
         return koiDAO.findByKoiName(koiName);
     }
+
+    @Override
+    public List<Koi> findAllActive() {
+        return koiDAO.findAllActive();
+    }
 }
