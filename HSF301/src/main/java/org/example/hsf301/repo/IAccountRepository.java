@@ -3,7 +3,7 @@ package org.example.hsf301.repo;
 import java.util.List;
 import org.example.hsf301.pojo.Account;
 
-public interface IAccountRepo {
+public interface IAccountRepository {
 
 	void save(Account account);
 	List<Account> findAll();

@@ -47,10 +47,8 @@ public class AccountDAO implements IAccountDAO {
 			Accounts = session.createQuery("from Account", Account.class).list();
 		} catch (Exception e) {
 			System.out.println("Erorr: " + e.getMessage());
-		} finally {
-//			sessionFactory.close();
 		}
-		return Accounts;
+        return Accounts;
 	}
 
 	@Override
@@ -59,7 +57,7 @@ public class AccountDAO implements IAccountDAO {
 		Transaction t = session.getTransaction();
 		try {
 			t.begin();
-			Account account = (Account) session.get(Account.class, id);
+			Account account = session.get(Account.class, id);
 			session.delete(account);
 			t.commit();
 			System.out.println("Successfully Delete");
@@ -77,7 +75,7 @@ public class AccountDAO implements IAccountDAO {
 	public Account findById(Integer id) {
 		Session session = sessionFactory.openSession();
 		try {
-			return (Account) session.get(Account.class, id);
+			return session.get(Account.class, id);
 		} catch (Exception e) {
 			throw e;
 		} finally {

@@ -1,4 +1,4 @@
-package org.example.hsf301.views.utils;
+package org.example.hsf301.utils;
 
 import javafx.scene.control.Alert;
 import javax.swing.JOptionPane;

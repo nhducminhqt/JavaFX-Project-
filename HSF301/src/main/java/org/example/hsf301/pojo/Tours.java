@@ -8,12 +8,14 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "tours")
+@ToString(exclude = {"bookingTourDetails", "tourDetails"}) //prevent stack overflow when call toString
 public class Tours {
 
     @Id
