@@ -1,3 +1,4 @@
+package org.example.hsf301;
 
 import org.example.hsf301.views.LoginView;
 
