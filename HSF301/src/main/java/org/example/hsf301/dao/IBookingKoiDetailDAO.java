@@ -7,6 +7,8 @@ import java.util.List;
 public interface IBookingKoiDetailDAO {
     public List<BookingKoiDetail> getAll();
 
+    public List<BookingKoiDetail> findByBookingId(Long bookingId);
+
     public void save(BookingKoiDetail student);
 
     public void delete(Long studentID);
