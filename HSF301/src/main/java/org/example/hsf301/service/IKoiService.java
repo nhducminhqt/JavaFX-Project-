@@ -19,7 +19,7 @@ public interface IKoiService {
     void delete(Long id);
 
     // Find a Koi record by ID
-    Koi findById(Long id);
+    Koi findByKoiId(Long id);
 
     // Update an existing Koi record
     Koi updateKoi(Long id,KoiRequest koi);

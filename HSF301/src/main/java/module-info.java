@@ -17,6 +17,7 @@ module org.example.hsf301 {
     requires org.slf4j;
     requires thymeleaf;
     requires io.github.cdimascio.dotenv.java;
+    requires java.transaction;
 
     opens org.example.hsf301 to javafx.fxml;
     exports org.example.hsf301;
