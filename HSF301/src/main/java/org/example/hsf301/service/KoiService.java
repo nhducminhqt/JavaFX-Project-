@@ -5,6 +5,7 @@ import org.example.hsf301.pojo.Koi;
 import org.example.hsf301.repo.IKoiRepository;
 import org.example.hsf301.repo.KoiRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,9 +45,9 @@ public class KoiService  implements  IKoiService{
     public void delete(Long id) {
         koiRepository.delete(id);
     }
-
+    @Transactional
     @Override
-    public Koi findById(Long id) {
+    public Koi findByKoiId(Long id) {
         return koiRepository.findById(id);
     }
 

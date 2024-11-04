@@ -15,7 +15,6 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Koi {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +40,11 @@ public class Koi {
         @Column(name = "is_active")
         private boolean isActive;
 
-        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL})
+        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL} ,fetch = FetchType.EAGER)
         @JsonIgnore
         private Set<KoiOfFarm> koiOfFarmList;
 
-        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL})
+        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
         @JsonIgnore
         private Set<BookingKoiDetail> bookingKoiDetails;
 
