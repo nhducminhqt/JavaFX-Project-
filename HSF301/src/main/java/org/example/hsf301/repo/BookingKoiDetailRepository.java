@@ -27,6 +27,11 @@ public class BookingKoiDetailRepository implements IBookingKoiDetailRepository {
     }
 
     @Override
+    public List<BookingKoiDetail> findByBookingId(Long bookingId) {
+        return dao.findByBookingId(bookingId);
+    }
+
+    @Override
     public BookingKoiDetail findById(Long studentID) {
         return dao.findById(studentID);
     }

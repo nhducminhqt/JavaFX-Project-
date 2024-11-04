@@ -11,6 +11,8 @@ public interface IBookingKoiDetailRepository {
 
     public void delete(Long studentID);
 
+    public List<BookingKoiDetail> findByBookingId(Long bookingId);
+
     public BookingKoiDetail findById(Long studentID);
 
     public void update(BookingKoiDetail student);

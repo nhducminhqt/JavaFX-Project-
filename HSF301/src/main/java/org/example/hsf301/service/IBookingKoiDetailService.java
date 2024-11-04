@@ -12,5 +12,5 @@ public interface IBookingKoiDetailService {
 
     List<BookingKoiDetail> bookingKoiDetails(Long bookingID);
 
-    List<BookingKoiDetail> updateBookingKoiDetail(Long id, BookingKoiDetailRequest BookingKoiDetailRequest);
+    BookingKoiDetail updateBookingKoiDetail(Long id, BookingKoiDetailRequest BookingKoiDetailRequest);
 }

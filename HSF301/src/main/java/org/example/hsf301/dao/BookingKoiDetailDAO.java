@@ -1,11 +1,14 @@
 package org.example.hsf301.dao;
 
 import org.example.hsf301.pojo.BookingKoiDetail;
+import org.example.hsf301.pojo.Deposit;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
@@ -23,7 +26,7 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         List<BookingKoiDetail> students = null;
         Session session = sessionFactory.openSession();
         try {
-            students = session.createQuery("from BookingKoiDetail", BookingKoiDetail.class).list();
+            students = session.createQuery("from booking_koi_detail", BookingKoiDetail.class).list();
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("Error" + e.getMessage());
@@ -32,6 +35,24 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
             session.close();
         }
         return students;
+    }
+
+    @Override
+    public List<BookingKoiDetail> findByBookingId(Long bookingId) {
+        List<BookingKoiDetail> bookingKoiDetails = new ArrayList<BookingKoiDetail>();
+        Session session = sessionFactory.openSession();
+        Transaction t =null;
+        try {
+            t = session.beginTransaction();
+            Query<BookingKoiDetail> query =session.createQuery("FROM booking_koi_detail d WHERE d.booking_id = :bookingId", BookingKoiDetail.class);
+            query.setParameter("bookingId", bookingId);
+            bookingKoiDetails = query.list();
+            t.commit();
+        } catch (Exception e) {
+            if (t != null) t.rollback();
+            e.printStackTrace();
+        }
+        return bookingKoiDetails;
     }
 
     @Override
