@@ -2,14 +2,14 @@ package org.example.hsf301.service;
 
 import java.util.List;
 import org.example.hsf301.pojo.Account;
-import org.example.hsf301.repo.AccountRepo;
-import org.example.hsf301.repo.IAccountRepo;
+import org.example.hsf301.repo.AccountRepository;
+import org.example.hsf301.repo.IAccountRepository;
 
 public class AccountService implements IAccountService{
-	private IAccountRepo accountRepo;
+	private final IAccountRepository accountRepo;
 
 	public AccountService(String name) {
-		accountRepo = new AccountRepo(name);
+		accountRepo = new AccountRepository(name);
 	}
 
 	@Override

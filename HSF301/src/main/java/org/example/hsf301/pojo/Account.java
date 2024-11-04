@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import lombok.Setter;
+import org.example.hsf301.enums.ERole;
 
 @Entity
 @Table(name = "account")
@@ -25,8 +26,9 @@ public class Account {
     @Column(name = "password",nullable = false,length = 20)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role",nullable = false)
-    private String role;
+    private ERole role;
 
     @Column(name = "firstName",nullable = false,length = 20)
     private String firstName;

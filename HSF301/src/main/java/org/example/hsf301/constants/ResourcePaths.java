@@ -1,6 +1,14 @@
 package org.example.hsf301.constants;
 
 public class ResourcePaths {
+
+    //fxml
+    public static final String LOGIN_VIEW = "/org/example/hsf301/fxml/login.fxml";
+
+
+    //hibernate.cfg.xml
+    public static final String HIBERNATE_CONFIG = "hibernate.cfg.xml";
+
     // img
     public static final String URL_DOT = "/org/example/hsf301/assets/img/dot.png";
     public static final String URL_HEAD = "/org/example/hsf301/assets/img/head.png";

@@ -30,7 +30,7 @@ import org.example.hsf301.utils.AudioUtils;
 @Getter
 public abstract class AppComponent extends JFrame implements IAppAction {
 
-    public static JPanel jPanel_Right_Bottom_Button = new JPanel();;
+    public static JPanel jPanel_Right_Bottom_Button = new JPanel();
     protected final JMenu jMenu = new JMenu("HELP");
     protected final JMenu jMenu_Play_Here = new JMenu("Play without login");
     protected final JMenuItem jMenuItem_AboutMe = new JMenuItem("About me");
@@ -67,7 +67,7 @@ public abstract class AppComponent extends JFrame implements IAppAction {
     protected JPanel jPanel_Left = new JPanel(new BorderLayout());
     protected JLabel jLabel_Left_Icon = new JLabel(
         new ImageIcon(new ImageIcon(
-            Toolkit.getDefaultToolkit().getImage(AppFrame.class.getResource(ResourcePaths.URL_SNAKE_LOGO))).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH)));;
+            Toolkit.getDefaultToolkit().getImage(AppFrame.class.getResource(ResourcePaths.URL_SNAKE_LOGO))).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH)));
     protected JMenuBar jMenuBar = new JMenuBar();
     protected Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
 
@@ -77,7 +77,7 @@ public abstract class AppComponent extends JFrame implements IAppAction {
     protected JButton jButton_Mode_Campaign = new JButton("Campaign");
     protected JPanel jPanel_Container_MenuView = new JPanel(new BorderLayout());
     protected JLabel jLabel_Title_MenuView = new JLabel("Snake Game", JLabel.CENTER);
-    protected JPanel jPanel_Button_MenuView = new JPanel(new GridLayout(3, 1, 30, 20));;
+    protected JPanel jPanel_Button_MenuView = new JPanel(new GridLayout(3, 1, 30, 20));
     protected JMenuBar jMenuBar_MenuView;
     protected final JMenu jMenu_Back_To_Main_Menu = new JMenu("Back to");
     protected final JMenuItem jMenuItem_Back_To_Main_Menu = new JMenuItem("main menu");

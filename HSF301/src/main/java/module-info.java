@@ -22,7 +22,15 @@ module org.example.hsf301 {
     opens org.example.hsf301 to javafx.fxml;
     exports org.example.hsf301;
 
+    opens org.example.hsf301.views to javafx.graphics;
+    exports org.example.hsf301.views;
+
+    opens org.example.hsf301.service to org.hibernate.orm.core;
+    exports org.example.hsf301.service;
+
     opens org.example.hsf301.pojo to org.hibernate.orm.core;
+    exports org.example.hsf301.pojo;
+
     opens org.example.hsf301.dao to org.hibernate.orm.core;
     exports org.example.hsf301.controllers;
     opens org.example.hsf301.controllers to javafx.fxml;
@@ -34,6 +42,6 @@ module org.example.hsf301 {
     opens org.example.hsf301.utils to javafx.fxml;
     exports org.example.hsf301.views.base;
     opens org.example.hsf301.views.base to javafx.fxml;
-    exports org.example.hsf301.views.utils;
-    opens org.example.hsf301.views.utils to javafx.fxml;
+    exports org.example.hsf301.layouts;
+    opens org.example.hsf301.layouts to javafx.fxml;
 }

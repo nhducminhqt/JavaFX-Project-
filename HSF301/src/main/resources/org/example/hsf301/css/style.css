@@ -64,3 +64,14 @@ table#Block-Account-Page,#Forgot-Password-Page,#Send-Otp-Page{
   color:#999;
 }
 
+/*.button {*/
+/*  -fx-background-color: #34495e;*/
+/*  -fx-text-fill: white;*/
+/*  -fx-font-size: 14px;*/
+/*  -fx-cursor: hand;*/
+/*  -fx-background-radius: 5;*/
+/*}*/
+
+/*.button:hover {*/
+/*  -fx-background-color: #2ecc71;*/
+/*}*/

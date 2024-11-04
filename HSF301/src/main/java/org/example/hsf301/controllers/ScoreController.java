@@ -17,7 +17,7 @@ public class ScoreController implements ActionListener {
 
     private final ScoreView scoreView;
 //    private final UserDAO executeQuery = UserDAO.getInstance();
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
     public ScoreController(ScoreView scoreView) {
         this.scoreView = scoreView;
         objectMapper = new ObjectMapper().registerModule(new JavaTimeModule()).enable(

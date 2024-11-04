@@ -31,6 +31,9 @@ public class Delivery {
     @Column(name = "remain_amount")
     private float remainAmount;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "status")
     private String status;
 

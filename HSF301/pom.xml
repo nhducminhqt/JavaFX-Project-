@@ -163,8 +163,17 @@
         <filtering>false</filtering>
         <includes>
           <include>**.png</include>
+          <include>**.jpg</include>
         </includes>
         <targetPath>${project.build.outputDirectory}/org/example/hsf301/assets/img</targetPath>
+      </resource>
+      <resource>
+        <directory>src/main/resources/org/example/hsf301/css</directory>
+        <filtering>false</filtering>
+        <includes>
+          <include>**.css</include>
+        </includes>
+        <targetPath>${project.build.outputDirectory}/org/example/hsf301/assets/css</targetPath>
       </resource>
       <resource>
         <directory>src/main/resources/org/example/hsf301/assets/sound</directory>
