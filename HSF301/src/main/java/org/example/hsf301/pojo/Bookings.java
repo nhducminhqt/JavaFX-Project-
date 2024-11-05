@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class Bookings {
     private String bookingType;
 
     @Column(name = "booking_date")
-    private LocalDateTime bookingDate;
+    private LocalDate bookingDate;
 
     @Column(name = "total_amount")
     private float totalAmount;
@@ -53,7 +54,7 @@ public class Bookings {
     private String paymentMethod;
 
     @Column(name = "paymentDate")
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
 
     //here mapping quotation table
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
