@@ -1,5 +1,7 @@
 package org.example.hsf301.service;
 
+import org.example.hsf301.enums.CCSTATUS;
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.DepositRequest;
 import org.example.hsf301.pojo.Bookings;
 import org.example.hsf301.pojo.Deposit;
@@ -29,7 +31,7 @@ public class DepositService implements IDepositService{
         if(bookings == null){return null;}
         if(bookings.getDeposit()!=null){return null;}
         deposit.setBooking(bookings);
-        deposit.setDepositStatus("complete");
+        deposit.setDepositStatus(CCSTATUS.COMPLETED);
         deposit.setDepositPercentage(depositRequest.getDepositPercentage());
         deposit.setShippingFee(depositRequest.getShippingFee());
         deposit.setShippingAddress(depositRequest.getShippingAddress());
@@ -38,7 +40,7 @@ public class DepositService implements IDepositService{
         deposit.setDepositAmount(bookings.getTotalAmountWithVAT()*depositRequest.getDepositPercentage());
         deposit.setRemainAmount(bookings.getTotalAmountWithVAT()-deposit.getDepositAmount()+deposit.getShippingFee());
         depositRepo.save(deposit);
-        bookings.setPaymentStatus("shipping");
+        bookings.setPaymentStatus(PaymentStatus.shipping);
         bookingRepo.update(bookings);
         return deposit;
     }
@@ -46,7 +48,7 @@ public class DepositService implements IDepositService{
     @Override
     public Deposit deleteById(Long id) {
         Deposit deposit = depositRepo.findById(id);
-        deposit.setDepositStatus("cancel");
+        deposit.setDepositStatus(CCSTATUS.CANCELLED);
         depositRepo.update(deposit);
         return deposit;
     }

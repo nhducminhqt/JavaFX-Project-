@@ -4,6 +4,9 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.hsf301.enums.BookingType;
+import org.example.hsf301.enums.PaymentMethod;
+import org.example.hsf301.enums.PaymentStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,7 +30,8 @@ public class Bookings {
 
 
     @Column(name = "booking_type")
-    private String bookingType;
+    @Enumerated(EnumType.STRING)
+    private BookingType bookingType;
 
     @Column(name = "booking_date")
     private LocalDate bookingDate;
@@ -48,10 +52,12 @@ public class Bookings {
     private float vatAmount;
 
     @Column(name = "payment_status")
-    private String paymentStatus;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 
     @Column(name = "payment_method")
-    private String paymentMethod;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
 
     @Column(name = "paymentDate")
     private LocalDate paymentDate;

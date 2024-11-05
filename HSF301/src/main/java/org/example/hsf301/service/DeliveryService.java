@@ -1,5 +1,6 @@
 package org.example.hsf301.service;
 
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.DeliveryRequest;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.pojo.Bookings;
@@ -30,7 +31,7 @@ public class DeliveryService implements IDeliveryService{
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
         if(bookings.getDelivery()!=null) return null;
-        bookings.setPaymentStatus("complete");
+        bookings.setPaymentStatus(PaymentStatus.complete);
         bookings.setPaymentDate(LocalDate.now());
         bookingRepo.update(bookings);
 

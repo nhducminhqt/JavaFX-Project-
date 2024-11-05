@@ -1,6 +1,7 @@
 package org.example.hsf301.model.request;
 
 import lombok.Data;
+import org.example.hsf301.enums.CCSTATUS;
 
 import java.time.LocalDate;
 @Data
@@ -13,7 +14,7 @@ public class DeliveryRequest {
 
     private String healthKoiDescription;
 
-    private String status;
+    private CCSTATUS status;
 
     private String address;
 }

@@ -1,5 +1,8 @@
 package org.example.hsf301.service;
 
+import org.example.hsf301.enums.BookingType;
+import org.example.hsf301.enums.CCSTATUS;
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.BookingKoiDetailRequest;
 import org.example.hsf301.model.request.BookingKoiRequest;
 import org.example.hsf301.model.request.BookingUpdate;
@@ -27,15 +30,15 @@ public class BookingKoiService implements IBookingKoiService {
     public Bookings createKoiBooking(BookingKoiRequest request, Long bookingTourId,Account staff) {
 
         Bookings bookingTour = bookingRepository.findById(bookingTourId);
-        if(bookingTour==null || bookingTour.getBookingType().equals("Koi Purchase")){
+        if(bookingTour==null || bookingTour.getBookingType()==BookingType.KoiPurchase){
             throw new IllegalArgumentException("Bookings not found");
         }
         Bookings booking = new Bookings();
-        booking.setBookingType("Koi Purchase");
+        booking.setBookingType(BookingType.KoiPurchase);
         booking.setBookingDate(request.getBookingDate());
         booking.setPaymentMethod(request.getPaymentMethod());
         booking.setCreatedBy(staff);
-        booking.setPaymentStatus("pending");
+        booking.setPaymentStatus(PaymentStatus.pending);
         booking.setVat(request.getVat());
         booking.setDiscountAmount(request.getDiscountAmount());
         bookingRepository.save(booking);
@@ -78,7 +81,7 @@ public class BookingKoiService implements IBookingKoiService {
     @Override
     public Bookings updateKoiBooking(BookingUpdate bookingUpdate, Long bookingId,Account staff) {
         Bookings bookings = bookingRepository.findById(bookingId);
-        if(bookings==null || bookings.getBookingType().equals("Tour Booking")){
+        if(bookings==null || bookings.getBookingType()==BookingType.TourBooking){
             throw new IllegalArgumentException("Bookings not found");
         }
         bookings.setPaymentMethod(bookingUpdate.getPaymentMethod());
@@ -100,7 +103,7 @@ public class BookingKoiService implements IBookingKoiService {
         List<Bookings> bookings = bookingRepository.getAll();
         List<Bookings> bookingKoiList = new ArrayList<>();
         for (Bookings booking : bookings) {
-            if(booking.getBookingType().equals("Koi Purchase")){
+            if(booking.getBookingType()==BookingType.KoiPurchase){
                 bookingKoiList.add(booking);
             }
         }
@@ -122,7 +125,7 @@ public class BookingKoiService implements IBookingKoiService {
     @Override
     public Bookings deleteKoiBooking(Long bookingId) {
         Bookings bookings = bookingRepository.findById(bookingId);
-        bookings.setPaymentStatus("cancel");
+        bookings.setPaymentStatus(PaymentStatus.cancel);
         bookingRepository.update(bookings);
         return bookings;
     }

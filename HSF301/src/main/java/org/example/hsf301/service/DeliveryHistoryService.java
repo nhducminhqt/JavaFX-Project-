@@ -1,5 +1,6 @@
 package org.example.hsf301.service;
 
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.DeliveryHistoryRequest;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.pojo.Bookings;
@@ -26,7 +27,7 @@ public class DeliveryHistoryService implements IDeliveryHistoryService {
     public DeliveryHistory addDeliveryHistory(DeliveryHistoryRequest deliveryHistoryRequest, Long bookingId,Account staff) throws Exception {
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
-        if(!bookings.getPaymentStatus().equals("shipping"))return null;
+        if(!(bookings.getPaymentStatus()==PaymentStatus.shipping))return null;
         DeliveryHistory deliveryHistory = new DeliveryHistory();
         deliveryHistory.setDeliveryStaff(staff);
         deliveryHistory.setBooking(bookings);

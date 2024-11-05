@@ -2,6 +2,8 @@ package org.example.hsf301;
 
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.dao.IDeliveryHistoryDAO;
+import org.example.hsf301.enums.CCSTATUS;
+import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.model.request.*;
 import org.example.hsf301.pojo.*;
 import org.example.hsf301.service.*;
@@ -19,20 +21,20 @@ public class maintest {
 //
 //        Account account = accountService.findByUserName("minh1"); // Khởi tạo account theo yêu cầu của bạn.
         Account account = accountService.findByUserName("deliverystaff");
-//
-//
+////
+////
 //        BookingKoiRequest bookingKoiRequest = new BookingKoiRequest();
 //        bookingKoiRequest.setBookingDate(LocalDate.now());
 //        bookingKoiRequest.setDiscountAmount(50);
 //        bookingKoiRequest.setVat(0.3f);
-//        bookingKoiRequest.setPaymentMethod("CASH");
-//
+//        bookingKoiRequest.setPaymentMethod(PaymentMethod.BANKING);
+////
 //        BookingKoiDetailRequest bookingKoiDetailRequest = new BookingKoiDetailRequest();
 //        bookingKoiDetailRequest.setKoiId(10002L);
 //        bookingKoiDetailRequest.setFarmId(10002L);
-//        bookingKoiDetailRequest.setQuantity(20);
+//        bookingKoiDetailRequest.setQuantity(10);
 //        bookingKoiDetailRequest.setUnitPrice(10);
-//
+////
 //        BookingKoiDetailRequest bookingKoiDetailRequest2 = new BookingKoiDetailRequest();
 //        bookingKoiDetailRequest2.setKoiId(10002L);
 //        bookingKoiDetailRequest2.setFarmId(10003L);
@@ -66,23 +68,23 @@ public class maintest {
         IDepositService depositService = new DepositService(ResourcePaths.HIBERNATE_CONFIG);
         IDeliveryHistoryService deliveryHistoryService = new DeliveryHistoryService(ResourcePaths.HIBERNATE_CONFIG);
         IDeliveryService deliveryService = new DeliveryService(ResourcePaths.HIBERNATE_CONFIG);
-        DepositRequest depositRequest = new DepositRequest();
-        depositRequest.setDepositPercentage(0.2f);
-        depositRequest.setShippingAddress("vietnam");
-        depositRequest.setDeliveryExpectedDate(LocalDate.now());
-        depositRequest.setShippingFee(20f);
-        depositService.createDeposit(depositRequest,10012L);
+//        DepositRequest depositRequest = new DepositRequest();
+//        depositRequest.setDepositPercentage(0.2f);
+//        depositRequest.setShippingAddress("vietnam");
+//        depositRequest.setDeliveryExpectedDate(LocalDate.now());
+//        depositRequest.setShippingFee(20f);
+//        depositService.createDeposit(depositRequest,10013L);
 //        DeliveryHistoryRequest deliveryHistoryRequest = new DeliveryHistoryRequest();
 //        deliveryHistoryRequest.setRoute("Loading...");
 //        deliveryHistoryRequest.setHealthKoiDescription("All of kois are good");
-//        deliveryHistoryService.addDeliveryHistory(deliveryHistoryRequest,10012L,account);
-//        DeliveryRequest deliveryRequest = new DeliveryRequest();
-//        deliveryRequest.setAddress("Viet nam");
-//        deliveryRequest.setHealthKoiDescription("All good");
-//        deliveryRequest.setStatus("complete");
-//        deliveryRequest.setCustomerName("Vo Quang Minh");
-//        deliveryRequest.setReceiveDate(LocalDate.now());
-//        deliveryService.addDelivery(deliveryRequest,10012L,account);
+//        deliveryHistoryService.addDeliveryHistory(deliveryHistoryRequest,10013L,account);
+        DeliveryRequest deliveryRequest = new DeliveryRequest();
+        deliveryRequest.setAddress("Viet nam");
+        deliveryRequest.setHealthKoiDescription("All good");
+        deliveryRequest.setStatus(CCSTATUS.COMPLETED);
+        deliveryRequest.setCustomerName("Vo Quang Minh");
+        deliveryRequest.setReceiveDate(LocalDate.now());
+        deliveryService.addDelivery(deliveryRequest,10013L,account);
 
     }
 }

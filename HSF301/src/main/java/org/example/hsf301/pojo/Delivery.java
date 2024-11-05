@@ -4,6 +4,7 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.hsf301.enums.CCSTATUS;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -36,7 +37,8 @@ public class Delivery {
     private String address;
 
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private CCSTATUS status;
 
     @Column(name = "reason")
     private String reason;
