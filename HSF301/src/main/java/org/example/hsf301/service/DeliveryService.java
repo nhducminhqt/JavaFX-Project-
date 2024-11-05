@@ -7,6 +7,7 @@ import org.example.hsf301.pojo.Delivery;
 import org.example.hsf301.pojo.Deposit;
 import org.example.hsf301.repo.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class DeliveryService implements IDeliveryService{
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
         bookings.setPaymentStatus("complete");
-        bookings.setPaymentDate(LocalDateTime.now());
+        bookings.setPaymentDate(LocalDate.now());
         bookingRepo.update(bookings);
 
         delivery.setDeliveryStaff(account);
