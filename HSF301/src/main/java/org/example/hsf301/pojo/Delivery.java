@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -23,7 +24,7 @@ public class Delivery {
     private String customerName;
 
     @Column(name = "receive_date")
-    private Date receiveDate;
+    private LocalDate receiveDate;
 
     @Column(name = "health_koi_description")
     private String healthKoiDescription;
@@ -45,6 +46,6 @@ public class Delivery {
     private Account deliveryStaff;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "booking_id")
+    @JoinColumn(name = "booking_id",unique = true)
     private Bookings booking;
 }

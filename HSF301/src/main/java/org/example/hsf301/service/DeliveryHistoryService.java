@@ -15,20 +15,20 @@ import java.util.List;
 public class DeliveryHistoryService implements IDeliveryHistoryService {
     private IDeliveryHistoryRepository deliveryHistoryRepo;
     private IBookingRepository bookingRepo;
-    private Account account;
 
-    public DeliveryHistoryService(String name,Account account) {
+
+    public DeliveryHistoryService(String name) {
         deliveryHistoryRepo = new DeliveryHistoryRepository(name);
         bookingRepo = new BookingRepository(name);
-        this.account = account;
+
     }
     @Override
-    public DeliveryHistory addDeliveryHistory(DeliveryHistoryRequest deliveryHistoryRequest, Long bookingId) throws Exception {
+    public DeliveryHistory addDeliveryHistory(DeliveryHistoryRequest deliveryHistoryRequest, Long bookingId,Account staff) throws Exception {
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
         if(!bookings.getPaymentStatus().equals("shipping"))return null;
         DeliveryHistory deliveryHistory = new DeliveryHistory();
-        deliveryHistory.setDeliveryStaff(account);
+        deliveryHistory.setDeliveryStaff(staff);
         deliveryHistory.setBooking(bookings);
         deliveryHistory.setRoute(deliveryHistoryRequest.getRoute());
         deliveryHistory.setHealthKoiDescription(deliveryHistoryRequest.getHealthKoiDescription());

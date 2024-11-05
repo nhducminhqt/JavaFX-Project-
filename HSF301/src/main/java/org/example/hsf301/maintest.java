@@ -1,12 +1,9 @@
 package org.example.hsf301;
 
 import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.model.request.BookingKoiDetailRequest;
-import org.example.hsf301.model.request.BookingKoiRequest;
-import org.example.hsf301.model.request.KoiRequest;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.pojo.Koi;
+import org.example.hsf301.dao.IDeliveryHistoryDAO;
+import org.example.hsf301.model.request.*;
+import org.example.hsf301.pojo.*;
 import org.example.hsf301.service.*;
 
 import java.time.LocalDate;
@@ -14,15 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class maintest {
-    public static void main(String[] args) {
-//        IBookingKoiService bookingKoiService = new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG);
+    public static void main(String[] args) throws Exception {
+        IBookingKoiService bookingKoiService = new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG);
 //        Bookings booking = new Bookings();
-//        IAccountService accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
+        IAccountService accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
+
 //
-//        // Giả sử bạn đã có một đối tượng Account
 //        Account account = accountService.findByUserName("minh1"); // Khởi tạo account theo yêu cầu của bạn.
+        Account account = accountService.findByUserName("deliverystaff");
 //
-//        // Sử dụng các hàm setter để thiết lập giá trị cho các thuộc tính
+//
 //        BookingKoiRequest bookingKoiRequest = new BookingKoiRequest();
 //        bookingKoiRequest.setBookingDate(LocalDate.now());
 //        bookingKoiRequest.setDiscountAmount(50);
@@ -30,16 +28,16 @@ public class maintest {
 //        bookingKoiRequest.setPaymentMethod("CASH");
 //
 //        BookingKoiDetailRequest bookingKoiDetailRequest = new BookingKoiDetailRequest();
-//        bookingKoiDetailRequest.setKoiId(1L);
-//        bookingKoiDetailRequest.setFarmId(1L);
+//        bookingKoiDetailRequest.setKoiId(10002L);
+//        bookingKoiDetailRequest.setFarmId(10002L);
 //        bookingKoiDetailRequest.setQuantity(20);
 //        bookingKoiDetailRequest.setUnitPrice(10);
 //
 //        BookingKoiDetailRequest bookingKoiDetailRequest2 = new BookingKoiDetailRequest();
-//        bookingKoiDetailRequest.setKoiId(2L);
-//        bookingKoiDetailRequest.setFarmId(1L);
-//        bookingKoiDetailRequest.setQuantity(10);
-//        bookingKoiDetailRequest.setUnitPrice(5);
+//        bookingKoiDetailRequest2.setKoiId(10002L);
+//        bookingKoiDetailRequest2.setFarmId(10003L);
+//        bookingKoiDetailRequest2.setQuantity(10);
+//        bookingKoiDetailRequest2.setUnitPrice(8);
 //
 //        List<BookingKoiDetailRequest> detailRequests = new ArrayList<>();
 //        detailRequests.add(bookingKoiDetailRequest);
@@ -48,16 +46,43 @@ public class maintest {
 //        bookingKoiRequest.setDetails(detailRequests);
 //
 //        bookingKoiService.createKoiBooking(bookingKoiRequest, 3L, account);
-        IKoiService koiService = new KoiService(ResourcePaths.HIBERNATE_CONFIG);
-        koiService.findById(10002L);
+//
+    KoiFarmService koiFarmService = new KoiFarmService(ResourcePaths.HIBERNATE_CONFIG);
+    KoiService koiService = new KoiService(ResourcePaths.HIBERNATE_CONFIG);
+        KoiOfFarmService koiOfFarmService = new KoiOfFarmService(ResourcePaths.HIBERNATE_CONFIG);
+//        KoiFarmRequest koiFarmRequest = new KoiFarmRequest();
+//        koiFarmRequest.setFarmAddress("Test");
+//        koiFarmRequest.setFarmName("Test");
+//        koiFarmRequest.setFarmEmail("Test@test.com");
+//        koiFarmRequest.setActive(true);
+//        koiFarmRequest.setFarmPhoneNumber("012321392");
+//        koiFarmRequest.setImages("test.jpg");
+//        koiFarmRequest.setDescription("Test");
+//        koiFarmRequest.setWebsite("Test");
+//    koiFarmService.addKoiFarm(koiFarmRequest);
 
-//        KoiRequest koi = new KoiRequest();
-//        koi.setImage("test");
-//        koi.setKoiName("test");
-//        koi.setColor("test");
-//        koi.setDescription("test");
-//        koi.setOrigin("test");
+//    KoiFarms koiFarms= koiFarmService.findById(10002L);
+//    Koi koi = koiService.findByKoiId(10002L);
+        IDepositService depositService = new DepositService(ResourcePaths.HIBERNATE_CONFIG);
+        IDeliveryHistoryService deliveryHistoryService = new DeliveryHistoryService(ResourcePaths.HIBERNATE_CONFIG);
+        IDeliveryService deliveryService = new DeliveryService(ResourcePaths.HIBERNATE_CONFIG);
+        DepositRequest depositRequest = new DepositRequest();
+        depositRequest.setDepositPercentage(0.2f);
+        depositRequest.setShippingAddress("vietnam");
+        depositRequest.setDeliveryExpectedDate(LocalDate.now());
+        depositRequest.setShippingFee(20f);
+        depositService.createDeposit(depositRequest,10012L);
+//        DeliveryHistoryRequest deliveryHistoryRequest = new DeliveryHistoryRequest();
+//        deliveryHistoryRequest.setRoute("Loading...");
+//        deliveryHistoryRequest.setHealthKoiDescription("All of kois are good");
+//        deliveryHistoryService.addDeliveryHistory(deliveryHistoryRequest,10012L,account);
+//        DeliveryRequest deliveryRequest = new DeliveryRequest();
+//        deliveryRequest.setAddress("Viet nam");
+//        deliveryRequest.setHealthKoiDescription("All good");
+//        deliveryRequest.setStatus("complete");
+//        deliveryRequest.setCustomerName("Vo Quang Minh");
+//        deliveryRequest.setReceiveDate(LocalDate.now());
+//        deliveryService.addDelivery(deliveryRequest,10012L,account);
 
-        System.out.println(koiService.findById(10002L));
     }
 }

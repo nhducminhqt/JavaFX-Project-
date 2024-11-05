@@ -1,6 +1,6 @@
 package org.example.hsf301;
 
-<<<<<<< HEAD
+
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.model.request.KoiFarmRequest;
 

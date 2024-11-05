@@ -15,25 +15,26 @@ public class DeliveryService implements IDeliveryService{
     private IDeliveryRepository deliveryRepo;
     private IBookingRepository bookingRepo;
     private IDepositRepository depositRepo;
-    private Account account;
-    public DeliveryService(String name,Account account) {
+
+    public DeliveryService(String name) {
         deliveryRepo = new DeliveryRepository(name);
-        this.account = account;
+
         depositRepo = new DepositRepository(name);
         bookingRepo = new BookingRepository(name);
     }
 
 
     @Override
-    public Delivery addDelivery(DeliveryRequest deliveryRequest, Long bookingId) {
+    public Delivery addDelivery(DeliveryRequest deliveryRequest, Long bookingId,Account staff) {
         Delivery delivery = new Delivery();
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
+        if(bookings.getDelivery()!=null) return null;
         bookings.setPaymentStatus("complete");
         bookings.setPaymentDate(LocalDate.now());
         bookingRepo.update(bookings);
 
-        delivery.setDeliveryStaff(account);
+        delivery.setDeliveryStaff(staff);
         delivery.setBooking(bookings);
         delivery.setAddress(deliveryRequest.getAddress());
         delivery.setReason(deliveryRequest.getReason());

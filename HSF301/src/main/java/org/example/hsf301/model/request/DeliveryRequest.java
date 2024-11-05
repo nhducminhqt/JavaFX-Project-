@@ -2,14 +2,14 @@ package org.example.hsf301.model.request;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 @Data
 public class DeliveryRequest {
     private String customerName;
 
     private String reason;
 
-    private Date receiveDate;
+    private LocalDate receiveDate;
 
     private String healthKoiDescription;
 

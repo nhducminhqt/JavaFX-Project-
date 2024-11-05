@@ -66,7 +66,7 @@ public class BookingKoiService implements IBookingKoiService {
         booking.setVatAmount(request.getVat()*(booking.getTotalAmount()-request.getDiscountAmount()));
         booking.setTotalAmountWithVAT(booking.getTotalAmount() + booking.getVatAmount() - booking.getDiscountAmount());
         booking.setAccount(bookingTour.getAccount());
-        bookingRepository.save(booking);
+        bookingRepository.update(booking);
         return booking;
     }
 

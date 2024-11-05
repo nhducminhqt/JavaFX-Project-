@@ -27,6 +27,7 @@ public class DepositService implements IDepositService{
         Deposit deposit = new Deposit();
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
+        if(bookings.getDeposit()!=null){return null;}
         deposit.setBooking(bookings);
         deposit.setDepositStatus("complete");
         deposit.setDepositPercentage(depositRequest.getDepositPercentage());
@@ -37,6 +38,8 @@ public class DepositService implements IDepositService{
         deposit.setDepositAmount(bookings.getTotalAmountWithVAT()*depositRequest.getDepositPercentage());
         deposit.setRemainAmount(bookings.getTotalAmountWithVAT()-deposit.getDepositAmount()+deposit.getShippingFee());
         depositRepo.save(deposit);
+        bookings.setPaymentStatus("shipping");
+        bookingRepo.update(bookings);
         return deposit;
     }
 
