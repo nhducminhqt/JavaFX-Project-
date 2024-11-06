@@ -126,3 +126,23 @@ java.lang.IllegalStateException: Cannot get a connection as the driver manager i
 2024-11-01 00:44:57 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
 2024-11-01 00:44:58 INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@12c40535] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 2024-11-01 00:44:59 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-11-02 11:15:10 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2024-11-02 11:15:10 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-11-02 11:15:10 WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-11-02 11:15:10 INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [com.microsoft.sqlserver.jdbc.SQLServerDriver] at URL [jdbc:sqlserver://localhost:1433;DatabaseName=HSF301_KoiOrderingSystem;encrypt=true;trustServerCertificate=true]
+2024-11-02 11:15:10 INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=sa}
+2024-11-02 11:15:10 INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2024-11-02 11:15:10 INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-11-02 11:15:11 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
+2024-11-02 11:15:11 INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49d3fe12] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-11-02 11:15:12 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-11-02 11:15:20 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version [WORKING]
+2024-11-02 11:15:20 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-11-02 11:15:20 WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-11-02 11:15:20 INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [com.microsoft.sqlserver.jdbc.SQLServerDriver] at URL [jdbc:sqlserver://localhost:1433;DatabaseName=HSF301_KoiOrderingSystem;encrypt=true;trustServerCertificate=true]
+2024-11-02 11:15:20 INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=sa}
+2024-11-02 11:15:20 INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2024-11-02 11:15:20 INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-11-02 11:15:20 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
+2024-11-02 11:15:21 INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@12c40535] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-11-02 11:15:21 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
