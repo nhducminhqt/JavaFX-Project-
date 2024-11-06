@@ -1,5 +1,6 @@
 package org.example.hsf301.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.example.hsf301.pojo.Tours;
 import org.hibernate.Session;
@@ -47,9 +48,43 @@ public class TourDAO  implements  ITourDAO{
         }
         return tours;
     }
+    @Override
+    public List<Tours> findByTourName(String tourName) {
+        List<Tours> tours = null;
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "from Tours WHERE tourName like :tourNameHql";
+            tours = session.createQuery(hql, Tours.class)
+                    .setParameter("tourNameHql", "%" + tourName + "%")
+                    .getResultList();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return tours;
+    }
 
     @Override
-    public void delete(Integer id) {
+    public List<Tours> findByTourActive() {
+        List<Tours> tours = null;
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "from Tours WHERE status = :status";
+            tours = session.createQuery(hql, Tours.class)
+                    .setParameter("status", "active")
+                    .getResultList();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return tours;
+    }
+
+
+    @Override
+    public void delete(Long id) {
         Session session = sessionFactory.openSession();
         Transaction t = session.getTransaction();
         try {
@@ -68,7 +103,7 @@ public class TourDAO  implements  ITourDAO{
     }
 
     @Override
-    public Tours findById(Integer id) {
+    public Tours findById(Long id) {
         Session session = sessionFactory.openSession();
         try {
             return session.get(Tours.class, id);
@@ -78,4 +113,24 @@ public class TourDAO  implements  ITourDAO{
             session.close();
         }
     }
+
+    @Override
+    public void update(Tours tours) {
+        Session session = sessionFactory.openSession();
+        Transaction t = session.beginTransaction();
+        try {
+            session.update(tours);
+            t.commit();
+            System.out.println("Update successfully");
+        } catch (Exception e) {
+            // TODO: handle exception
+            t.rollback();
+            System.out.println("Error "+e.getMessage());
+        } finally {
+            //sessionFactory.close();
+            session.close();
+        }
+    }
+
+
 }

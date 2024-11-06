@@ -38,7 +38,7 @@ public class KoiRepository implements IKoiRepository {
 
     @Override
     public void update(Koi koi) {
-    koiDAO.update(koi);
+        koiDAO.update(koi);
     }
 
     @Override
@@ -49,10 +49,5 @@ public class KoiRepository implements IKoiRepository {
     @Override
     public List<Koi> findByKoiName(String koiName) {
         return koiDAO.findByKoiName(koiName);
-    }
-
-    @Override
-    public List<Koi> findAllActive() {
-        return koiDAO.findAllActive();
     }
 }

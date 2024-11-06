@@ -9,7 +9,6 @@ import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.controllers.MyProfileController;
 import org.example.hsf301.controllers.TourController;
 import org.example.hsf301.controllers.TourManagementController;
-import org.example.hsf301.pojo.Account;
 import org.example.hsf301.service.AccountService;
 import org.example.hsf301.service.TourService;
 import org.example.hsf301.utils.NavigateUtil;

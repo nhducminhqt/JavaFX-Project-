@@ -24,12 +24,27 @@ public class TourRepository implements ITourRepository {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         tourDAO.delete(id);
     }
 
     @Override
-    public Tours findById(Integer id) {
+    public Tours findById(Long id) {
         return tourDAO.findById(id);
+    }
+
+    @Override
+    public void update(Tours tours) {
+         tourDAO.update(tours);
+    }
+
+    @Override
+    public List<Tours> findByTourName(String tourName) {
+        return tourDAO.findByTourName(tourName);
+    }
+
+    @Override
+    public List<Tours> findByTourActive() {
+        return tourDAO.findByTourActive();
     }
 }
