@@ -8,8 +8,8 @@
 
 
 <?import javafx.scene.layout.StackPane?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.layouts.AdminMainController">
-  <VBox alignment="CENTER" layoutY="3.0" prefHeight="644.0" prefWidth="123.0">
+<AnchorPane prefHeight="850.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.layouts.AdminMainController">
+  <VBox alignment="CENTER" layoutY="3.0" prefHeight="850.0" prefWidth="250.0">
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
       text="Home" onAction="#navigateHome"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
@@ -30,6 +30,7 @@
       style="-fx-background-color: red; -fx-text-fill: white;"
       text="Logout" onAction="#navigateLogout"/>
   </VBox>
-  <StackPane fx:id="contentArea" layoutX="126.0" layoutY="3.0" prefWidth="750.0"
-    style="-fx-background-color: white;"/>
+  <AnchorPane layoutX="242.0" prefHeight="596.0" prefWidth="1024.0">
+    <StackPane fx:id="contentArea"/>
+  </AnchorPane>
 </AnchorPane>
