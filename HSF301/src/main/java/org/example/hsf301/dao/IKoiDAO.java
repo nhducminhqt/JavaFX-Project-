@@ -1,3 +1,4 @@
+
 package org.example.hsf301.dao;
 
 import org.example.hsf301.pojo.Koi;
@@ -26,4 +27,5 @@ public interface IKoiDAO {
 
     // Find Koi records by koiName
     List<Koi> findByKoiName(String koiName);
+    List<Koi> findAllActive();
 }

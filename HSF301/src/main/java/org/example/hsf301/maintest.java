@@ -23,31 +23,31 @@ public class maintest {
         Account account = accountService.findByUserName("deliverystaff");
 ////
 ////
-//        BookingKoiRequest bookingKoiRequest = new BookingKoiRequest();
-//        bookingKoiRequest.setBookingDate(LocalDate.now());
-//        bookingKoiRequest.setDiscountAmount(50);
-//        bookingKoiRequest.setVat(0.3f);
-//        bookingKoiRequest.setPaymentMethod(PaymentMethod.BANKING);
-////
-//        BookingKoiDetailRequest bookingKoiDetailRequest = new BookingKoiDetailRequest();
-//        bookingKoiDetailRequest.setKoiId(10002L);
-//        bookingKoiDetailRequest.setFarmId(10002L);
-//        bookingKoiDetailRequest.setQuantity(10);
-//        bookingKoiDetailRequest.setUnitPrice(10);
-////
+        BookingKoiRequest bookingKoiRequest = new BookingKoiRequest();
+        bookingKoiRequest.setBookingDate(LocalDate.now());
+        bookingKoiRequest.setDiscountAmount(50);
+        bookingKoiRequest.setVat(0.3f);
+        bookingKoiRequest.setPaymentMethod(PaymentMethod.BANKING);
+//
+        BookingKoiDetailRequest bookingKoiDetailRequest = new BookingKoiDetailRequest();
+        bookingKoiDetailRequest.setKoiId(1L);
+        bookingKoiDetailRequest.setFarmId(1L);
+        bookingKoiDetailRequest.setQuantity(10);
+        bookingKoiDetailRequest.setUnitPrice(10);
+//
 //        BookingKoiDetailRequest bookingKoiDetailRequest2 = new BookingKoiDetailRequest();
 //        bookingKoiDetailRequest2.setKoiId(10002L);
 //        bookingKoiDetailRequest2.setFarmId(10003L);
 //        bookingKoiDetailRequest2.setQuantity(10);
 //        bookingKoiDetailRequest2.setUnitPrice(8);
-//
-//        List<BookingKoiDetailRequest> detailRequests = new ArrayList<>();
-//        detailRequests.add(bookingKoiDetailRequest);
+
+        List<BookingKoiDetailRequest> detailRequests = new ArrayList<>();
+        detailRequests.add(bookingKoiDetailRequest);
 //        detailRequests.add(bookingKoiDetailRequest2);
-//
-//        bookingKoiRequest.setDetails(detailRequests);
-//
-//        bookingKoiService.createKoiBooking(bookingKoiRequest, 3L, account);
+
+        bookingKoiRequest.setDetails(detailRequests);
+
+        bookingKoiService.createKoiBooking(bookingKoiRequest, 3L, account);
 //
     KoiFarmService koiFarmService = new KoiFarmService(ResourcePaths.HIBERNATE_CONFIG);
     KoiService koiService = new KoiService(ResourcePaths.HIBERNATE_CONFIG);
@@ -78,13 +78,13 @@ public class maintest {
 //        deliveryHistoryRequest.setRoute("Loading...");
 //        deliveryHistoryRequest.setHealthKoiDescription("All of kois are good");
 //        deliveryHistoryService.addDeliveryHistory(deliveryHistoryRequest,10013L,account);
-        DeliveryRequest deliveryRequest = new DeliveryRequest();
-        deliveryRequest.setAddress("Viet nam");
-        deliveryRequest.setHealthKoiDescription("All good");
-        deliveryRequest.setStatus(CCSTATUS.COMPLETED);
-        deliveryRequest.setCustomerName("Vo Quang Minh");
-        deliveryRequest.setReceiveDate(LocalDate.now());
-        deliveryService.addDelivery(deliveryRequest,10013L,account);
+//        DeliveryRequest deliveryRequest = new DeliveryRequest();
+//        deliveryRequest.setAddress("Viet nam");
+//        deliveryRequest.setHealthKoiDescription("All good");
+//        deliveryRequest.setStatus(CCSTATUS.COMPLETED);
+//        deliveryRequest.setCustomerName("Vo Quang Minh");
+//        deliveryRequest.setReceiveDate(LocalDate.now());
+//        deliveryService.addDelivery(deliveryRequest,10013L,account);
 
     }
 }

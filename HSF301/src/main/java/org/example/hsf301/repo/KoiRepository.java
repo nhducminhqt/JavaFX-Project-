@@ -1,3 +1,4 @@
+
 package org.example.hsf301.repo;
 
 import org.example.hsf301.dao.IKoiDAO;
@@ -49,5 +50,10 @@ public class KoiRepository implements IKoiRepository {
     @Override
     public List<Koi> findByKoiName(String koiName) {
         return koiDAO.findByKoiName(koiName);
+    }
+
+    @Override
+    public List<Koi> findAllActive() {
+        return koiDAO.findAllActive();
     }
 }

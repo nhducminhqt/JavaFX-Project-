@@ -1,3 +1,4 @@
+
 package org.example.hsf301.repo;
 import org.example.hsf301.pojo.Koi;
 
@@ -27,5 +28,6 @@ public interface IKoiRepository {
     // Find Koi records by koiName
     List<Koi> findByKoiName(String koiName);
 
+    List<Koi> findAllActive();
     // Additional methods can be defined as needed
 }
