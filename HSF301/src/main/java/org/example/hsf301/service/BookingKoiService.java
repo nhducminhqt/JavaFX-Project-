@@ -103,27 +103,23 @@ public class BookingKoiService implements IBookingKoiService {
         List<Bookings> bookings = bookingRepository.findAll();
             List<Bookings> bookingKoiList = new ArrayList<>();
             for (Bookings booking : bookings) {
-                if(booking.getBookingType()==BookingType.KoiPurchase){
-                bookingKoiList.add(booking);
-
-
-        return bookingKoiList;
-    }
-
-    @Override
-    public List<Bookings> getAllTourBookings() {
-        List<Bookings> bookings = bookingRepository.findAll();
-        List<Bookings> bookingKoiList = new ArrayList<>();
-        if(bookings!=null){
-            for (Bookings booking : bookings) {
-                if(booking.getBookingType()==BookingType.TourBooking){
+                if (booking.getBookingType() == BookingType.KoiPurchase) {
                     bookingKoiList.add(booking);
                 }
             }
-        }
-
         return bookingKoiList;
     }
+    @Override
+                public List<Bookings> getAllTourBookings() {
+                    List<Bookings> bookings = bookingRepository.findAll();
+                    List<Bookings> bookingKoiList = new ArrayList<>();
+                    for (Bookings booking : bookings) {
+                        if(booking.getBookingType()==BookingType.TourBooking) {
+                            bookingKoiList.add(booking);
+                        }}
+
+                            return bookingKoiList;
+                        }
 
     @Override
     public List<Bookings> getAllKoiBookings(String username) {
