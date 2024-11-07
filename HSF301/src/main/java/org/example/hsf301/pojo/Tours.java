@@ -8,12 +8,14 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "tours")
+@ToString(exclude = {"bookingTourDetails", "tourDetails"}) //prevent stack overflow when call toString
 public class Tours {
 
     @Id
@@ -48,34 +50,10 @@ public class Tours {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdDate;
+    @OneToOne(mappedBy = "tourId", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
+    private BookingTourDetail bookingTourDetails;
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedDate;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "created_by")
-    private Account createdBy;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "updated_by")
-    private Account updatedBy;
-
-    @PrePersist
-    protected void onCreate(){
-        createdDate = LocalDateTime.now();
-        updatedDate = LocalDateTime.now();
-    }
-    @PreUpdate
-    protected void onUpdate(){
-        updatedDate = LocalDateTime.now();
-    }
-
-    @OneToMany(mappedBy = "tourId", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    private Set<BookingTourDetail> bookingTourDetails;
-
-    @OneToMany(mappedBy = "tour", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "tour", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     private Set<TourDetail> tourDetails;
 
 }

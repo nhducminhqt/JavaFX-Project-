@@ -4,6 +4,7 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.hsf301.enums.CCSTATUS;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,7 +34,8 @@ public class Deposit {
     private float depositPercentage;
 
     @Column(name = "deposit_status")
-    private String depositStatus;
+    @Enumerated(EnumType.STRING)
+    private CCSTATUS depositStatus;
 
     @Column(name = "delivery_expected_date")
     private LocalDate deliveryExpectedDate;
@@ -44,8 +46,8 @@ public class Deposit {
     @Column(name = "shipping_fee")
     private float shippingFee;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "booking_id")
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "booking_id",unique = true)
     private Bookings booking;
 
     @PrePersist

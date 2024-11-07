@@ -7,6 +7,7 @@ import org.example.hsf301.pojo.Account;
 public interface IAccountService {
 	void save(Account account);
 	List<Account> findAll();
+	List<Account> findAllCustomers();
 	void delete(Integer id);
 	Account findById(Integer id);
 	void update(Account account);

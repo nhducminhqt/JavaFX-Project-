@@ -86,6 +86,12 @@
           <artifactId>hibernate-entitymanager</artifactId>
           <version>5.6.9.Final</version>
       </dependency>
+    <!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
+    <dependency>
+      <groupId>org.controlsfx</groupId>
+      <artifactId>controlsfx</artifactId>
+      <version>11.2.1</version>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
     <dependency>
@@ -163,8 +169,17 @@
         <filtering>false</filtering>
         <includes>
           <include>**.png</include>
+          <include>**.jpg</include>
         </includes>
         <targetPath>${project.build.outputDirectory}/org/example/hsf301/assets/img</targetPath>
+      </resource>
+      <resource>
+        <directory>src/main/resources/org/example/hsf301/css</directory>
+        <filtering>false</filtering>
+        <includes>
+          <include>**.css</include>
+        </includes>
+        <targetPath>${project.build.outputDirectory}/org/example/hsf301/assets/css</targetPath>
       </resource>
       <resource>
         <directory>src/main/resources/org/example/hsf301/assets/sound</directory>
@@ -216,7 +231,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>org.example.hsf301/org.example.hsf301.HelloApplication</mainClass>
+              <mainClass>org.example.hsf301/org.example.hsf301.test.HelloApplication</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

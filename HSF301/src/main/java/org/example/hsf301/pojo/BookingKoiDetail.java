@@ -19,6 +19,10 @@ public class BookingKoiDetail {
     private Long id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "koifarm_id")
+    private KoiFarms koiFarms;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "koi_id")
     private Koi koi;
 
@@ -40,5 +44,17 @@ public class BookingKoiDetail {
         this.koi=koi;
         this.quantity=quantity;
         this.unitPrice=unitPrice;
+    }
+    @PrePersist
+    @PreUpdate
+    private void validateData() {
+        if (quantity <= 0) {
+            throw new IllegalStateException("Quantity must be positive");
+        }
+        if (unitPrice <= 0) {
+            throw new IllegalStateException("Unit price must be positive");
+        }
+        // Recalculate total amount to ensure consistency
+        totalAmount = unitPrice*quantity;
     }
 }

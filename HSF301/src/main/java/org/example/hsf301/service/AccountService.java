@@ -1,15 +1,18 @@
 package org.example.hsf301.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.example.hsf301.enums.ERole;
 import org.example.hsf301.pojo.Account;
-import org.example.hsf301.repo.AccountRepo;
-import org.example.hsf301.repo.IAccountRepo;
+import org.example.hsf301.repo.AccountRepository;
+import org.example.hsf301.repo.IAccountRepository;
 
 public class AccountService implements IAccountService{
-	private IAccountRepo accountRepo;
+	private final IAccountRepository accountRepo;
 
 	public AccountService(String name) {
-		accountRepo = new AccountRepo(name);
+		accountRepo = new AccountRepository(name);
 	}
 
 	@Override
@@ -20,6 +23,17 @@ public class AccountService implements IAccountService{
 	@Override
 	public List<Account> findAll() {
 		return accountRepo.findAll();
+	}
+
+	@Override
+	public List<Account> findAllCustomers() {
+		List<Account> accounts = accountRepo.findAll();
+		List<Account> customers = new ArrayList<Account>();
+		for (Account account : accounts) {
+			if(account.getRole()== ERole.CUSTOMER)
+				customers.add(account);
+		}
+		return customers;
 	}
 
 	@Override

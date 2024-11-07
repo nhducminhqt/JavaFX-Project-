@@ -23,7 +23,7 @@ public class KoiOfFarm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-   Long id;
+    Long id;
 
     @Column(name = "quantity")
     private int quantity;

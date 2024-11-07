@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/org/example/hsf301/META-INF" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/org/example/hsf301/assets/img" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/org/example/hsf301/assets/sound" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/org/example/hsf301/css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/org/example/hsf301/fxml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/org/example/hsf301/templates/email" charset="UTF-8" />
   </component>
