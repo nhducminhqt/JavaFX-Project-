@@ -1,4 +1,4 @@
-package org.example.hsf301;
+package org.example.hsf301.test;
 
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.dao.IDeliveryHistoryDAO;

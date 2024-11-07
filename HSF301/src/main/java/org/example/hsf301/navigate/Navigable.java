@@ -36,6 +36,7 @@ public interface Navigable {
         setContent("tour", contentArea);
     }
 
+
     // Default method to navigate to the Bookings page
     default void navigateBooking(StackPane contentArea) throws IOException {
         setContent("booking", contentArea);
@@ -112,6 +113,10 @@ public interface Navigable {
     default void navigateBookingTourList(StackPane contentArea) throws IOException {
         setContent("BookingTourListStaff", contentArea);
     }
+    default void navigateBookingTourListSaleStaff(StackPane contentArea) throws IOException {
+        setContent("BookingTourListSaleStaff", contentArea);
+    }
+
     default void navigateDelivery(StackPane contentArea) throws IOException {
         setContent("Delivery", contentArea);
     }
@@ -161,6 +166,7 @@ public interface Navigable {
             MyProfileController myProfileController = new MyProfileController(accountService);
             loader.setController(myProfileController);
         }
+
 
         if(page.equals("purchased_tour")){
             PurchasedTourController purchasedTourController = new PurchasedTourController();
