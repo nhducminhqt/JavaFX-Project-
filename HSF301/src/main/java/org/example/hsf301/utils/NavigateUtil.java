@@ -1,11 +1,13 @@
 package org.example.hsf301.utils;
 
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.Scanner;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.controllers.LoginController;
@@ -42,6 +44,8 @@ public class NavigateUtil {
             double sceneWidth = (width != null) ? width : 600; // Default height
 
             Scene scene = new Scene(root, sceneWidth, sceneHeight);
+            newStage.getIcons().add(new Image(
+                Objects.requireNonNull(NavigateUtil.class.getResource(ResourcePaths.URL_KOI_ICON_LOGO)).toExternalForm()));
             newStage.setScene(scene);
 
             // Set the title, default to "Application Title" if not specified
