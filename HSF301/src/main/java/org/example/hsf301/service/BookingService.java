@@ -1,6 +1,7 @@
 package org.example.hsf301.service;
 
 import java.util.List;
+import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.Bookings;
 import org.example.hsf301.repo.BookingRepository;
 import org.example.hsf301.repo.IBookingRepository;
@@ -38,6 +39,11 @@ public class BookingService implements IBookingService {
     @Override
     public List<Bookings> findByAccountID(String accountID) {
         return repository.findByAccountID(accountID);
+    }
+
+    @Override
+    public List<BookingKoiDetail> findByBookingID(Long bookingID) {
+        return repository.findByBookingID(bookingID);
     }
 
 }

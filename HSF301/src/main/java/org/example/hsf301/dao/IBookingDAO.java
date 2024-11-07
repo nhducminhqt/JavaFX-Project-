@@ -1,5 +1,6 @@
 package org.example.hsf301.dao;
 
+import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.Bookings;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface IBookingDAO {
     Bookings findById(Long bookingID);
     void update(Bookings booking);
     List<Bookings> findByAccountID(String accountID);
+    List<BookingKoiDetail> findByBookingID(Long bookingID);
 }
