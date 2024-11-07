@@ -17,9 +17,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
+import lombok.RequiredArgsConstructor;
 import org.example.hsf301.pojo.Tours;
 import org.example.hsf301.service.TourService;
 
+@RequiredArgsConstructor
 public class TourController implements Initializable {
 
     @FXML
@@ -29,10 +31,6 @@ public class TourController implements Initializable {
     private static final int COLUMNS = 4;
     private static final SimpleDateFormat DATE_FORMATTER =
         new SimpleDateFormat("MMM dd, yyyy HH:mm");
-
-    public TourController(TourService tourService) {
-        this.tourService = tourService;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -7,11 +7,15 @@ import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.controllers.BookingKoiController;
+import org.example.hsf301.controllers.FarmController;
+import org.example.hsf301.controllers.KoiController;
 import org.example.hsf301.controllers.MyProfileController;
 import org.example.hsf301.controllers.PurchasedTourController;
 import org.example.hsf301.controllers.TourController;
 import org.example.hsf301.controllers.TourManagementController;
 import org.example.hsf301.service.AccountService;
+import org.example.hsf301.service.KoiFarmService;
+import org.example.hsf301.service.KoiService;
 import org.example.hsf301.service.TourService;
 import org.example.hsf301.utils.NavigateUtil;
 
@@ -71,6 +75,14 @@ public interface Navigable {
         setContent("booking_koi", contentArea);
     }
 
+    default void navigateKois(StackPane contentArea) throws IOException {
+        setContent("kois", contentArea);
+    }
+
+    default void navigateFarms(StackPane contentArea) throws IOException {
+        setContent("farms", contentArea);
+    }
+
     //Management
     default void navigateTourManagement(StackPane contentArea) throws IOException {
         setContent("tours_management", contentArea);
@@ -109,6 +121,16 @@ public interface Navigable {
 
         if(page.equals("booking_koi")){
             BookingKoiController bookingKoiController = new BookingKoiController();
+        }
+
+        if(page.equals("kois")){
+             KoiController koiController = new KoiController(new KoiService(ResourcePaths.HIBERNATE_CONFIG));
+             loader.setController(koiController);
+        }
+
+        if(page.equals("farms")){
+             FarmController farmController = new FarmController(new KoiFarmService(ResourcePaths.HIBERNATE_CONFIG));
+             loader.setController(farmController);
         }
 
         //preload data when admin login

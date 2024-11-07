@@ -1,6 +1,5 @@
 package org.example.hsf301.pojo;
 
-
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +18,7 @@ public class KoiFarms {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-   Long id;
+    Long id;
 
     @Column(name = "farmName")
     private String farmName;
@@ -43,8 +42,6 @@ public class KoiFarms {
 
     @Column(name = "isActive")
     private boolean isActive;
-
-
 
     @OneToMany(mappedBy = "farm", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Set<TourDetail> tourDetails;

@@ -59,4 +59,14 @@ public class MainController implements Initializable, Navigable {
     public void navigateBookingKoi(ActionEvent event) throws IOException {
         navigateBookingKoi(contentArea);
     }
+
+    @FXML
+    public void navigateKois(ActionEvent event) throws IOException {
+        navigateKois(contentArea);
+    }
+
+    @FXML
+    public void navigateFarms(ActionEvent event) throws IOException {
+        navigateFarms(contentArea);
+    }
 }

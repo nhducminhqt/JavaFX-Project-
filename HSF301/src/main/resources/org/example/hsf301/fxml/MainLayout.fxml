@@ -14,6 +14,10 @@
       text="Home"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#navigateMyProfile"
       text="My Profile"/>
+    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#navigateKois"
+      text="Kois"/>
+    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#navigateFarms"
+      text="Farms"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#navigateTour"
       text="Tours"/>
     <!-- view tour da dat, neu tour co status pending thi ko cho thanh toan, con neu processing ( bao gia) hien nut thanh toan ,
