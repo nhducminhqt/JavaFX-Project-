@@ -1,6 +1,7 @@
 package org.example.hsf301.service;
 
 import org.example.hsf301.model.request.BookingTourDetailRequest;
+import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.BookingTourDetail;
 import org.example.hsf301.pojo.Bookings;
 import org.example.hsf301.pojo.Tours;
@@ -85,5 +86,10 @@ public class BookingTourDetailService implements IBookingTourDetailService {
             throw new IllegalArgumentException("bookingTourDetails cannot be null");
         }
         return bookingTourDetails;
+    }
+
+    @Override
+    public List<BookingTourDetail> bookingTourDetails(Long bookingID) {
+        return bookingTourDetailRepository.findByBookingId(bookingID);
     }
 }

@@ -24,6 +24,7 @@ public class BookingTourDetail {
     @JoinColumn(name = "tour_id")
     private Tours tourId;
 
+
     @Column(name = "participant")
     private int participant;
 
