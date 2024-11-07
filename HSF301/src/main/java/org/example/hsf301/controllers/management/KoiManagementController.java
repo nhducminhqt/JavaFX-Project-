@@ -1,4 +1,4 @@
-package org.example.hsf301.controllers;
+package org.example.hsf301.controllers.management;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -17,12 +17,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
 import org.example.hsf301.pojo.Tours;
-import org.example.hsf301.service.ITourService;
 import org.example.hsf301.service.TourService;
 import org.example.hsf301.utils.AppAlert;
 
 @RequiredArgsConstructor
-public class TourManagementController implements Initializable {
+public class KoiManagementController implements Initializable {
 
     @FXML
     private GridPane tourGrid;

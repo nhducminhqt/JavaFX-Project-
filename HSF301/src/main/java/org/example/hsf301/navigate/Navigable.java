@@ -13,7 +13,8 @@ import org.example.hsf301.controllers.KoiController;
 import org.example.hsf301.controllers.MyProfileController;
 import org.example.hsf301.controllers.PurchasedTourController;
 import org.example.hsf301.controllers.TourController;
-import org.example.hsf301.controllers.TourManagementController;
+import org.example.hsf301.controllers.management.FarmManagementController;
+import org.example.hsf301.controllers.management.TourManagementController;
 import org.example.hsf301.service.AccountService;
 import org.example.hsf301.service.BookingService;
 import org.example.hsf301.service.KoiFarmService;
@@ -89,6 +90,11 @@ public interface Navigable {
     default void navigateTourManagement(StackPane contentArea) throws IOException {
         setContent("tours_management", contentArea);
     }
+
+    default void navigateFarmManagement(StackPane contentArea) throws IOException {
+        setContent("farms_management", contentArea);
+    }
+
     //Staff
     default void navigateBookingKoiList(StackPane contentArea) throws IOException {
         setContent("BookingKoiListStaff", contentArea);
@@ -122,6 +128,11 @@ public interface Navigable {
             TourManagementController tourManagementController = new TourManagementController(
                 tourService);
             loader.setController(tourManagementController);
+        }
+
+        if (page.equals("farms_management")) {
+            FarmManagementController farmManagementController = new FarmManagementController(new KoiFarmService(ResourcePaths.HIBERNATE_CONFIG));
+            loader.setController(farmManagementController);
         }
 
         if (page.equals("my_profile")) {

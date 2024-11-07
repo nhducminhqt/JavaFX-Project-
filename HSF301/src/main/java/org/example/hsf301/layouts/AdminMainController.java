@@ -66,7 +66,7 @@ public class AdminMainController implements Initializable, Navigable {
 
     @FXML
     private void navigateFarm() throws IOException {
-        navigateFarm(contentArea);
+        navigateFarmManagement(contentArea);
     }
 
 }
