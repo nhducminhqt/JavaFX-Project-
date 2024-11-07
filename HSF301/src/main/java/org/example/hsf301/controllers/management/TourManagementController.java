@@ -21,7 +21,7 @@ import org.example.hsf301.service.TourService;
 import org.example.hsf301.utils.AppAlert;
 
 @RequiredArgsConstructor
-public class TourManagementController implements Initializable {
+public class TourManagementController extends Crud<Tours> implements Initializable {
 
     @FXML
     private GridPane tourGrid;
@@ -102,7 +102,8 @@ public class TourManagementController implements Initializable {
         priceLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #e67e22;");
 
         Label availabilityLabel = new Label(
-            String.format("Available spots: %d/%d", tour.getRemaining(), tour.getMaxParticipants()));
+            String.format("Available spots: %d/%d", tour.getRemaining(),
+                          tour.getMaxParticipants()));
         availabilityLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #95a5a6;");
 
         priceBox.getChildren().addAll(priceLabel, availabilityLabel);
@@ -137,7 +138,7 @@ public class TourManagementController implements Initializable {
             bookButton.setDisable(true);
         }
 
-        bookButton.setOnAction(event -> handleBooking(tour));
+        bookButton.setOnAction(event -> handleAdd(tour));
 
         // Add all elements to card
         card.getChildren().addAll(
@@ -153,37 +154,28 @@ public class TourManagementController implements Initializable {
         return card;
     }
 
-    private Button createStyledButton(String text, String color) {
-        Button button = new Button(text);
-        button.setStyle(
-            String.format("-fx-background-color: %s; " +
-                              "-fx-text-fill: white; " +
-                              "-fx-font-size: 12px; " +
-                              "-fx-padding: 5 10; " +
-                              "-fx-cursor: hand; " +
-                              "-fx-background-radius: 3;", color)
-        );
-        return button;
-    }
-
-    private void handleBooking(Tours tour) {
+    @Override
+    public void handleAdd(Tours tour) {
         if (tour.getRemaining() > 0) {
             // TODO: Implement booking logic
             System.out.println("Booking tour: " + tour.getTourName());
         }
     }
 
-    private void handleEdit(Tours tour) {
+    @Override
+    public void handleEdit(Tours tour) {
         System.out.println("Editing tour: " + tour.getTourName());
         // TODO: Implement edit logic
     }
 
-    private void handleDelete(Tours tour) {
+    @Override
+    public void handleDelete(Tours tour) {
         tourService.deleteTour(tour.getId());
         AppAlert.showAlert("Success", "Tour deleted successfully");
     }
 
-    private void handleView(Tours tour) {
+    @Override
+    public void handleView(Tours tour) {
         System.out.println("Viewing tour: " + tour.getTourName());
         // TODO: Implement view logic
     }

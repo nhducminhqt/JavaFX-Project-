@@ -13,6 +13,7 @@ import org.example.hsf301.controllers.KoiController;
 import org.example.hsf301.controllers.MyProfileController;
 import org.example.hsf301.controllers.PurchasedTourController;
 import org.example.hsf301.controllers.TourController;
+import org.example.hsf301.controllers.management.BookingManagementController;
 import org.example.hsf301.controllers.management.FarmManagementController;
 import org.example.hsf301.controllers.management.KoiManagementController;
 import org.example.hsf301.controllers.management.TourManagementController;
@@ -38,6 +39,10 @@ public interface Navigable {
     // Default method to navigate to the Bookings page
     default void navigateBooking(StackPane contentArea) throws IOException {
         setContent("booking", contentArea);
+    }
+
+    default void navigateBookingManagement(StackPane contentArea) throws IOException {
+        setContent("bookings_management", contentArea);
     }
 
     // Default method to navigate to the Settings page
@@ -133,6 +138,11 @@ public interface Navigable {
             TourManagementController tourManagementController = new TourManagementController(
                 tourService);
             loader.setController(tourManagementController);
+        }
+
+        if (page.equals("bookings_management")) {
+            BookingManagementController bookingManagementController = new BookingManagementController(new BookingService(ResourcePaths.HIBERNATE_CONFIG));
+            loader.setController(bookingManagementController);
         }
 
         if (page.equals("farms_management")) {

@@ -1,49 +1,55 @@
 package org.example.hsf301.controllers.management;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
-import org.example.hsf301.pojo.Tours;
-import org.example.hsf301.service.TourService;
+import org.example.hsf301.enums.PaymentStatus;
+import org.example.hsf301.pojo.Bookings;
+import org.example.hsf301.pojo.KoiFarms;
+import org.example.hsf301.service.IBookingService;
 import org.example.hsf301.utils.AppAlert;
 
 @RequiredArgsConstructor
 public class BookingManagementController implements Initializable {
 
-    @FXML
-    private GridPane tourGrid;
+    private final IBookingService bookingService;
 
-    private final TourService tourService;
-    private static final int COLUMNS = 4;
-    private static final SimpleDateFormat DATE_FORMATTER =
-        new SimpleDateFormat("MMM dd, yyyy HH:mm");
+    @FXML
+    private GridPane bookingGrid;
+
+    private static final int COLUMNS = 3;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        displayTours();
+        displayBookings();
     }
 
-    private void displayTours() {
-        List<Tours> tours = tourService.findAll();
+    private void displayBookings() {
+        // Retrieve the list of bookings by account ID
+        List<Bookings> bookings = bookingService.findAll();
+        if (bookings.isEmpty()) {
+            Label emptyLabel = new Label("No bookings found");
+            emptyLabel.setStyle("-fx-text-fill: red; -fx-font-size: 16px; -fx-font-weight: bold;");
+            bookingGrid.add(emptyLabel, 0, 0);
+            return;
+        }
+
         int row = 0;
         int col = 0;
 
-        for (Tours tour : tours) {
-            VBox tourCard = createTourCard(tour);
-            tourGrid.add(tourCard, col, row);
+        for (Bookings booking : bookings) {
+            VBox bookingCard = createBookingCard(booking);
+            bookingGrid.add(bookingCard, col, row);
 
             col++;
             if (col == COLUMNS) {
@@ -53,10 +59,10 @@ public class BookingManagementController implements Initializable {
         }
     }
 
-    private VBox createTourCard(Tours tour) {
+    private VBox createBookingCard(Bookings booking) {
         VBox card = new VBox(10);
-        card.setMaxWidth(300);
-        card.setPrefWidth(300);
+        card.setMaxWidth(350);
+        card.setPrefWidth(350);
         card.setStyle("-fx-background-color: white; " +
                           "-fx-border-color: #e0e0e0; " +
                           "-fx-border-radius: 8; " +
@@ -64,93 +70,92 @@ public class BookingManagementController implements Initializable {
                           "-fx-padding: 15; " +
                           "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);");
 
-        // Image
-        ImageView imageView = new ImageView();
-        try {
-            String imagePath = tour.getTourImg();
-            Image image = new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
-            imageView.setImage(image);
-            imageView.setFitWidth(320);
-            imageView.setFitHeight(200);
-            imageView.setPreserveRatio(true);
-        } catch (Exception e) {
-            System.err.println("Could not load image: " + tour.getTourImg());
+        // Booking Type
+        try{
+            HBox titleBox = new HBox(15);
+            Label typeLabel = new Label("Booking Type: " + booking.getBookingType());
+            typeLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;");
+            typeLabel.setWrapText(true);
+
+            titleBox.setStyle("-fx-background-color: #34495e");
+            titleBox.setAlignment(Pos.CENTER);
+            titleBox.getChildren().addAll(typeLabel);
+
+            // Booking Date
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Label dateLabel = new Label("Date: " + booking.getBookingDate().format(dateFormatter));
+            dateLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #7f8c8d;");
+
+            // Payment Information
+            VBox paymentInfoBox = new VBox(15);
+            paymentInfoBox.setAlignment(Pos.CENTER_LEFT);
+
+            Label paymentStatusLabel = new Label("Payment Status: " + booking.getPaymentStatus());
+            paymentStatusLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
+
+            Label amountLabel = new Label("Total: $" + booking.getTotalAmountWithVAT());
+            amountLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
+
+            // Payment Method
+            Label paymentMethodLabel = new Label("Payment Method: " + booking.getPaymentMethod());
+
+            HBox paymentBox = new HBox(15);
+            paymentBox.setAlignment(Pos.CENTER);
+            if(booking.getPaymentStatus().equals(PaymentStatus.PROCESSING)){
+                Button purchaseButton = new Button("Purchase Now!");
+                purchaseButton.setStyle("-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+                Button cancelButton = new Button("Cancel");
+                cancelButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold");
+                paymentBox.getChildren().addAll(purchaseButton, cancelButton);
+            }
+
+            paymentMethodLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
+
+            paymentInfoBox.getChildren().addAll(paymentStatusLabel, amountLabel, paymentMethodLabel);
+
+            // CRUD Buttons
+            HBox crudButtons = new HBox(5);
+            crudButtons.setAlignment(Pos.CENTER);
+
+            Button editButton = createStyledButton("Edit", "#f39c12");
+            Button deleteButton = createStyledButton("Delete", "#e74c3c");
+            Button viewButton = createStyledButton("View", "#3498db");
+
+            editButton.setOnAction(event -> handleEdit(booking));
+            deleteButton.setOnAction(event -> handleDelete(booking));
+            viewButton.setOnAction(event -> handleView(booking));
+
+            crudButtons.getChildren().addAll(viewButton, editButton, deleteButton);
+
+            // Add all elements to card
+            card.getChildren().addAll(
+                titleBox,
+                dateLabel,
+                paymentInfoBox,
+                paymentBox
+            );
+
+            return card;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
-
-        // Tour Name
-        Label nameLabel = new Label(tour.getTourName());
-        nameLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;");
-        nameLabel.setWrapText(true);
-
-        // Description
-        Label descriptionLabel = new Label(tour.getDescription());
-        descriptionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
-        descriptionLabel.setWrapText(true);
-
-        // Date/Time
-        Label dateTimeLabel = new Label(String.format("From: %s\nTo: %s",
-                                                      DATE_FORMATTER.format(tour.getStartTime()),
-                                                      DATE_FORMATTER.format(tour.getEndTime())));
-        dateTimeLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #7f8c8d;");
-
-        // Price and Availability HBox
-        HBox priceBox = new HBox(10);
-        priceBox.setAlignment(Pos.CENTER_LEFT);
-
-        Label priceLabel = new Label(String.format("$%.2f", tour.getUnitPrice()));
-        priceLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #e67e22;");
-
-        Label availabilityLabel = new Label(
-            String.format("Available spots: %d/%d", tour.getRemaining(), tour.getMaxParticipants()));
-        availabilityLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #95a5a6;");
-
-        priceBox.getChildren().addAll(priceLabel, availabilityLabel);
-
-        // CRUD Buttons
-        HBox crudButtons = new HBox(5);
-        crudButtons.setAlignment(Pos.CENTER);
-
-        Button editButton = createStyledButton("Edit", "#f39c12");
-        Button deleteButton = createStyledButton("Delete", "#e74c3c");
-        Button viewButton = createStyledButton("View", "#3498db");
-
-        editButton.setOnAction(event -> handleEdit(tour));
-        deleteButton.setOnAction(event -> handleDelete(tour));
-        viewButton.setOnAction(event -> handleView(tour));
-
-        crudButtons.getChildren().addAll(viewButton, editButton, deleteButton);
-
-        // Book Button
-        Button bookButton = new Button("Book Now");
-        bookButton.setMaxWidth(Double.MAX_VALUE);
-        bookButton.setStyle("-fx-background-color: #2ecc71; " +
-                                "-fx-text-fill: white; " +
-                                "-fx-font-size: 14px; " +
-                                "-fx-padding: 10 20; " +
-                                "-fx-cursor: hand; " +
-                                "-fx-background-radius: 5;");
-
-        if (tour.getRemaining() == 0) {
-            bookButton.setText("Fully Booked");
-            bookButton.setStyle(bookButton.getStyle().replace("#2ecc71", "#95a5a6"));
-            bookButton.setDisable(true);
-        }
-
-        bookButton.setOnAction(event -> handleBooking(tour));
-
-        // Add all elements to card
-        card.getChildren().addAll(
-            imageView,
-            nameLabel,
-            descriptionLabel,
-            dateTimeLabel,
-            priceBox,
-            crudButtons,
-            bookButton
-        );
 
         return card;
+    }
+
+    private void handleEdit(Bookings bookings) {
+        System.out.println("Editing booking: " + bookings.getId());
+        // TODO: Implement edit logic
+    }
+
+    private void handleDelete(Bookings bookings) {
+        bookingService.delete(bookings.getId());
+        AppAlert.showAlert("Success", "Tour deleted successfully");
+    }
+
+    private void handleView(Bookings bookings) {
+        System.out.println("Viewing bookings: " + bookings.getId());
+        // TODO: Implement view logic
     }
 
     private Button createStyledButton(String text, String color) {
@@ -164,27 +169,5 @@ public class BookingManagementController implements Initializable {
                               "-fx-background-radius: 3;", color)
         );
         return button;
-    }
-
-    private void handleBooking(Tours tour) {
-        if (tour.getRemaining() > 0) {
-            // TODO: Implement booking logic
-            System.out.println("Booking tour: " + tour.getTourName());
-        }
-    }
-
-    private void handleEdit(Tours tour) {
-        System.out.println("Editing tour: " + tour.getTourName());
-        // TODO: Implement edit logic
-    }
-
-    private void handleDelete(Tours tour) {
-        tourService.deleteTour(tour.getId());
-        AppAlert.showAlert("Success", "Tour deleted successfully");
-    }
-
-    private void handleView(Tours tour) {
-        System.out.println("Viewing tour: " + tour.getTourName());
-        // TODO: Implement view logic
     }
 }
