@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class BookingDAO implements IBookingDAO{
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
     private Configuration configuration;
 
     public BookingDAO(String name) {

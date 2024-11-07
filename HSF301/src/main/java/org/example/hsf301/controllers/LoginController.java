@@ -138,8 +138,8 @@ public class LoginController {
             switch (account.getRole()){
                 case ADMIN -> destinationPage = "AdminMainLayout";
                 case SALE_STAFF -> destinationPage = "StaffMainLayout";
-                case CONSULT_STAFF -> destinationPage = "StaffMainLayout";
-                case DELIVERY_STAFF -> destinationPage = "StaffMainLayout";
+                case CONSULT_STAFF -> destinationPage = "DeliveryStaff";
+                case DELIVERY_STAFF -> destinationPage = "DeliveryStaff";
                 case CUSTOMER -> destinationPage = "MainLayout";
                 default -> destinationPage = "error";
             }
