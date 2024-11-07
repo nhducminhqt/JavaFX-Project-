@@ -1,3 +1,4 @@
+
 package org.example.hsf301.repo;
 
 import org.example.hsf301.dao.IKoiDAO;
@@ -38,7 +39,7 @@ public class KoiRepository implements IKoiRepository {
 
     @Override
     public void update(Koi koi) {
-    koiDAO.update(koi);
+        koiDAO.update(koi);
     }
 
     @Override

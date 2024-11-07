@@ -28,7 +28,7 @@ public class KoiFarmsRepository implements IKoiFarmsRepository{
 
     @Override
     public void delete(Long id) {
-    iKoiFarmsDAO.delete(id);
+        iKoiFarmsDAO.delete(id);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class KoiFarmsRepository implements IKoiFarmsRepository{
 
     @Override
     public void update(KoiFarms koiFarms) {
-            iKoiFarmsDAO.update(koiFarms);
+        iKoiFarmsDAO.update(koiFarms);
     }
 
     @Override

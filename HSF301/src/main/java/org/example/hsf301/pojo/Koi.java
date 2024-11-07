@@ -40,11 +40,11 @@ public class Koi {
         @Column(name = "is_active")
         private boolean isActive;
 
-        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL})
+        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL} ,fetch = FetchType.LAZY)
         @JsonIgnore
         private Set<KoiOfFarm> koiOfFarmList;
 
-        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL})
+        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
         @JsonIgnore
         private Set<BookingKoiDetail> bookingKoiDetails;
 

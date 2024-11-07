@@ -4,7 +4,9 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.hsf301.enums.CCSTATUS;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -23,7 +25,7 @@ public class Delivery {
     private String customerName;
 
     @Column(name = "receive_date")
-    private Date receiveDate;
+    private LocalDate receiveDate;
 
     @Column(name = "health_koi_description")
     private String healthKoiDescription;
@@ -35,7 +37,8 @@ public class Delivery {
     private String address;
 
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private CCSTATUS status;
 
     @Column(name = "reason")
     private String reason;
@@ -45,6 +48,6 @@ public class Delivery {
     private Account deliveryStaff;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "booking_id")
+    @JoinColumn(name = "booking_id",unique = true)
     private Bookings booking;
 }

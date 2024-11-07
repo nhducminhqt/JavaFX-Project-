@@ -5,6 +5,7 @@ import org.example.hsf301.pojo.Koi;
 import org.example.hsf301.repo.IKoiRepository;
 import org.example.hsf301.repo.KoiRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,18 +21,18 @@ public class KoiService  implements  IKoiService{
     }
     @Override
     public Koi addKoi(KoiRequest koiRequest) {
-       Koi koi = new Koi();
+        Koi koi = new Koi();
         koi.setKoiName(koiRequest.getKoiName());
         koi.setColor(koiRequest.getColor());
         koi.setDescription(koiRequest.getDescription());
         koi.setOrigin(koiRequest.getOrigin());
 
 
-            koi.setActive(true);
-            koi.setKoiImage(koiRequest.getImage());
+        koi.setActive(true);
+        koi.setKoiImage(koiRequest.getImage());
 
-            koiRepository.save(koi);
-            return koi;
+        koiRepository.save(koi);
+        return koi;
 
     }
 
@@ -44,9 +45,9 @@ public class KoiService  implements  IKoiService{
     public void delete(Long id) {
         koiRepository.delete(id);
     }
-
+    @Transactional
     @Override
-    public Koi findById(Long id) {
+    public Koi findByKoiId(Long id) {
         return koiRepository.findById(id);
     }
 
@@ -82,7 +83,7 @@ public class KoiService  implements  IKoiService{
 
     @Override
     public List<Koi> findAllActive() {
-         return koiRepository.findAllActive();
+        return koiRepository.findAllActive();
     }
 
 }

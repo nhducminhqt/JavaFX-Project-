@@ -1,5 +1,6 @@
 package org.example.hsf301.service;
 
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.DeliveryRequest;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.pojo.Bookings;
@@ -7,6 +8,7 @@ import org.example.hsf301.pojo.Delivery;
 import org.example.hsf301.pojo.Deposit;
 import org.example.hsf301.repo.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,25 +16,26 @@ public class DeliveryService implements IDeliveryService{
     private IDeliveryRepository deliveryRepo;
     private IBookingRepository bookingRepo;
     private IDepositRepository depositRepo;
-    private Account account;
-    public DeliveryService(String name,Account account) {
+
+    public DeliveryService(String name) {
         deliveryRepo = new DeliveryRepository(name);
-        this.account = account;
+
         depositRepo = new DepositRepository(name);
         bookingRepo = new BookingRepository(name);
     }
 
 
     @Override
-    public Delivery addDelivery(DeliveryRequest deliveryRequest, Long bookingId) {
+    public Delivery addDelivery(DeliveryRequest deliveryRequest, Long bookingId,Account staff) {
         Delivery delivery = new Delivery();
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
-        bookings.setPaymentStatus("complete");
-        bookings.setPaymentDate(LocalDateTime.now());
+        if(bookings.getDelivery()!=null) return null;
+        bookings.setPaymentStatus(PaymentStatus.complete);
+        bookings.setPaymentDate(LocalDate.now());
         bookingRepo.update(bookings);
 
-        delivery.setDeliveryStaff(account);
+        delivery.setDeliveryStaff(staff);
         delivery.setBooking(bookings);
         delivery.setAddress(deliveryRequest.getAddress());
         delivery.setReason(deliveryRequest.getReason());

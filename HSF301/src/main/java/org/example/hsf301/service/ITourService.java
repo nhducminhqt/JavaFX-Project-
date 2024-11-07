@@ -1,11 +1,21 @@
 package org.example.hsf301.service;
 
-import java.util.List;
+
+import org.example.hsf301.model.request.TourRequest;
 import org.example.hsf301.pojo.Tours;
 
+import java.util.List;
+
 public interface ITourService {
-    void save(Tours tours);
+    Tours addTour(TourRequest tourRequest);
+
+    Tours updateTour(Long tourId, TourRequest tourRequest) throws Exception;
+
+    void deleteTour(Long tourId);
+
+    Tours getTour(Long tourId);
+
     List<Tours> findAll();
-    void delete(Integer id);
-    Tours findById(Integer id);
+    List<Tours> findByName(String tourName);
+    List<Tours> findByTourActive();
 }

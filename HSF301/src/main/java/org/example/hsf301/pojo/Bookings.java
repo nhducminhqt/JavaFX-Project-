@@ -4,7 +4,11 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.hsf301.enums.BookingType;
+import org.example.hsf301.enums.PaymentMethod;
+import org.example.hsf301.enums.PaymentStatus;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 import lombok.ToString;
@@ -28,10 +32,11 @@ public class Bookings {
 
 
     @Column(name = "booking_type")
-    private String bookingType;
+    @Enumerated(EnumType.STRING)
+    private BookingType bookingType;
 
     @Column(name = "booking_date")
-    private LocalDateTime bookingDate;
+    private LocalDate bookingDate;
 
     @Column(name = "total_amount")
     private float totalAmount;
@@ -49,26 +54,28 @@ public class Bookings {
     private float vatAmount;
 
     @Column(name = "payment_status")
-    private String paymentStatus;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 
     @Column(name = "payment_method")
-    private String paymentMethod;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
 
     @Column(name = "paymentDate")
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
 
     //here mapping quotation table
-    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     private Set<Quotations> quotations;
 
     //mapped By same name with ManyToOne annotation
-    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     private Set<BookingTourDetail> bookingTourDetails;
 
     @OneToOne(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Deposit deposit;
 
-    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     private Set<DeliveryHistory> deliveryHistory;
 
     @OneToOne(mappedBy = "booking",cascade = CascadeType.ALL)

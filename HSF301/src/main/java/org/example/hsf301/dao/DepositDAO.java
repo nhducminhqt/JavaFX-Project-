@@ -108,19 +108,25 @@ public class DepositDAO implements IDepositDAO{
 
     @Override
     public Deposit findByBookingId(Long bookingId) {
-        Deposit deposit = new Deposit();
+        Deposit deposit = null;
         Session session = sessionFactory.openSession();
-        Transaction t =null;
+        Transaction t = null;
         try {
-             t = session.beginTransaction();
-            Query<Deposit> query = session.createQuery("FROM deposit d WHERE d.booking.id = :bookingId", Deposit.class);
+            t = session.beginTransaction();
+
+            // Sửa lại câu HQL
+            Query<Deposit> query = session.createQuery("FROM Deposit d WHERE d.booking.id = :bookingId", Deposit.class);
             query.setParameter("bookingId", bookingId);
+
             deposit = query.uniqueResult();
             t.commit();
         } catch (Exception e) {
-        if (t != null) t.rollback();
-        e.printStackTrace();
-    }
+            if (t != null) t.rollback();
+            e.printStackTrace();
+        } finally {
+            // Đảm bảo đóng session
+            session.close();
+        }
         return deposit;
     }
 }

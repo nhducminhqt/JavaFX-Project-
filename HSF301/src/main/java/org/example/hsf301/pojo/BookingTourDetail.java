@@ -20,7 +20,7 @@ public class BookingTourDetail {
     @JoinColumn(name = "booking_id") //name same foreign key mapping
     private Bookings booking;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "tour_id")
     private Tours tourId;
 
