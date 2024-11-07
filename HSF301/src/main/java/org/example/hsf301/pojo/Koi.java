@@ -15,6 +15,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"koiOfFarmList", "bookingKoiDetails"})
 public class Koi {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,11 +49,5 @@ public class Koi {
         @JsonIgnore
         private Set<BookingKoiDetail> bookingKoiDetails;
 
-        @Override
-        public String toString() {
-                return "Koi{" +
-                        "id=" + id +
-                        ", koiName='" + koiName + '\'' +
-                        '}';
-        }
+
 }

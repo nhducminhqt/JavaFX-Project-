@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingKoiService implements IBookingKoiService {
-    private IBookingRepository bookingRepository;
-    private IKoiFarmsRepository koiFarmsRepository;
-    private IKoiRepository koiRepository;
-    private IBookingKoiDetailRepository bookingKoiDetailRepository;
+    private final IBookingRepository bookingRepository;
+    private final IKoiFarmsRepository koiFarmsRepository;
+    private final IKoiRepository koiRepository;
+    private final IBookingKoiDetailRepository bookingKoiDetailRepository;
     public BookingKoiService(String name)
     {
         bookingRepository = new BookingRepository(name);
@@ -38,7 +38,7 @@ public class BookingKoiService implements IBookingKoiService {
         booking.setBookingDate(request.getBookingDate());
         booking.setPaymentMethod(request.getPaymentMethod());
         booking.setCreatedBy(staff);
-        booking.setPaymentStatus(PaymentStatus.pending);
+        booking.setPaymentStatus(PaymentStatus.PENDING);
         booking.setVat(request.getVat());
         booking.setDiscountAmount(request.getDiscountAmount());
         bookingRepository.save(booking);
@@ -100,22 +100,19 @@ public class BookingKoiService implements IBookingKoiService {
 
     @Override
     public List<Bookings> getAllKoiBookings() {
-        List<Bookings> bookings = bookingRepository.getAll();
-        List<Bookings> bookingKoiList = new ArrayList<>();
-        if(bookings!=null){
+        List<Bookings> bookings = bookingRepository.findAll();
+            List<Bookings> bookingKoiList = new ArrayList<>();
             for (Bookings booking : bookings) {
                 if(booking.getBookingType()==BookingType.KoiPurchase){
-                    bookingKoiList.add(booking);
-                }
-            }
-        }
+                bookingKoiList.add(booking);
+
 
         return bookingKoiList;
     }
 
     @Override
     public List<Bookings> getAllTourBookings() {
-        List<Bookings> bookings = bookingRepository.getAll();
+        List<Bookings> bookings = bookingRepository.findAll();
         List<Bookings> bookingKoiList = new ArrayList<>();
         if(bookings!=null){
             for (Bookings booking : bookings) {
@@ -130,7 +127,7 @@ public class BookingKoiService implements IBookingKoiService {
 
     @Override
     public List<Bookings> getAllKoiBookings(String username) {
-        List<Bookings> bookings = bookingRepository.getAll();
+        List<Bookings> bookings = bookingRepository.findAll();
         List<Bookings> bookingKoiList = new ArrayList<>();
         for (Bookings booking : bookings) {
             if(booking.getAccount().getUsername().equals(username)&&booking.getBookingType()==BookingType.KoiPurchase){
@@ -143,7 +140,7 @@ public class BookingKoiService implements IBookingKoiService {
     @Override
     public Bookings deleteKoiBooking(Long bookingId) {
         Bookings bookings = bookingRepository.findById(bookingId);
-        bookings.setPaymentStatus(PaymentStatus.cancel);
+        bookings.setPaymentStatus(PaymentStatus.CANCELLED);
         bookingRepository.update(bookings);
         return bookings;
     }
