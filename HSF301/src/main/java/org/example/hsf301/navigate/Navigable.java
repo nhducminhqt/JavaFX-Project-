@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.controllers.BookingController;
 import org.example.hsf301.controllers.BookingKoiController;
 import org.example.hsf301.controllers.FarmController;
 import org.example.hsf301.controllers.KoiController;
@@ -14,6 +15,7 @@ import org.example.hsf301.controllers.PurchasedTourController;
 import org.example.hsf301.controllers.TourController;
 import org.example.hsf301.controllers.TourManagementController;
 import org.example.hsf301.service.AccountService;
+import org.example.hsf301.service.BookingService;
 import org.example.hsf301.service.KoiFarmService;
 import org.example.hsf301.service.KoiService;
 import org.example.hsf301.service.TourService;
@@ -131,6 +133,11 @@ public interface Navigable {
         if(page.equals("farms")){
              FarmController farmController = new FarmController(new KoiFarmService(ResourcePaths.HIBERNATE_CONFIG));
              loader.setController(farmController);
+        }
+
+        if(page.equals("booking")){
+             BookingController bookingController = new BookingController(new BookingService(ResourcePaths.HIBERNATE_CONFIG));
+             loader.setController(bookingController);
         }
 
         //preload data when admin login

@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "bookings")
+@ToString(exclude = {"account", "quotations", "bookingTourDetails", "deposit", "deliveryHistory", "delivery", "createdBy", "updatedBy"})
 public class Bookings {
 
     @Id
