@@ -2,6 +2,7 @@ package org.example.hsf301.pojo;
 
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.hsf301.enums.BookingType;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import lombok.ToString;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

@@ -29,6 +29,8 @@ module org.example.hsf301 {
     opens org.example.hsf301.views to javafx.graphics;
     exports org.example.hsf301.views;
 
+    exports org.example.hsf301.enums;
+
     opens org.example.hsf301.service to org.hibernate.orm.core;
     exports org.example.hsf301.service;
 

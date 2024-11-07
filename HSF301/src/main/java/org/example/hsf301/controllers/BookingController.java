@@ -103,8 +103,16 @@ public class BookingController implements Initializable {
             if(booking.getPaymentStatus().equals(PaymentStatus.PROCESSING)){
                 Button purchaseButton = new Button("Purchase Now!");
                 purchaseButton.setStyle("-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+                purchaseButton.setOnAction((event) -> {
+                    bookingService.updateBookingStatus(booking.getId(), PaymentStatus.COMPLETE);
+                });
+
                 Button cancelButton = new Button("Cancel");
                 cancelButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold");
+                cancelButton.setOnAction((event) -> {
+                    bookingService.updateBookingStatus(booking.getId(), PaymentStatus.CANCELLED);
+                });
+
                 paymentBox.getChildren().addAll(purchaseButton, cancelButton);
             }
 

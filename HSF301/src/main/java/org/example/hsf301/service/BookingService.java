@@ -1,6 +1,7 @@
 package org.example.hsf301.service;
 
 import java.util.List;
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.Bookings;
 import org.example.hsf301.repo.BookingRepository;
@@ -44,6 +45,13 @@ public class BookingService implements IBookingService {
     @Override
     public List<BookingKoiDetail> findByBookingID(Long bookingID) {
         return repository.findByBookingID(bookingID);
+    }
+
+    @Override
+    public void updateBookingStatus(Long bookingID, PaymentStatus status) {
+        Bookings bookings = repository.findById(bookingID);
+        bookings.setPaymentStatus(status);
+        repository.update(bookings);
     }
 
 }
