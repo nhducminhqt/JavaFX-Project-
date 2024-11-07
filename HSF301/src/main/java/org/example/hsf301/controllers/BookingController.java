@@ -24,16 +24,23 @@ public class BookingController implements Initializable {
     @FXML
     private GridPane bookingGrid;
 
-    private static final int COLUMNS = 3; // Adjust number of columns for booking display
+    private static final int COLUMNS = 3;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        displayBookings(LoginController.account); // Load and display bookings for user 'minh1'
+        displayBookings(LoginController.account);
     }
 
     private void displayBookings(Account account) {
         // Retrieve the list of bookings by account ID
         List<Bookings> bookings = bookingService.findByAccountID(account.getUsername());
+        if (bookings.isEmpty()) {
+            Label emptyLabel = new Label("No bookings found");
+            emptyLabel.setStyle("-fx-text-fill: red; -fx-font-size: 16px; -fx-font-weight: bold;");
+            bookingGrid.add(emptyLabel, 0, 0);
+            return;
+        }
+
         int row = 0;
         int col = 0;
 
@@ -61,9 +68,14 @@ public class BookingController implements Initializable {
                           "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);");
 
         // Booking Type
+        HBox titleBox = new HBox(15);
         Label typeLabel = new Label("Booking Type: " + booking.getBookingType());
-        typeLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;");
+        typeLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;");
         typeLabel.setWrapText(true);
+
+        titleBox.setStyle("-fx-background-color: #34495e");
+        titleBox.setAlignment(Pos.CENTER);
+        titleBox.getChildren().addAll(typeLabel);
 
         // Booking Date
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -71,7 +83,7 @@ public class BookingController implements Initializable {
         dateLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #7f8c8d;");
 
         // Payment Information
-        HBox paymentInfoBox = new HBox(15);
+        VBox paymentInfoBox = new VBox(15);
         paymentInfoBox.setAlignment(Pos.CENTER_LEFT);
 
         Label paymentStatusLabel = new Label("Payment Status: " + booking.getPaymentStatus());
@@ -80,18 +92,17 @@ public class BookingController implements Initializable {
         Label amountLabel = new Label("Total: $" + booking.getTotalAmountWithVAT());
         amountLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
 
-        paymentInfoBox.getChildren().addAll(paymentStatusLabel, amountLabel);
-
         // Payment Method
         Label paymentMethodLabel = new Label("Payment Method: " + booking.getPaymentMethod());
         paymentMethodLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
 
+        paymentInfoBox.getChildren().addAll(paymentStatusLabel, amountLabel, paymentMethodLabel);
+
         // Add all elements to card
         card.getChildren().addAll(
-            typeLabel,
+            titleBox,
             dateLabel,
-            paymentInfoBox,
-            paymentMethodLabel
+            paymentInfoBox
         );
 
         return card;
