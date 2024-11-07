@@ -9,17 +9,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.fxml.DeliveryHistory">
+<AnchorPane prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.controllers.DeliveryHistoryController">
    <children>
-      <TableView layoutY="46.0" prefHeight="317.0" prefWidth="900.0">
+      <TableView fx:id="tbData" layoutY="46.0" prefHeight="317.0" prefWidth="900.0">
         <columns>
-          <TableColumn prefWidth="112.0" text="ID" />
-          <TableColumn prefWidth="193.0" text="Route" />
-            <TableColumn prefWidth="257.0" text="Koi Health" />
-            <TableColumn prefWidth="110.0" text="Booking Id" />
-            <TableColumn prefWidth="100.0" text="Time" />
-            <TableColumn prefWidth="127.0" text="Staff" />
+          <TableColumn fx:id="id" prefWidth="72.00005853176117" text="ID" />
+          <TableColumn fx:id="route" prefWidth="233.3332748413086" text="Route" />
+            <TableColumn fx:id="koiHealth" prefWidth="306.0000305175781" text="Koi Health" />
+            <TableColumn fx:id="time" prefWidth="144.66668701171875" text="Time" />
+            <TableColumn fx:id="staff" prefWidth="146.0001220703125" text="Staff" />
         </columns>
       </TableView>
       <Label layoutX="371.0" layoutY="8.0" prefHeight="23.0" prefWidth="158.0" text="Delivery History">
@@ -27,21 +25,21 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="114.0" layoutY="394.0" prefHeight="25.0" prefWidth="189.0" />
+      <TextField fx:id="txtRoute" layoutX="114.0" layoutY="394.0" prefHeight="25.0" prefWidth="189.0" />
       <Label layoutX="56.0" layoutY="396.0" text="Route">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextArea layoutX="529.0" layoutY="394.0" prefHeight="87.0" prefWidth="297.0" />
+      <TextArea fx:id="txtDescription" layoutX="529.0" layoutY="394.0" prefHeight="87.0" prefWidth="297.0" />
       <Label layoutX="363.0" layoutY="396.0" text="Health Koi Description">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button layoutX="104.0" layoutY="534.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" text="Add" />
-      <Button layoutX="279.0" layoutY="534.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" text="Update" />
-      <Button layoutX="452.0" layoutY="534.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" text="Delete" />
-      <Button layoutX="618.0" layoutY="534.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" text="Exit" />
+      <Button fx:id="btnAdd" layoutX="104.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnAddAction" prefHeight="41.0" prefWidth="119.0" text="Add" />
+      <Button fx:id="btnUpdate" layoutX="279.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnUpdateAction" prefHeight="41.0" prefWidth="119.0" text="Update" />
+      <Button fx:id="btnDelete" layoutX="452.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnDeleteAction" prefHeight="41.0" prefWidth="119.0" text="Delete" />
+      <Button fx:id="btnExit" layoutX="618.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnExitAction" prefHeight="41.0" prefWidth="119.0" text="Exit" />
    </children>
 </AnchorPane>

@@ -44,9 +44,14 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         Transaction t =null;
         try {
             t = session.beginTransaction();
-            Query<BookingKoiDetail> query =session.createQuery("FROM booking_koi_detail d WHERE d.booking_id = :bookingId", BookingKoiDetail.class);
+            Query<BookingKoiDetail> query = session.createQuery(
+                    "FROM BookingKoiDetail d "
+                            + "JOIN FETCH d.koiFarms "
+                            + "JOIN FETCH d.koi "
+                            + "JOIN FETCH d.booking "
+                            + "WHERE d.booking.id = :bookingId", BookingKoiDetail.class);
             query.setParameter("bookingId", bookingId);
-            bookingKoiDetails = query.list();
+            bookingKoiDetails = query.getResultList();
             t.commit();
         } catch (Exception e) {
             if (t != null) t.rollback();

@@ -16,6 +16,8 @@ public interface IBookingKoiService {
 
     List<Bookings> getAllKoiBookings();
 
+    List<Bookings> getAllTourBookings();
+
     List<Bookings> getAllKoiBookings(String username);
 
     Bookings deleteKoiBooking(Long bookingId);

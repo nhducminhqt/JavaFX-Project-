@@ -45,4 +45,16 @@ public class BookingKoiDetail {
         this.quantity=quantity;
         this.unitPrice=unitPrice;
     }
+    @PrePersist
+    @PreUpdate
+    private void validateData() {
+        if (quantity <= 0) {
+            throw new IllegalStateException("Quantity must be positive");
+        }
+        if (unitPrice <= 0) {
+            throw new IllegalStateException("Unit price must be positive");
+        }
+        // Recalculate total amount to ensure consistency
+        totalAmount = unitPrice*quantity;
+    }
 }

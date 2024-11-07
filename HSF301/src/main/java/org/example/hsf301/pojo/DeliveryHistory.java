@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,7 +31,7 @@ public class DeliveryHistory {
     private Bookings booking;
 
     @Column(name = "created_at")
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "delivery_staff_id")
@@ -38,7 +39,7 @@ public class DeliveryHistory {
 
     @PrePersist
     protected void onCreate(){
-        createdDate = LocalDateTime.now();
+        createdDate = LocalDate.now();
     }
 }
 

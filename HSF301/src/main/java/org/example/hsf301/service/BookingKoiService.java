@@ -44,7 +44,7 @@ public class BookingKoiService implements IBookingKoiService {
         bookingRepository.save(booking);
 
         float totalBookingAmount = 0;
-
+        if(request.getDetails()!=null){
         for (BookingKoiDetailRequest detailRequest : request.getDetails()) {
             KoiFarms koiFarms = koiFarmsRepository.findById(detailRequest.getFarmId());
             if(koiFarms==null){
@@ -64,7 +64,7 @@ public class BookingKoiService implements IBookingKoiService {
             bookingKoiDetail.setTotalAmount(totalAmount);
             bookingKoiDetailRepository.save(bookingKoiDetail);
             totalBookingAmount+=totalAmount;
-        }
+        }}
         booking.setTotalAmount(totalBookingAmount);
         booking.setVatAmount(request.getVat()*(booking.getTotalAmount()-request.getDiscountAmount()));
         booking.setTotalAmountWithVAT(booking.getTotalAmount() + booking.getVatAmount() - booking.getDiscountAmount());
@@ -75,7 +75,7 @@ public class BookingKoiService implements IBookingKoiService {
 
     @Override
     public Bookings getKoiBookings(Long bookingId) {
-        return null;
+        return bookingRepository.findById(bookingId);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class BookingKoiService implements IBookingKoiService {
         if(deposit != null){
             deposit.setRemainAmount(bookings.getTotalAmountWithVAT()-deposit.getDepositAmount()+deposit.getShippingFee());
         }
-        bookingRepository.save(bookings);
+        bookingRepository.update(bookings);
         return bookings;
     }
 
@@ -102,11 +102,29 @@ public class BookingKoiService implements IBookingKoiService {
     public List<Bookings> getAllKoiBookings() {
         List<Bookings> bookings = bookingRepository.getAll();
         List<Bookings> bookingKoiList = new ArrayList<>();
-        for (Bookings booking : bookings) {
-            if(booking.getBookingType()==BookingType.KoiPurchase){
-                bookingKoiList.add(booking);
+        if(bookings!=null){
+            for (Bookings booking : bookings) {
+                if(booking.getBookingType()==BookingType.KoiPurchase){
+                    bookingKoiList.add(booking);
+                }
             }
         }
+
+        return bookingKoiList;
+    }
+
+    @Override
+    public List<Bookings> getAllTourBookings() {
+        List<Bookings> bookings = bookingRepository.getAll();
+        List<Bookings> bookingKoiList = new ArrayList<>();
+        if(bookings!=null){
+            for (Bookings booking : bookings) {
+                if(booking.getBookingType()==BookingType.TourBooking){
+                    bookingKoiList.add(booking);
+                }
+            }
+        }
+
         return bookingKoiList;
     }
 
@@ -115,7 +133,7 @@ public class BookingKoiService implements IBookingKoiService {
         List<Bookings> bookings = bookingRepository.getAll();
         List<Bookings> bookingKoiList = new ArrayList<>();
         for (Bookings booking : bookings) {
-            if(booking.getAccount().getUsername().equals(username)&&booking.getBookingType().equals("Koi")){
+            if(booking.getAccount().getUsername().equals(username)&&booking.getBookingType()==BookingType.KoiPurchase){
                 bookingKoiList.add(booking);
             }
         }

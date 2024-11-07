@@ -48,7 +48,11 @@ public class Koi {
         @JsonIgnore
         private Set<BookingKoiDetail> bookingKoiDetails;
 
-
-
-
+        @Override
+        public String toString() {
+                return "Koi{" +
+                        "id=" + id +
+                        ", koiName='" + koiName + '\'' +
+                        '}';
+        }
 }

@@ -65,6 +65,19 @@ public interface Navigable {
     default void navigateTourManagement(StackPane contentArea) throws IOException {
         setContent("tours_management", contentArea);
     }
+    //Staff
+    default void navigateBookingKoiList(StackPane contentArea) throws IOException {
+        setContent("BookingKoiListStaff", contentArea);
+    }
+    default void navigateBookingTourList(StackPane contentArea) throws IOException {
+        setContent("BookingTourListStaff", contentArea);
+    }
+    default void navigateDelivery(StackPane contentArea) throws IOException {
+        setContent("Delivery", contentArea);
+    }
+    default void navigateDeposit(StackPane contentArea) throws IOException {
+        setContent("Deposit", contentArea);
+    }
 
     // Method to load and set the content in the provided contentArea
     default void setContent(String page, StackPane contentArea) throws IOException {
