@@ -30,7 +30,10 @@
       style="-fx-background-color: red; -fx-text-fill: white;"
       text="Logout" onAction="#navigateLogout"/>
   </VBox>
-  <AnchorPane layoutX="242.0" prefHeight="596.0" prefWidth="1024.0">
-    <StackPane fx:id="contentArea"/>
-  </AnchorPane>
+  <StackPane fx:id="contentArea"
+    AnchorPane.leftAnchor="250.0"
+    AnchorPane.topAnchor="0.0"
+    AnchorPane.rightAnchor="0.0"
+    AnchorPane.bottomAnchor="0.0"
+    style="-fx-background-color: white;"/>
 </AnchorPane>
