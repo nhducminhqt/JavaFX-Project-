@@ -7,13 +7,13 @@ import org.example.hsf301.pojo.Bookings;
 import java.util.List;
 
 public class BookingRepository implements IBookingRepository {
-    private IBookingDAO dao;
+    private final IBookingDAO dao;
     public BookingRepository(String name) {
         dao = new BookingDAO(name);
     }
     @Override
-    public List<Bookings> getAll() {
-        return dao.getAll();
+    public List<Bookings> findAll() {
+        return dao.findAll();
     }
 
     @Override
@@ -34,5 +34,10 @@ public class BookingRepository implements IBookingRepository {
     @Override
     public void update(Bookings student) {
         dao.update(student);
+    }
+
+    @Override
+    public List<Bookings> findByAccountID(String accountID) {
+        return dao.findByAccountID(accountID);
     }
 }

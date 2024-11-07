@@ -1,5 +1,10 @@
 package org.example.hsf301.enums;
 
 public enum PaymentStatus {
-    pending, processing, cancel, complete,shipping
+    PENDING,
+    PROCESSING,
+    CANCELLED,
+    COMPLETE,
+    SHIPPING,
+    DELIVERED
 }

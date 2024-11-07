@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DeliveryHistoryDAO implements IDeliveryHistoryDAO{
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private Configuration configuration;
 
 
@@ -58,7 +58,7 @@ public class DeliveryHistoryDAO implements IDeliveryHistoryDAO{
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            DeliveryHistory student = (DeliveryHistory) session.get(DeliveryHistory.class,studentID);
+            DeliveryHistory student = session.get(DeliveryHistory.class, studentID);
             session.delete(student);
             t.commit();
             System.out.println("Delete saved");
@@ -76,7 +76,7 @@ public class DeliveryHistoryDAO implements IDeliveryHistoryDAO{
     public DeliveryHistory findById(Long studentID) {
         Session session = sessionFactory.openSession();
         try {
-            return (DeliveryHistory) session.get(DeliveryHistory.class,studentID);
+            return session.get(DeliveryHistory.class, studentID);
         } catch (Exception e) {
             // TODO: handle exception
             throw e;

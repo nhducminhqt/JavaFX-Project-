@@ -5,15 +5,15 @@ import org.example.hsf301.pojo.BookingKoiDetail;
 import java.util.List;
 
 public interface IBookingKoiDetailDAO {
-    public List<BookingKoiDetail> getAll();
+    List<BookingKoiDetail> getAll();
 
-    public List<BookingKoiDetail> findByBookingId(Long bookingId);
+    List<BookingKoiDetail> findByBookingId(Long bookingId);
 
-    public void save(BookingKoiDetail student);
+    void save(BookingKoiDetail student);
 
-    public void delete(Long studentID);
+    void delete(Long studentID);
 
-    public BookingKoiDetail findById(Long studentID);
+    BookingKoiDetail findById(Long studentID);
 
-    public void update(BookingKoiDetail student);
+    void update(BookingKoiDetail student);
 }

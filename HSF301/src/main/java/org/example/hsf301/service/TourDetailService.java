@@ -6,9 +6,9 @@ import org.example.hsf301.repo.*;
 import java.util.List;
 
 public class TourDetailService implements ITourDetailService {
-    private ITourDetailRepository tourDetailRepository;
-    private ITourRepository tourRepository;
-    private IKoiFarmsRepository koiFarmsRepository;
+    private final ITourDetailRepository tourDetailRepository;
+    private final ITourRepository tourRepository;
+    private final IKoiFarmsRepository koiFarmsRepository;
     public TourDetailService(String name) {
         tourDetailRepository = new TourDetailRepository(name);
         tourRepository = new TourRepository(name);

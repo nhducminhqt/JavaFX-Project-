@@ -31,8 +31,6 @@ public class KoiDAO implements IKoiDAO{
         } catch (Exception e) {
             transaction.rollback();
             System.out.println("Error saving koi: " + e.getMessage());
-        } finally {
-            //  session.close();
         }
     }
 

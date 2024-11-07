@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import lombok.Setter;
+import lombok.ToString;
 import org.example.hsf301.enums.ERole;
 
 @Entity
@@ -18,6 +19,7 @@ import org.example.hsf301.enums.ERole;
 @Getter
 @Setter
 @Builder
+@ToString
 public class Account {
     @Id
     @Column(name = "username",nullable = false)

@@ -5,13 +5,13 @@ import org.example.hsf301.pojo.DeliveryHistory;
 import java.util.List;
 
 public interface IDeliveryHistoryRepository {
-    public List<DeliveryHistory> getAll();
+    List<DeliveryHistory> getAll();
 
-    public void save(DeliveryHistory student);
+    void save(DeliveryHistory student);
 
-    public void delete(Long studentID);
+    void delete(Long studentID);
 
-    public DeliveryHistory findById(Long studentID);
+    DeliveryHistory findById(Long studentID);
 
-    public void update(DeliveryHistory student);
+    void update(DeliveryHistory student);
 }

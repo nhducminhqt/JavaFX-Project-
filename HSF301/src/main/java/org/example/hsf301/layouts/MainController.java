@@ -1,12 +1,12 @@
 package org.example.hsf301.layouts;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
-import org.example.hsf301.controllers.LoginController;
 import org.example.hsf301.navigate.Navigable;
 
 public class MainController implements Initializable, Navigable {
@@ -24,7 +24,6 @@ public class MainController implements Initializable, Navigable {
         }
     }
 
-    // Handler for navigating to the Home page
     @FXML
     private void navigateHome() throws IOException {
         navigateHome(contentArea);
@@ -35,7 +34,6 @@ public class MainController implements Initializable, Navigable {
         navigateMyProfile(contentArea);
     }
 
-    // Handler for navigating to the Tours page
     @FXML
     private void navigateTour() throws IOException {
         navigateTourHomePage(contentArea);
@@ -50,5 +48,25 @@ public class MainController implements Initializable, Navigable {
     @FXML
     private void navigateLogout() throws IOException {
         navigateLogout(contentArea);
+    }
+
+    @FXML
+    public void navigatePurchasedTour(ActionEvent event) throws IOException {
+        navigatePurchasedTour(contentArea);
+    }
+
+    @FXML
+    public void navigateBookingKoi(ActionEvent event) throws IOException {
+        navigateBookingKoi(contentArea);
+    }
+
+    @FXML
+    public void navigateKois(ActionEvent event) throws IOException {
+        navigateKois(contentArea);
+    }
+
+    @FXML
+    public void navigateFarms(ActionEvent event) throws IOException {
+        navigateFarms(contentArea);
     }
 }

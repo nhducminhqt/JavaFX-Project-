@@ -32,7 +32,7 @@ public class TourManagementController implements Initializable {
     private Button deleteButton;
 
     private final TourService tourService;
-    private static final int COLUMNS = 2;
+    private static final int COLUMNS = 4;
     private static final SimpleDateFormat DATE_FORMATTER =
         new SimpleDateFormat("MMM dd, yyyy HH:mm");
 
@@ -72,8 +72,8 @@ public class TourManagementController implements Initializable {
 
     private VBox createTourCard(Tours tour) {
         VBox card = new VBox(10);
-        card.setMaxWidth(350);
-        card.setPrefWidth(350);
+        card.setMaxWidth(300);
+        card.setPrefWidth(300);
         card.setStyle("-fx-background-color: white; " +
                           "-fx-border-color: #e0e0e0; " +
                           "-fx-border-radius: 8; " +

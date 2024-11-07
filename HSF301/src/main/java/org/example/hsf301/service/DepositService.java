@@ -13,8 +13,8 @@ import org.example.hsf301.repo.IDepositRepository;
 import java.time.LocalDateTime;
 
 public class DepositService implements IDepositService{
-    private IBookingRepository bookingRepo;
-    private IDepositRepository depositRepo;
+    private final IBookingRepository bookingRepo;
+    private final IDepositRepository depositRepo;
     public DepositService(String name){
         bookingRepo = new BookingRepository(name);
         depositRepo = new DepositRepository(name);
@@ -40,7 +40,7 @@ public class DepositService implements IDepositService{
         deposit.setDepositAmount(bookings.getTotalAmountWithVAT()*depositRequest.getDepositPercentage());
         deposit.setRemainAmount(bookings.getTotalAmountWithVAT()-deposit.getDepositAmount()+deposit.getShippingFee());
         depositRepo.save(deposit);
-        bookings.setPaymentStatus(PaymentStatus.shipping);
+        bookings.setPaymentStatus(PaymentStatus.SHIPPING);
         bookingRepo.update(bookings);
         return deposit;
     }

@@ -10,7 +10,7 @@ import java.util.List;
  * @author KoiImageRepository
  */
 public class KoiImageRepository implements IKoiImageRepository{
-    private IKoiImageDAO iKoiImageDAO;
+    private final IKoiImageDAO iKoiImageDAO;
     public KoiImageRepository (String name)
     {
         iKoiImageDAO = new KoiImageDAO(name);

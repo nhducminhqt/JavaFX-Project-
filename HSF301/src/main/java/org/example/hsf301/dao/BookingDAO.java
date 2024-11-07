@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class BookingDAO implements IBookingDAO{
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private Configuration configuration;
 
     public BookingDAO(String name) {
@@ -20,11 +20,11 @@ public class BookingDAO implements IBookingDAO{
     }
 
     @Override
-    public List<Bookings> getAll() {
-        List<Bookings> students = null;
+    public List<Bookings> findAll() {
+        List<Bookings> bookings = null;
         Session session = sessionFactory.openSession();
         try {
-            students = session.createQuery("from Bookings", Bookings.class).list();
+            bookings = session.createQuery("from Bookings", Bookings.class).list();
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("Error" + e.getMessage());
@@ -32,15 +32,15 @@ public class BookingDAO implements IBookingDAO{
             //sessionFactory.close();
             session.close();
         }
-        return students;
+        return bookings;
     }
 
     @Override
-    public void save(Bookings student) {
+    public void save(Bookings booking) {
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            session.save(student);
+            session.save(booking);
             t.commit();
             System.out.println("Successfully saved");
         } catch (Exception e) {
@@ -54,12 +54,12 @@ public class BookingDAO implements IBookingDAO{
     }
 
     @Override
-    public void delete(Long studentID) {
+    public void delete(Long bookingID) {
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            Bookings student = (Bookings) session.get(Bookings.class,studentID);
-            session.delete(student);
+            Bookings booking = session.get(Bookings.class, bookingID);
+            session.delete(booking);
             t.commit();
             System.out.println("Delete saved");
         } catch (Exception e) {
@@ -73,11 +73,11 @@ public class BookingDAO implements IBookingDAO{
     }
 
     @Override
-    public Bookings findById(Long studentID) {
+    public Bookings findById(Long bookingID) {
         // TODO Auto-generated method stub
         Session session = sessionFactory.openSession();
         try {
-            return (Bookings) session.get(Bookings.class,studentID);
+            return session.get(Bookings.class, bookingID);
         } catch (Exception e) {
             // TODO: handle exception
             throw e;
@@ -87,11 +87,11 @@ public class BookingDAO implements IBookingDAO{
     }
 
     @Override
-    public void update(Bookings student) {
+    public void update(Bookings booking) {
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            session.update(student);
+            session.update(booking);
             t.commit();
             System.out.println("Update successfully");
         } catch (Exception e) {
@@ -103,4 +103,27 @@ public class BookingDAO implements IBookingDAO{
             session.close();
         }
     }
+
+    @Override
+    public  List<Bookings> findByAccountID(String accountID) {
+        List<Bookings> bookings = null;
+        Session session = sessionFactory.openSession();
+        try {
+            bookings = session.createQuery("from Bookings where account.id = :accountID",
+                                           Bookings.class).setParameter("accountID", accountID)
+                .list();
+        } catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
+        }
+        return bookings;
+    }
+
+    public static void main(String[] args) {
+
+        for (Bookings booking : new BookingDAO("hibernate.cfg.xml").findByAccountID("minh1")) {
+            System.out.println(booking);
+        }
+
+    }
+
 }

@@ -9,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class DeliveryDAO implements IDeliveryDAO{
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private Configuration configuration;
 
     public DeliveryDAO(String name) {
@@ -56,7 +56,7 @@ public class DeliveryDAO implements IDeliveryDAO{
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            Delivery student = (Delivery) session.get(Delivery.class,studentID);
+            Delivery student = session.get(Delivery.class, studentID);
             session.delete(student);
             t.commit();
             System.out.println("Delete saved");
@@ -75,7 +75,7 @@ public class DeliveryDAO implements IDeliveryDAO{
         // TODO Auto-generated method stub
         Session session = sessionFactory.openSession();
         try {
-            return (Delivery) session.get(Delivery.class,studentID);
+            return session.get(Delivery.class, studentID);
         } catch (Exception e) {
             // TODO: handle exception
             throw e;

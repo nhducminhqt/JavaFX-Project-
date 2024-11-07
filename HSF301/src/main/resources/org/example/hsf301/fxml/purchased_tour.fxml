@@ -8,9 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
   xmlns:fx="http://javafx.com/fxml"
-  fx:controller="org.example.hsf301.controllers.FarmController"
+  fx:controller="org.example.hsf301.controllers.PurchasedTourController"
   prefHeight="400.0" prefWidth="600.0">
-
-  <Label layoutX="14.0" layoutY="14.0" text="Welcome to the Farm Page!"/>
 
 </AnchorPane>

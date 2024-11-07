@@ -11,7 +11,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class BookingTourDetailDAO implements IBookingTourDetailDAO {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private Configuration configuration;
     public BookingTourDetailDAO(String name) {
         configuration = new Configuration();
@@ -58,7 +58,7 @@ public class BookingTourDetailDAO implements IBookingTourDetailDAO {
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            BookingTourDetail bookingTourDetail = (BookingTourDetail) session.get(BookingTourDetail.class,id);
+            BookingTourDetail bookingTourDetail = session.get(BookingTourDetail.class, id);
             session.delete(bookingTourDetail);
             t.commit();
             System.out.println("Delete saved");
@@ -78,7 +78,7 @@ public class BookingTourDetailDAO implements IBookingTourDetailDAO {
         // TODO Auto-generated method stub
         Session session = sessionFactory.openSession();
         try {
-            return (BookingTourDetail) session.get(BookingTourDetail.class,id);
+            return session.get(BookingTourDetail.class, id);
         } catch (Exception e) {
             // TODO: handle exception
             throw e;

@@ -26,7 +26,7 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         List<BookingKoiDetail> students = null;
         Session session = sessionFactory.openSession();
         try {
-            students = session.createQuery("from booking_koi_detail", BookingKoiDetail.class).list();
+            students = session.createQuery("from BookingKoiDetail ", BookingKoiDetail.class).list();
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("Error" + e.getMessage());

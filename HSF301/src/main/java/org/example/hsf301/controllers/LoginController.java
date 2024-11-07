@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.controlsfx.control.Notifications;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.service.AccountService;
 import org.example.hsf301.service.IAccountService;
@@ -125,21 +126,28 @@ public class LoginController {
             AppAlert.showAlert("Login Failed", "Invalid email or password");
         } else {
 
+            Notifications.create()
+                .title("Title Text")
+                .text("Hello World 0!")
+                .showWarning();
+
             String destinationPage = "";
+
+            System.out.println(account);
 
             switch (account.getRole()){
                 case ADMIN -> destinationPage = "AdminMainLayout";
                 case SALE_STAFF -> destinationPage = "StaffMainLayout";
-                case CONSULT_STAFF -> destinationPage = "DeliveryStaff";
-                case DELIVERY_STAFF -> destinationPage = "DeliveryStaff";
+                case CONSULT_STAFF -> destinationPage = "StaffMainLayout";
+                case DELIVERY_STAFF -> destinationPage = "StaffMainLayout";
                 case CUSTOMER -> destinationPage = "MainLayout";
                 default -> destinationPage = "error";
             }
 
             NavigateUtil.navigateTo(String.format("/org/example/hsf301/fxml/%s.fxml",
                                                   destinationPage),
-                                    loginButton, 1300,
-                                    750
+                                    loginButton, 1700,
+                                    850
                 , "Booking Tours");
         }
     }

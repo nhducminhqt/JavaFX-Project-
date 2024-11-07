@@ -13,7 +13,7 @@ import java.util.List;
  * @author KoiService
  */
 public class KoiService  implements  IKoiService{
-    private IKoiRepository koiRepository;
+    private final IKoiRepository koiRepository;
     public KoiService (String name)
     {
         koiRepository = new KoiRepository(name);
