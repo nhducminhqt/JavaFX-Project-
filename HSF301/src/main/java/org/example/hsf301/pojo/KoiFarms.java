@@ -45,13 +45,13 @@ public class KoiFarms {
     private boolean isActive;
 
  @OneToMany(mappedBy = "koiFarms", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
- private Set<BookingKoiDetail> bookingKoiDetails;
+ private List<BookingKoiDetail> bookingKoiDetails;
 
     @OneToMany(mappedBy = "farm", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
-    private Set<TourDetail> tourDetails;
+    private List<TourDetail> tourDetails;
 
     @OneToMany(mappedBy = "koiFarms", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
-    private Set<KoiOfFarm> koiOfFarms;
+    private List<KoiOfFarm> koiOfFarms;
 
     @Override
     public String toString() {
@@ -62,16 +62,5 @@ public class KoiFarms {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        KoiFarms koiFarms = (KoiFarms) o;
-        return isActive == koiFarms.isActive && Objects.equals(id, koiFarms.id) && Objects.equals(farmName, koiFarms.farmName) && Objects.equals(farmPhoneNumber, koiFarms.farmPhoneNumber) && Objects.equals(farmEmail, koiFarms.farmEmail) && Objects.equals(image, koiFarms.image) && Objects.equals(description, koiFarms.description) && Objects.equals(farmAddress, koiFarms.farmAddress) && Objects.equals(website, koiFarms.website) && Objects.equals(bookingKoiDetails, koiFarms.bookingKoiDetails) && Objects.equals(tourDetails, koiFarms.tourDetails) && Objects.equals(koiOfFarms, koiFarms.koiOfFarms);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, farmName, farmPhoneNumber, farmEmail, image, description, farmAddress, website, isActive, bookingKoiDetails, tourDetails, koiOfFarms);
-    }
 }

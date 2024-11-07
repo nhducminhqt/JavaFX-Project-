@@ -2,7 +2,10 @@ package org.example.hsf301.layouts;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import org.example.hsf301.controllers.LoginController;
+import org.example.hsf301.enums.ERole;
 import org.example.hsf301.navigate.Navigable;
 
 import java.io.IOException;
@@ -10,6 +13,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DeliveryStaffController implements Navigable, Initializable {
+    @FXML
+    Button btnTourList;
+    @FXML
+    Button btnKoiList;
+    @FXML
+    Button btnDelivery;
+    @FXML
+    Button btnDeposit;
+    public DeliveryStaffController(){
+
+    }
+
     @FXML
     private StackPane contentArea;
     @FXML
@@ -42,6 +57,12 @@ public class DeliveryStaffController implements Navigable, Initializable {
         try {
             // Set tours_home_page as the default content when the app starts
             setContent("BookingKoiListStaff", contentArea);
+            if(LoginController.account.getRole()== ERole.DELIVERY_STAFF){
+                btnTourList.setDisable(true);
+                btnDeposit.setDisable(true);
+            } else {
+                btnDelivery.setDisable(true);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

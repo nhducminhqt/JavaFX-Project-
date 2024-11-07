@@ -43,11 +43,11 @@ public class Koi {
 
         @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL} ,fetch = FetchType.LAZY)
         @JsonIgnore
-        private Set<KoiOfFarm> koiOfFarmList;
+        private List<KoiOfFarm> koiOfFarmList;
 
         @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
         @JsonIgnore
-        private Set<BookingKoiDetail> bookingKoiDetails;
+        private List<BookingKoiDetail> bookingKoiDetails;
 
 
 }

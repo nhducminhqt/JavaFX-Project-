@@ -1,5 +1,7 @@
 package org.example.hsf301.service;
 
+import org.example.hsf301.enums.PaymentMethod;
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.BookingKoiRequest;
 import org.example.hsf301.model.request.BookingUpdate;
 import org.example.hsf301.pojo.Account;
@@ -21,4 +23,6 @@ public interface IBookingKoiService {
     List<Bookings> getAllKoiBookings(String username);
 
     Bookings deleteKoiBooking(Long bookingId);
+
+    List<Bookings> getAllKoiBookingStatus(PaymentStatus paymentStatus);
 }
