@@ -101,9 +101,9 @@ public class BookingKoiService implements IBookingKoiService {
     @Override
     public List<Bookings> getAllKoiBookings() {
         List<Bookings> bookings = bookingRepository.getAll();
-        List<Bookings> bookingKoiList = new ArrayList<>();
-        for (Bookings booking : bookings) {
-            if(booking.getBookingType()==BookingType.KoiPurchase){
+            List<Bookings> bookingKoiList = new ArrayList<>();
+            for (Bookings booking : bookings) {
+                if(booking.getBookingType()==BookingType.KoiPurchase){
                 bookingKoiList.add(booking);
             }
         }
@@ -115,7 +115,7 @@ public class BookingKoiService implements IBookingKoiService {
         List<Bookings> bookings = bookingRepository.getAll();
         List<Bookings> bookingKoiList = new ArrayList<>();
         for (Bookings booking : bookings) {
-            if(booking.getAccount().getUsername().equals(username)&&booking.getBookingType().equals("Koi")){
+            if(booking.getAccount().getUsername().equals(username)&&booking.getBookingType()==BookingType.KoiPurchase){
                 bookingKoiList.add(booking);
             }
         }
