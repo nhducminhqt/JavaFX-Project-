@@ -6,10 +6,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.controllers.BookingController;
+import org.example.hsf301.controllers.BookingKoiController;
+import org.example.hsf301.controllers.FarmController;
+import org.example.hsf301.controllers.KoiController;
 import org.example.hsf301.controllers.MyProfileController;
+import org.example.hsf301.controllers.PurchasedTourController;
 import org.example.hsf301.controllers.TourController;
 import org.example.hsf301.controllers.TourManagementController;
 import org.example.hsf301.service.AccountService;
+import org.example.hsf301.service.BookingService;
+import org.example.hsf301.service.KoiFarmService;
+import org.example.hsf301.service.KoiService;
 import org.example.hsf301.service.TourService;
 import org.example.hsf301.utils.NavigateUtil;
 
@@ -61,6 +69,22 @@ public interface Navigable {
         setContent("tours_home_page", contentArea);
     }
 
+    default void navigatePurchasedTour(StackPane contentArea) throws IOException {
+        setContent("purchased_tour", contentArea);
+    }
+
+    default void navigateBookingKoi(StackPane contentArea) throws IOException {
+        setContent("booking_koi", contentArea);
+    }
+
+    default void navigateKois(StackPane contentArea) throws IOException {
+        setContent("kois", contentArea);
+    }
+
+    default void navigateFarms(StackPane contentArea) throws IOException {
+        setContent("farms", contentArea);
+    }
+
     //Management
     default void navigateTourManagement(StackPane contentArea) throws IOException {
         setContent("tours_management", contentArea);
@@ -80,7 +104,6 @@ public interface Navigable {
             loader.setController(tourController);
         }
 
-        //tours_management
         if (page.equals("tours_management")) {
             TourService tourService = new TourService(ResourcePaths.HIBERNATE_CONFIG);
             TourManagementController tourManagementController = new TourManagementController(
@@ -88,11 +111,33 @@ public interface Navigable {
             loader.setController(tourManagementController);
         }
 
-        //my_profile
         if (page.equals("my_profile")) {
             AccountService accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
             MyProfileController myProfileController = new MyProfileController(accountService);
             loader.setController(myProfileController);
+        }
+
+        if(page.equals("purchased_tour")){
+            PurchasedTourController purchasedTourController = new PurchasedTourController();
+        }
+
+        if(page.equals("booking_koi")){
+            BookingKoiController bookingKoiController = new BookingKoiController();
+        }
+
+        if(page.equals("kois")){
+             KoiController koiController = new KoiController(new KoiService(ResourcePaths.HIBERNATE_CONFIG));
+             loader.setController(koiController);
+        }
+
+        if(page.equals("farms")){
+             FarmController farmController = new FarmController(new KoiFarmService(ResourcePaths.HIBERNATE_CONFIG));
+             loader.setController(farmController);
+        }
+
+        if(page.equals("booking")){
+             BookingController bookingController = new BookingController(new BookingService(ResourcePaths.HIBERNATE_CONFIG));
+             loader.setController(bookingController);
         }
 
         //preload data when admin login

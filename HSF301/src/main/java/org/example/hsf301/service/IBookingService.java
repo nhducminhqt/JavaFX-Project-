@@ -1,10 +1,9 @@
-package org.example.hsf301.dao;
-
-import org.example.hsf301.pojo.Bookings;
+package org.example.hsf301.service;
 
 import java.util.List;
+import org.example.hsf301.pojo.Bookings;
 
-public interface IBookingDAO {
+public interface IBookingService {
     List<Bookings> findAll();
     void save(Bookings student);
     void delete(Long studentID);

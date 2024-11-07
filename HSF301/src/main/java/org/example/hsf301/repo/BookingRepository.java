@@ -12,8 +12,8 @@ public class BookingRepository implements IBookingRepository {
         dao = new BookingDAO(name);
     }
     @Override
-    public List<Bookings> getAll() {
-        return dao.getAll();
+    public List<Bookings> findAll() {
+        return dao.findAll();
     }
 
     @Override
@@ -34,5 +34,10 @@ public class BookingRepository implements IBookingRepository {
     @Override
     public void update(Bookings student) {
         dao.update(student);
+    }
+
+    @Override
+    public List<Bookings> findByAccountID(String accountID) {
+        return dao.findByAccountID(accountID);
     }
 }

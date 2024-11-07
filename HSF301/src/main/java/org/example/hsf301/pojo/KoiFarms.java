@@ -1,13 +1,9 @@
 package org.example.hsf301.pojo;
 
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.List;
 import java.util.Set;
@@ -47,27 +43,10 @@ public class KoiFarms {
     @Column(name = "isActive")
     private boolean isActive;
 
- @OneToMany(mappedBy = "koiFarms", cascade = {CascadeType.ALL})
- private Set<BookingKoiDetail> bookingKoiDetails;
-
-    @OneToMany(mappedBy = "farm", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "farm", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Set<TourDetail> tourDetails;
 
-    @OneToMany(mappedBy = "koiFarms", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "koiFarms", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Set<KoiOfFarm> koiOfFarms;
 
-//    @Override
-//    public String toString() {
-//        return "KoiFarms{" +
-//                "id=" + id +
-//                ", farmName='" + farmName + '\'' +
-//                ", farmPhoneNumber='" + farmPhoneNumber + '\'' +
-//                ", farmEmail='" + farmEmail + '\'' +
-//                ", image='" + image + '\'' +
-//                ", description='" + description + '\'' +
-//                ", farmAddress='" + farmAddress + '\'' +
-//                ", website='" + website + '\'' +
-//                ", isActive=" + isActive +
-//                '}';
-//    }
 }

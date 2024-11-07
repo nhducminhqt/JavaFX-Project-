@@ -26,7 +26,7 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         List<BookingKoiDetail> students = null;
         Session session = sessionFactory.openSession();
         try {
-            students = session.createQuery("from booking_koi_detail", BookingKoiDetail.class).list();
+            students = session.createQuery("from BookingKoiDetail ", BookingKoiDetail.class).list();
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("Error" + e.getMessage());
@@ -44,7 +44,7 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         Transaction t =null;
         try {
             t = session.beginTransaction();
-            Query<BookingKoiDetail> query =session.createQuery("FROM booking_koi_detail d WHERE d.booking_id = :bookingId", BookingKoiDetail.class);
+            Query<BookingKoiDetail> query =session.createQuery("FROM BookingKoiDetail d WHERE d.booking.id = :bookingId", BookingKoiDetail.class);
             query.setParameter("bookingId", bookingId);
             bookingKoiDetails = query.list();
             t.commit();

@@ -16,22 +16,20 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
+import lombok.RequiredArgsConstructor;
 import org.example.hsf301.pojo.Tours;
 import org.example.hsf301.service.TourService;
 
+@RequiredArgsConstructor
 public class TourController implements Initializable {
 
     @FXML
     private GridPane tourGrid;
 
     private final TourService tourService;
-    private static final int COLUMNS = 2;
+    private static final int COLUMNS = 4;
     private static final SimpleDateFormat DATE_FORMATTER =
         new SimpleDateFormat("MMM dd, yyyy HH:mm");
-
-    public TourController(TourService tourService) {
-        this.tourService = tourService;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -59,8 +57,8 @@ public class TourController implements Initializable {
 
     private VBox createTourCard(Tours tour) {
         VBox card = new VBox(10);
-        card.setMaxWidth(350);
-        card.setPrefWidth(350);
+        card.setMaxWidth(300);
+        card.setPrefWidth(300);
         card.setStyle("-fx-background-color: white; " +
                           "-fx-border-color: #e0e0e0; " +
                           "-fx-border-radius: 8; " +
@@ -146,6 +144,9 @@ public class TourController implements Initializable {
         if (tour.getRemaining() > 0) {
             // TODO: Implement booking logic
             System.out.println("Booking tour: " + tour.getTourName());
+
+            // Add booking logic here
+
         }
     }
 }

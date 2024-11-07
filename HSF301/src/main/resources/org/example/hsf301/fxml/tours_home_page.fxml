@@ -1,72 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-  prefHeight="600.0" prefWidth="800.0"
-  style="-fx-background-color: #f5f5f5;"
-  xmlns="http://javafx.com/javafx/22"
-  xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1450.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
 
   <!-- Header in the top section of the BorderPane -->
-  <top>
-    <HBox prefHeight="50.0" style="-fx-background-color: #34495e;">
-      <Label text="Our available Tours!" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-padding: 10;"/>
-    </HBox>
-  </top>
+  <HBox alignment="CENTER" layoutX="-4.0" layoutY="-2.0" prefHeight="70.0" prefWidth="1456.0" style="-fx-background-color: #34495e;">
+    <children>
+      <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-padding: 10;" text="Our available Tours!">
+        <font>
+          <Font size="24.0" />
+        </font>
+      </Label>
+    </children>
+  </HBox>
+  <AnchorPane layoutY="69.0" prefHeight="781.0" prefWidth="1451.0">
+    <children>
 
-  <!-- ScrollPane in the center section of the BorderPane -->
-  <center>
-    <ScrollPane style="-fx-background: #f5f5f5; -fx-background-color: transparent;">
-      <GridPane fx:id="tourGrid" hgap="20" vgap="20" alignment="CENTER">
-        <padding>
-          <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
+      <!-- ScrollPane in the center section of the BorderPane -->
+      <ScrollPane prefHeight="781.0" prefWidth="1450.0" style="-fx-background: #f5f5f5; -fx-background-color: transparent;">
+        <GridPane fx:id="tourGrid" alignment="CENTER" hgap="20" prefHeight="779.0" prefWidth="1452.0" vgap="20">
+          <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+          </padding>
 
-        <!-- Template for a single tour card (will be created programmatically) -->
-        <fx:define>
-          <VBox fx:id="tourCardTemplate" spacing="10" maxWidth="350" prefWidth="350"
-            style="-fx-background-color: white;
-                   -fx-border-color: #e0e0e0;
-                   -fx-border-radius: 8;
-                   -fx-background-radius: 8;
-                   -fx-padding: 15;
-                   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
-
-            <ImageView fx:id="tourImage" fitWidth="320" fitHeight="200" preserveRatio="true"/>
-
-            <Label fx:id="tourName" wrapText="true"
-              style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
-
-            <Label fx:id="tourDescription" wrapText="true"
-              style="-fx-font-size: 14px; -fx-text-fill: #34495e;"/>
-
-            <HBox spacing="10" alignment="CENTER_LEFT">
-              <Label fx:id="dateTimeLabel"
-                style="-fx-font-size: 13px; -fx-text-fill: #7f8c8d;"/>
-            </HBox>
-
-            <HBox spacing="10" alignment="CENTER_LEFT">
-              <Label fx:id="priceLabel"
-                style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #e67e22;"/>
-
-              <Label fx:id="availabilityLabel"
-                style="-fx-font-size: 13px; -fx-text-fill: #95a5a6;"/>
-            </HBox>
-
-            <Button fx:id="bookButton" text="Book Now" maxWidth="Infinity"
-              style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-cursor: hand; -fx-background-radius: 5;">
-              <HBox.margin>
-                <Insets top="10"/>
-              </HBox.margin>
-            </Button>
-          </VBox>
-        </fx:define>
-      </GridPane>
-    </ScrollPane>
-  </center>
-</BorderPane>
+        </GridPane>
+      </ScrollPane>
+    </children>
+  </AnchorPane>
+</AnchorPane>

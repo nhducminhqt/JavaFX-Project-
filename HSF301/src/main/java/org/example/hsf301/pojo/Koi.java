@@ -15,15 +15,15 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"koiOfFarmList", "bookingKoiDetails"})
 public class Koi {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         Long id;
+
         @Column(name = "koi_name")
         private String koiName;
-
-
 
         @Column(name = "origin")
         private String origin;
@@ -47,8 +47,6 @@ public class Koi {
         @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
         @JsonIgnore
         private Set<BookingKoiDetail> bookingKoiDetails;
-
-
 
 
 }
