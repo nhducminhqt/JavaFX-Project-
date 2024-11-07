@@ -20,7 +20,7 @@ public class KoiService  implements  IKoiService{
         //iKoiImageRepository=new KoiImageRepository(name);
     }
     @Override
-    public Koi addKoi(KoiRequest koiRequest) {
+    public Koi save(KoiRequest koiRequest) {
         Koi koi = new Koi();
         koi.setKoiName(koiRequest.getKoiName());
         koi.setColor(koiRequest.getColor());
