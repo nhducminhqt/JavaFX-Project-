@@ -11,7 +11,7 @@ import java.util.List;
  * @author KoiRepository
  */
 public class KoiRepository implements IKoiRepository {
-    private IKoiDAO koiDAO;
+    private final IKoiDAO koiDAO;
     public KoiRepository (String name)
     {
         koiDAO = new KoiDAO(name);

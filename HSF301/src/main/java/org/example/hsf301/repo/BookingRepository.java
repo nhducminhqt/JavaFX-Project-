@@ -7,7 +7,7 @@ import org.example.hsf301.pojo.Bookings;
 import java.util.List;
 
 public class BookingRepository implements IBookingRepository {
-    private IBookingDAO dao;
+    private final IBookingDAO dao;
     public BookingRepository(String name) {
         dao = new BookingDAO(name);
     }

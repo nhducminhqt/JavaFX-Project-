@@ -39,7 +39,7 @@ public class TourDAO  implements  ITourDAO{
 
     @Override
     public List<Tours> findAll() {
-        List<Tours> tours = null;
+        List<Tours> tours = new ArrayList<>();
         Session session = sessionFactory.openSession();
         try {
             tours = session.createQuery("from Tours ", Tours.class).list();
@@ -48,6 +48,7 @@ public class TourDAO  implements  ITourDAO{
         }
         return tours;
     }
+
     @Override
     public List<Tours> findByTourName(String tourName) {
         List<Tours> tours = null;
@@ -130,6 +131,14 @@ public class TourDAO  implements  ITourDAO{
             //sessionFactory.close();
             session.close();
         }
+    }
+
+    public static void main(String[] args) {
+
+        for (Tours tours : new TourDAO("hibernate.cfg.xml").findAll()) {
+            System.out.println(tours);
+        }
+
     }
 
 

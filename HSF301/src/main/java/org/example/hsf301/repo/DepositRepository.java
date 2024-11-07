@@ -7,7 +7,7 @@ import org.example.hsf301.pojo.Deposit;
 import java.util.List;
 
 public class DepositRepository implements IDepositRepository {
-    private IDepositDAO dao;
+    private final IDepositDAO dao;
     public DepositRepository(String name) {
         dao = new DepositDAO(name);
     }

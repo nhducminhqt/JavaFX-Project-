@@ -42,4 +42,6 @@ module org.example.hsf301 {
     opens org.example.hsf301.utils to javafx.fxml;
     exports org.example.hsf301.layouts;
     opens org.example.hsf301.layouts to javafx.fxml;
+    exports org.example.hsf301.test;
+    opens org.example.hsf301.test to javafx.fxml;
 }

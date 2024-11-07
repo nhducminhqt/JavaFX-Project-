@@ -7,7 +7,7 @@ import org.example.hsf301.pojo.DeliveryHistory;
 import java.util.List;
 
 public class DeliveryHistoryRepository implements IDeliveryHistoryRepository {
-    private IDeliveryHistoryDAO dao;
+    private final IDeliveryHistoryDAO dao;
     public DeliveryHistoryRepository(String name) {
         dao = new DeliveryHistoryDAO(name);
     }

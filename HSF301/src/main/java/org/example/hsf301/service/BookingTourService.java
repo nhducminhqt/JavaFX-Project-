@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingTourService implements IBookingTourService {
-    private IBookingRepository bookingRepository;
-    private IKoiFarmsRepository koiFarmsRepository;
-    private ITourRepository tourRepository;
-    private IBookingTourDetailRepository bookingTourDetailRepository;
+    private final IBookingRepository bookingRepository;
+    private final IKoiFarmsRepository koiFarmsRepository;
+    private final ITourRepository tourRepository;
+    private final IBookingTourDetailRepository bookingTourDetailRepository;
     public BookingTourService(String name)
     {
         bookingRepository = new BookingRepository(name);
@@ -31,7 +31,7 @@ public class BookingTourService implements IBookingTourService {
         booking.setBookingDate(request.getBookingDate());
         booking.setPaymentMethod(request.getPaymentMethod());
         booking.setCreatedBy(account);
-        booking.setPaymentStatus(PaymentStatus.pending);
+        booking.setPaymentStatus(PaymentStatus.PENDING);
         booking.setVat(request.getVat());
         booking.setDiscountAmount(request.getDiscountAmount());
         bookingRepository.save(booking);
@@ -86,7 +86,7 @@ public class BookingTourService implements IBookingTourService {
 
     @Override
     public List<Bookings> getAllTourBookings() {
-        List<Bookings> bookings = bookingRepository.getAll();
+        List<Bookings> bookings = bookingRepository.findAll();
         List<Bookings> bookingKoiList = new ArrayList<>();
         for (Bookings booking : bookings) {
             if(booking.getBookingType()==BookingType.TourBooking){
@@ -98,7 +98,7 @@ public class BookingTourService implements IBookingTourService {
 
     @Override
     public List<Bookings> getAllTourBookings(String username) {
-        List<Bookings> bookings = bookingRepository.getAll();
+        List<Bookings> bookings = bookingRepository.findAll();
         List<Bookings> bookingTourList = new ArrayList<>();
         for (Bookings booking : bookings) {
             if(booking.getAccount().getUsername().equals(username)&&booking.getBookingType()==BookingType.TourBooking){
@@ -111,7 +111,7 @@ public class BookingTourService implements IBookingTourService {
     @Override
     public Bookings deleteTourBooking(Long bookingId) {
         Bookings bookings = bookingRepository.findById(bookingId);
-        bookings.setPaymentStatus(PaymentStatus.cancel);
+        bookings.setPaymentStatus(PaymentStatus.CANCELLED);
         bookingRepository.update(bookings);
         return bookings;
     }

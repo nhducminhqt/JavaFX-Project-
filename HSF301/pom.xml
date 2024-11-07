@@ -231,7 +231,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>org.example.hsf301/org.example.hsf301.HelloApplication</mainClass>
+              <mainClass>org.example.hsf301/org.example.hsf301.test.HelloApplication</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

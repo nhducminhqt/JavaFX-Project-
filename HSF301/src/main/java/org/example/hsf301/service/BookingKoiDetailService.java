@@ -10,10 +10,10 @@ import org.example.hsf301.repo.*;
 import java.util.List;
 
 public class BookingKoiDetailService implements IBookingKoiDetailService{
-    private IBookingKoiDetailRepository bookingKoiDetailRepo;
-    private IKoiRepository koiRepository;
-    private IBookingRepository bookingRepository;
-    private Account account;
+    private final IBookingKoiDetailRepository bookingKoiDetailRepo;
+    private final IKoiRepository koiRepository;
+    private final IBookingRepository bookingRepository;
+    private final Account account;
     public BookingKoiDetailService(String name, Account account) {
         bookingKoiDetailRepo = new BookingKoiDetailRepository(name);
         koiRepository = new KoiRepository(name);

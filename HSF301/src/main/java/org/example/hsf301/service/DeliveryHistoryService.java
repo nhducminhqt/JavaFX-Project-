@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class DeliveryHistoryService implements IDeliveryHistoryService {
-    private IDeliveryHistoryRepository deliveryHistoryRepo;
-    private IBookingRepository bookingRepo;
+    private final IDeliveryHistoryRepository deliveryHistoryRepo;
+    private final IBookingRepository bookingRepo;
 
 
     public DeliveryHistoryService(String name) {
@@ -27,7 +27,7 @@ public class DeliveryHistoryService implements IDeliveryHistoryService {
     public DeliveryHistory addDeliveryHistory(DeliveryHistoryRequest deliveryHistoryRequest, Long bookingId,Account staff) throws Exception {
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
-        if(!(bookings.getPaymentStatus()==PaymentStatus.shipping))return null;
+        if(!(bookings.getPaymentStatus()==PaymentStatus.SHIPPING))return null;
         DeliveryHistory deliveryHistory = new DeliveryHistory();
         deliveryHistory.setDeliveryStaff(staff);
         deliveryHistory.setBooking(bookings);

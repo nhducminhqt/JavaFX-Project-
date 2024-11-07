@@ -11,7 +11,7 @@ import java.util.List;
  * @author KoiFarmService
  */
 public class KoiFarmService implements IKoiFarmService{
-   private IKoiFarmsRepository iKoiFarmsRepository;
+   private final IKoiFarmsRepository iKoiFarmsRepository;
 
    public  KoiFarmService (String name)
     {

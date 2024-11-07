@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class BookingDAO implements IBookingDAO{
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private Configuration configuration;
 
     public BookingDAO(String name) {
@@ -58,7 +58,7 @@ public class BookingDAO implements IBookingDAO{
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            Bookings booking = (Bookings) session.get(Bookings.class,bookingID);
+            Bookings booking = session.get(Bookings.class, bookingID);
             session.delete(booking);
             t.commit();
             System.out.println("Delete saved");
@@ -77,7 +77,7 @@ public class BookingDAO implements IBookingDAO{
         // TODO Auto-generated method stub
         Session session = sessionFactory.openSession();
         try {
-            return (Bookings) session.get(Bookings.class,bookingID);
+            return session.get(Bookings.class, bookingID);
         } catch (Exception e) {
             // TODO: handle exception
             throw e;

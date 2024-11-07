@@ -7,7 +7,7 @@ import org.example.hsf301.pojo.Delivery;
 import java.util.List;
 
 public class DeliveryRepository implements IDeliveryRepository {
-    private IDeliveryDAO dao;
+    private final IDeliveryDAO dao;
     public DeliveryRepository(String name) {
         dao = new DeliveryDAO(name);
     }

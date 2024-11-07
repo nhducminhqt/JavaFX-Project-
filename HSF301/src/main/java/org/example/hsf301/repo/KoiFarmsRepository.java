@@ -10,7 +10,7 @@ import java.util.List;
  * @author KoiFarmsRepository
  */
 public class KoiFarmsRepository implements IKoiFarmsRepository{
-    private IKoiFarmsDAO iKoiFarmsDAO;
+    private final IKoiFarmsDAO iKoiFarmsDAO;
 
     public  KoiFarmsRepository (String name)
     {

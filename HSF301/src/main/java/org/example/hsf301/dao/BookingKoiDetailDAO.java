@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private Configuration configuration;
 
     public BookingKoiDetailDAO(String name) {
@@ -78,7 +78,7 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            BookingKoiDetail student = (BookingKoiDetail) session.get(BookingKoiDetail.class,studentID);
+            BookingKoiDetail student = session.get(BookingKoiDetail.class, studentID);
             session.delete(student);
             t.commit();
             System.out.println("Delete saved");
@@ -97,7 +97,7 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         // TODO Auto-generated method stub
         Session session = sessionFactory.openSession();
         try {
-            return (BookingKoiDetail) session.get(BookingKoiDetail.class,studentID);
+            return session.get(BookingKoiDetail.class, studentID);
         } catch (Exception e) {
             // TODO: handle exception
             throw e;

@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class DeliveryService implements IDeliveryService{
-    private IDeliveryRepository deliveryRepo;
-    private IBookingRepository bookingRepo;
-    private IDepositRepository depositRepo;
+    private final IDeliveryRepository deliveryRepo;
+    private final IBookingRepository bookingRepo;
+    private final IDepositRepository depositRepo;
 
     public DeliveryService(String name) {
         deliveryRepo = new DeliveryRepository(name);
@@ -31,7 +31,7 @@ public class DeliveryService implements IDeliveryService{
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
         if(bookings.getDelivery()!=null) return null;
-        bookings.setPaymentStatus(PaymentStatus.complete);
+        bookings.setPaymentStatus(PaymentStatus.COMPLETE);
         bookings.setPaymentDate(LocalDate.now());
         bookingRepo.update(bookings);
 

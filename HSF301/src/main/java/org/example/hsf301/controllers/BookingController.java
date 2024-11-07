@@ -68,42 +68,49 @@ public class BookingController implements Initializable {
                           "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);");
 
         // Booking Type
-        HBox titleBox = new HBox(15);
-        Label typeLabel = new Label("Booking Type: " + booking.getBookingType());
-        typeLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;");
-        typeLabel.setWrapText(true);
+        try{
+            HBox titleBox = new HBox(15);
+            Label typeLabel = new Label("Booking Type: " + booking.getBookingType());
+            typeLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF;");
+            typeLabel.setWrapText(true);
 
-        titleBox.setStyle("-fx-background-color: #34495e");
-        titleBox.setAlignment(Pos.CENTER);
-        titleBox.getChildren().addAll(typeLabel);
+            titleBox.setStyle("-fx-background-color: #34495e");
+            titleBox.setAlignment(Pos.CENTER);
+            titleBox.getChildren().addAll(typeLabel);
 
-        // Booking Date
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        Label dateLabel = new Label("Date: " + booking.getBookingDate().format(dateFormatter));
-        dateLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #7f8c8d;");
+            // Booking Date
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Label dateLabel = new Label("Date: " + booking.getBookingDate().format(dateFormatter));
+            dateLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #7f8c8d;");
 
-        // Payment Information
-        VBox paymentInfoBox = new VBox(15);
-        paymentInfoBox.setAlignment(Pos.CENTER_LEFT);
+            // Payment Information
+            VBox paymentInfoBox = new VBox(15);
+            paymentInfoBox.setAlignment(Pos.CENTER_LEFT);
 
-        Label paymentStatusLabel = new Label("Payment Status: " + booking.getPaymentStatus());
-        paymentStatusLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
+            Label paymentStatusLabel = new Label("Payment Status: " + booking.getPaymentStatus());
+            paymentStatusLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
 
-        Label amountLabel = new Label("Total: $" + booking.getTotalAmountWithVAT());
-        amountLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
+            Label amountLabel = new Label("Total: $" + booking.getTotalAmountWithVAT());
+            amountLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
 
-        // Payment Method
-        Label paymentMethodLabel = new Label("Payment Method: " + booking.getPaymentMethod());
-        paymentMethodLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
+            // Payment Method
+            Label paymentMethodLabel = new Label("Payment Method: " + booking.getPaymentMethod());
 
-        paymentInfoBox.getChildren().addAll(paymentStatusLabel, amountLabel, paymentMethodLabel);
+            paymentMethodLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
 
-        // Add all elements to card
-        card.getChildren().addAll(
-            titleBox,
-            dateLabel,
-            paymentInfoBox
-        );
+            paymentInfoBox.getChildren().addAll(paymentStatusLabel, amountLabel, paymentMethodLabel);
+
+            // Add all elements to card
+            card.getChildren().addAll(
+                titleBox,
+                dateLabel,
+                paymentInfoBox
+            );
+
+            return card;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
         return card;
     }

@@ -1,9 +1,11 @@
 package org.example.hsf301.views;
 
+import java.util.Objects;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.controllers.LoginController;
@@ -30,7 +32,9 @@ public class LoginView extends Application {
 
             // Create and configure the scene
             Scene scene = new Scene(root, 830, 650);
-            stage.setTitle("Login");
+            stage.getIcons().add(new Image(
+                Objects.requireNonNull(getClass().getResource(ResourcePaths.URL_KOI_ICON_LOGO)).toExternalForm()));
+            stage.setTitle("Hello!");
             stage.setScene(scene);
             stage.show();
 

@@ -12,7 +12,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class DepositDAO implements IDepositDAO{
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private Configuration configuration;
 
 
@@ -61,7 +61,7 @@ public class DepositDAO implements IDepositDAO{
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            Deposit student = (Deposit) session.get(Deposit.class,studentID);
+            Deposit student = session.get(Deposit.class, studentID);
             session.delete(student);
             t.commit();
             System.out.println("Delete saved");
@@ -79,7 +79,7 @@ public class DepositDAO implements IDepositDAO{
     public Deposit findById(Long studentID) {
         Session session = sessionFactory.openSession();
         try {
-            return (Deposit) session.get(Deposit.class,studentID);
+            return session.get(Deposit.class, studentID);
         } catch (Exception e) {
             // TODO: handle exception
             throw e;

@@ -13,9 +13,9 @@ import java.util.List;
  * @author KoiOfFarmService
  */
 public class KoiOfFarmService implements IKoiOfFarmService{
-    private IKoiOfFarmRepository koiOfFarmRepository;
-    private IKoiRepository koiRepository;
-    private IKoiFarmsRepository iKoiFarmsRepository;
+    private final IKoiOfFarmRepository koiOfFarmRepository;
+    private final IKoiRepository koiRepository;
+    private final IKoiFarmsRepository iKoiFarmsRepository;
    public KoiOfFarmService (String name)
    {
        koiOfFarmRepository = new KoiOfFarmRepository(name);
