@@ -7,11 +7,13 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.pojo.Bookings;
 import org.example.hsf301.service.IBookingService;
@@ -96,6 +98,16 @@ public class BookingController implements Initializable {
             // Payment Method
             Label paymentMethodLabel = new Label("Payment Method: " + booking.getPaymentMethod());
 
+            HBox paymentBox = new HBox(15);
+            paymentBox.setAlignment(Pos.CENTER);
+            if(booking.getPaymentStatus().equals(PaymentStatus.PROCESSING)){
+                Button purchaseButton = new Button("Purchase Now!");
+                purchaseButton.setStyle("-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+                Button cancelButton = new Button("Cancel");
+                cancelButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold");
+                paymentBox.getChildren().addAll(purchaseButton, cancelButton);
+            }
+
             paymentMethodLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
 
             paymentInfoBox.getChildren().addAll(paymentStatusLabel, amountLabel, paymentMethodLabel);
@@ -104,7 +116,8 @@ public class BookingController implements Initializable {
             card.getChildren().addAll(
                 titleBox,
                 dateLabel,
-                paymentInfoBox
+                paymentInfoBox,
+                paymentBox
             );
 
             return card;

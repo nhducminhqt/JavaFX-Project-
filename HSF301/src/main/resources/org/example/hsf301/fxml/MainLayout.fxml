@@ -25,9 +25,7 @@
     <!--  xem booking koi (read only) do staff tao -> get service len (nhan vao account) -->
     <!--    View purchase -> show  bookings with status (PENDING|SHIPPING|CANCEL) ->
      click to view detail show booking koi detail (fetch via booking id) -->
-    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#navigateBooking"
-      text="Bookings"/>
-    <Button layoutX="37.0" layoutY="352.0" mnemonicParsing="false" onAction="#navigatePurchasedTour"
+    <Button layoutX="37.0" layoutY="352.0" mnemonicParsing="false" onAction="#navigateBooking"
       text="My Purchased Tour"/>
     <Button layoutX="10.0" layoutY="397.0" mnemonicParsing="false" onAction="#navigateBookingKoi"
       text="My Booking Koi"/>

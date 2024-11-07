@@ -24,6 +24,8 @@ module org.example.hsf301 {
     opens org.example.hsf301 to javafx.fxml;
     exports org.example.hsf301;
 
+    exports org.example.hsf301.model.request;
+
     opens org.example.hsf301.views to javafx.graphics;
     exports org.example.hsf301.views;
 

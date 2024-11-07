@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IBookingDAO {
     List<Bookings> findAll();
-    void save(Bookings student);
-    void delete(Long studentID);
-    Bookings findById(Long studentID);
-    void update(Bookings student);
+    void save(Bookings booking);
+    void delete(Long bookingID);
+    Bookings findById(Long bookingID);
+    void update(Bookings booking);
     List<Bookings> findByAccountID(String accountID);
 }
