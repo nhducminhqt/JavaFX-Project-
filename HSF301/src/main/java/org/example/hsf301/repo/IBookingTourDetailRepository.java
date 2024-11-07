@@ -1,5 +1,6 @@
 package org.example.hsf301.repo;
 
+import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.BookingTourDetail;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface IBookingTourDetailRepository {
     BookingTourDetail findById(Long id);
 
     void update(BookingTourDetail bookingTourDetail);
+    List<BookingTourDetail> findByBookingId(Long bookingId);
 }

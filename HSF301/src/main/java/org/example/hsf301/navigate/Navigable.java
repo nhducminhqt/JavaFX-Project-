@@ -18,7 +18,10 @@ import org.example.hsf301.controllers.management.FarmManagementController;
 import org.example.hsf301.controllers.management.KoiManagementController;
 import org.example.hsf301.controllers.management.TourManagementController;
 import org.example.hsf301.service.AccountService;
+import org.example.hsf301.service.BookingKoiService;
 import org.example.hsf301.service.BookingService;
+import org.example.hsf301.service.BookingTourService;
+import org.example.hsf301.service.IBookingTourService;
 import org.example.hsf301.service.KoiFarmService;
 import org.example.hsf301.service.KoiService;
 import org.example.hsf301.service.TourService;
@@ -34,11 +37,6 @@ public interface Navigable {
     // Default method to navigate to the Tours page
     default void navigateTour(StackPane contentArea) throws IOException {
         setContent("tour", contentArea);
-    }
-
-    // Default method to navigate to the Bookings page
-    default void navigateBooking(StackPane contentArea) throws IOException {
-        setContent("booking", contentArea);
     }
 
     default void navigateBookingManagement(StackPane contentArea) throws IOException {
@@ -112,6 +110,10 @@ public interface Navigable {
     default void navigateBookingTourList(StackPane contentArea) throws IOException {
         setContent("BookingTourListStaff", contentArea);
     }
+    default void navigateBookingTourListSaleStaff(StackPane contentArea) throws IOException {
+        setContent("BookingTourListSaleStaff", contentArea);
+    }
+
     default void navigateDelivery(StackPane contentArea) throws IOException {
         setContent("Delivery", contentArea);
     }
@@ -129,7 +131,8 @@ public interface Navigable {
         //preload data when customer login
         if (page.equals("tours_home_page")) {
             TourService tourService = new TourService(ResourcePaths.HIBERNATE_CONFIG);
-            TourController tourController = new TourController(tourService);
+            IBookingTourService bookingTourService = new BookingTourService(ResourcePaths.HIBERNATE_CONFIG);
+            TourController tourController = new TourController(tourService, bookingTourService);
             loader.setController(tourController);
         }
 
@@ -162,12 +165,10 @@ public interface Navigable {
             loader.setController(myProfileController);
         }
 
-        if(page.equals("purchased_tour")){
-            PurchasedTourController purchasedTourController = new PurchasedTourController();
-        }
-
         if(page.equals("booking_koi")){
-            BookingKoiController bookingKoiController = new BookingKoiController();
+            BookingKoiController bookingKoiController =
+                new BookingKoiController(new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG));
+            loader.setController(bookingKoiController);
         }
 
         if(page.equals("kois")){
@@ -180,7 +181,7 @@ public interface Navigable {
              loader.setController(farmController);
         }
 
-        if(page.equals("booking")){
+        if(page.equals("purchased_tour")){
              BookingController bookingController = new BookingController(new BookingService(ResourcePaths.HIBERNATE_CONFIG));
              loader.setController(bookingController);
         }

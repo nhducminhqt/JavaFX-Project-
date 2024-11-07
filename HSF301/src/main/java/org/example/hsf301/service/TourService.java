@@ -55,9 +55,9 @@ public class TourService implements ITourService {
         Tours tour = tourRepository.findById(tourId);
         if(tour == null) {
             throw new IllegalArgumentException("Tour not found");
+        }else{
+            tourRepository.delete(tourId);
         }
-        tourRepository.delete(tourId);
-
     }
 
     @Override

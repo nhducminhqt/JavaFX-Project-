@@ -39,12 +39,6 @@ public class MainController implements Initializable, Navigable {
         navigateTourHomePage(contentArea);
     }
 
-    // Handler for navigating to the Bookings page
-    @FXML
-    private void navigateBooking() throws IOException {
-        navigateBooking(contentArea);
-    }
-
     @FXML
     private void navigateLogout() throws IOException {
         navigateLogout(contentArea);

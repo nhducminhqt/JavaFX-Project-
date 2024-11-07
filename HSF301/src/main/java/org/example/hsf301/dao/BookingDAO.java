@@ -1,5 +1,6 @@
 package org.example.hsf301.dao;
 
+import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.Bookings;
 import org.example.hsf301.pojo.Delivery;
 import org.hibernate.Session;
@@ -9,7 +10,8 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
-public class BookingDAO implements IBookingDAO{
+public class BookingDAO implements IBookingDAO {
+
     private SessionFactory sessionFactory;
     private Configuration configuration;
 
@@ -97,7 +99,7 @@ public class BookingDAO implements IBookingDAO{
         } catch (Exception e) {
             // TODO: handle exception
             t.rollback();
-            System.out.println("Error "+e.getMessage());
+            System.out.println("Error " + e.getMessage());
         } finally {
             //sessionFactory.close();
             session.close();
@@ -105,7 +107,7 @@ public class BookingDAO implements IBookingDAO{
     }
 
     @Override
-    public  List<Bookings> findByAccountID(String accountID) {
+    public List<Bookings> findByAccountID(String accountID) {
         List<Bookings> bookings = null;
         Session session = sessionFactory.openSession();
         try {
@@ -116,6 +118,21 @@ public class BookingDAO implements IBookingDAO{
             System.out.println("Error" + e.getMessage());
         }
         return bookings;
+    }
+
+    @Override
+    public List<BookingKoiDetail> findByBookingID(Long bookingID) {
+        List<BookingKoiDetail> bookingKoiDetails = null;
+        Session session = sessionFactory.openSession();
+        try {
+            bookingKoiDetails = session.createQuery(
+                    "from BookingKoiDetail where booking.id = :bookingID",
+                    BookingKoiDetail.class).setParameter("bookingID", bookingID)
+                .list();
+        } catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
+        }
+        return bookingKoiDetails;
     }
 
     public static void main(String[] args) {

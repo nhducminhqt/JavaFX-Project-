@@ -1,6 +1,7 @@
 package org.example.hsf301.service;
 
 import org.example.hsf301.model.request.BookingTourDetailRequest;
+import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.BookingTourDetail;
 import org.example.hsf301.pojo.Bookings;
 import org.example.hsf301.pojo.Tours;
@@ -20,42 +21,42 @@ public class BookingTourDetailService implements IBookingTourDetailService {
     @Override
     public BookingTourDetail addBookingTourDetail(BookingTourDetailRequest bookingTourDetailRequest) {
         BookingTourDetail bookingTourDetail = new BookingTourDetail();
-        if(bookingTourDetailRequest == null) {
-            throw new IllegalArgumentException("bookingTourDetailRequest cannot be null");
-        }
-        Bookings bookings = bookingRepository.findById(bookingTourDetailRequest.getBookingID());
-        Tours tours = tourRepository.findById(bookingTourDetailRequest.getTourID());
-        if(bookings == null) {
-            throw new IllegalArgumentException("bookings cannot be null");
-        }
-        if(tours == null) {
-            throw new IllegalArgumentException("tours cannot be null");
-        }
-        bookingTourDetail.setParticipant(bookingTourDetailRequest.getParticipant());
-        bookingTourDetail.setTourId(tours);
-        bookingTourDetail.setBooking(bookings);
-        bookingTourDetailRepository.save(bookingTourDetail);
+//        if(bookingTourDetailRequest == null) {
+//            throw new IllegalArgumentException("bookingTourDetailRequest cannot be null");
+//        }
+//        Bookings bookings = bookingRepository.findById(bookingTourDetailRequest.getBookingID());
+//        Tours tours = tourRepository.findById(bookingTourDetailRequest.getTourID());
+//        if(bookings == null) {
+//            throw new IllegalArgumentException("bookings cannot be null");
+//        }
+//        if(tours == null) {
+//            throw new IllegalArgumentException("tours cannot be null");
+//        }
+//        bookingTourDetail.setParticipant(bookingTourDetailRequest.getParticipant());
+//        bookingTourDetail.setTourId(tours);
+//        bookingTourDetail.setBooking(bookings);
+//        bookingTourDetailRepository.save(bookingTourDetail);
         return bookingTourDetail;
     }
 
     @Override
     public BookingTourDetail updateBookingTourDetail(Long bookingTourDetailId, BookingTourDetailRequest bookingTourDetailRequest) throws Exception {
         BookingTourDetail bookingTourDetail = bookingTourDetailRepository.findById(bookingTourDetailId);
-        if(bookingTourDetail == null) {
-            throw new IllegalArgumentException("bookingTourDetail cannot be null");
-        }
-        Bookings bookings = bookingRepository.findById(bookingTourDetailRequest.getBookingID());
-        if(bookings == null) {
-            throw new IllegalArgumentException("bookings cannot be null");
-        }
-        Tours tours = tourRepository.findById(bookingTourDetailRequest.getTourID());
-        if(tours == null) {
-            throw new IllegalArgumentException("tours cannot be null");
-        }
-        bookingTourDetail.setParticipant(bookingTourDetailRequest.getParticipant());
-        bookingTourDetail.setTourId(tours);
-        bookingTourDetail.setBooking(bookings);
-        bookingTourDetailRepository.update(bookingTourDetail);
+//        if(bookingTourDetail == null) {
+//            throw new IllegalArgumentException("bookingTourDetail cannot be null");
+//        }
+//        Bookings bookings = bookingRepository.findById(bookingTourDetailRequest.getBookingID());
+//        if(bookings == null) {
+//            throw new IllegalArgumentException("bookings cannot be null");
+//        }
+//        Tours tours = tourRepository.findById(bookingTourDetailRequest.getTourID());
+//        if(tours == null) {
+//            throw new IllegalArgumentException("tours cannot be null");
+//        }
+//        bookingTourDetail.setParticipant(bookingTourDetailRequest.getParticipant());
+//        bookingTourDetail.setTourId(tours);
+//        bookingTourDetail.setBooking(bookings);
+//        bookingTourDetailRepository.update(bookingTourDetail);
         return bookingTourDetail;
     }
 
@@ -85,5 +86,10 @@ public class BookingTourDetailService implements IBookingTourDetailService {
             throw new IllegalArgumentException("bookingTourDetails cannot be null");
         }
         return bookingTourDetails;
+    }
+
+    @Override
+    public List<BookingTourDetail> bookingTourDetails(Long bookingID) {
+        return bookingTourDetailRepository.findByBookingId(bookingID);
     }
 }

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.controllers.TourController;
+import org.example.hsf301.service.BookingTourService;
+import org.example.hsf301.service.IBookingTourService;
 import org.example.hsf301.service.TourService;
 
 public class TourView extends Application {
@@ -17,12 +19,13 @@ public class TourView extends Application {
         try {
             // Initialize the TourService
             TourService tourService = new TourService(ResourcePaths.HIBERNATE_CONFIG);
+            IBookingTourService bookingTourService = new BookingTourService(ResourcePaths.HIBERNATE_CONFIG);
 
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH));
 
             // Create and set the controller with injected dependencies
-            TourController controller = new TourController(tourService);
+            TourController controller = new TourController(tourService, bookingTourService);
             loader.setController(controller);
 
             // Load the view

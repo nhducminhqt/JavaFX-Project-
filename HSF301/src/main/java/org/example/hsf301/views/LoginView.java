@@ -34,6 +34,7 @@ public class LoginView extends Application {
             Scene scene = new Scene(root, 830, 650);
             stage.getIcons().add(new Image(
                 Objects.requireNonNull(getClass().getResource(ResourcePaths.URL_KOI_ICON_LOGO)).toExternalForm()));
+            stage.setResizable(false);
             stage.setTitle("Hello!");
             stage.setScene(scene);
             stage.show();
