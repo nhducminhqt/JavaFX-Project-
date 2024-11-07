@@ -52,13 +52,13 @@ public class DeliveryHistoryController implements Initializable {
     @FXML
     private TextField txtRoute;
     @FXML
-    private TextArea txtKoiHealth;
+    private TextArea txtDescription;
 
     @FXML
     public void btnAddAction() throws Exception {
         DeliveryHistoryRequest deliveryHistoryRequest = new DeliveryHistoryRequest();
         deliveryHistoryRequest.setRoute(txtRoute.getText());
-        deliveryHistoryRequest.setHealthKoiDescription(txtKoiHealth.getText());
+        deliveryHistoryRequest.setHealthKoiDescription(txtDescription.getText());
         deliveryHistoryService.addDeliveryHistory(deliveryHistoryRequest,bookingId,LoginController.account);
         refreshTable();
     }
@@ -67,7 +67,7 @@ public class DeliveryHistoryController implements Initializable {
         DeliveryHistory bookingKoiDetail = tbData.getSelectionModel().getSelectedItem();
         DeliveryHistoryRequest deliveryHistoryRequest = new DeliveryHistoryRequest();
         deliveryHistoryRequest.setRoute(txtRoute.getText());
-        deliveryHistoryRequest.setHealthKoiDescription(txtKoiHealth.getText());
+        deliveryHistoryRequest.setHealthKoiDescription(txtDescription.getText());
         deliveryHistoryService.updateDeliveryHistory(bookingKoiDetail.getId(),deliveryHistoryRequest);
         refreshTable();
     }
@@ -116,7 +116,7 @@ public class DeliveryHistoryController implements Initializable {
     }
         private void show(DeliveryHistory deliveryHistory) {
         this.txtRoute.setText(deliveryHistory.getRoute());
-        this.txtKoiHealth.setText(deliveryHistory.getHealthKoiDescription());
+        this.txtDescription.setText(deliveryHistory.getHealthKoiDescription());
     }
     public void showAlert(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

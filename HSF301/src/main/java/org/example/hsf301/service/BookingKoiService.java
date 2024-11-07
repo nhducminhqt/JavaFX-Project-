@@ -2,6 +2,7 @@ package org.example.hsf301.service;
 
 import org.example.hsf301.enums.BookingType;
 import org.example.hsf301.enums.CCSTATUS;
+import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.BookingKoiDetailRequest;
 import org.example.hsf301.model.request.BookingKoiRequest;
@@ -149,5 +150,17 @@ public class BookingKoiService implements IBookingKoiService {
         bookings.setPaymentStatus(PaymentStatus.CANCELLED);
         bookingRepository.update(bookings);
         return bookings;
+    }
+
+    @Override
+    public List<Bookings> getAllKoiBookingStatus(PaymentStatus paymentStatus) {
+        List<Bookings> bookings = bookingRepository.findAll();
+        List<Bookings> bookingKoiList = new ArrayList<>();
+        for (Bookings booking : bookings) {
+            if (booking.getBookingType() == BookingType.KoiPurchase&& booking.getPaymentStatus().equals(paymentStatus)) {
+                bookingKoiList.add(booking);
+            }
+        }
+        return bookingKoiList;
     }
 }

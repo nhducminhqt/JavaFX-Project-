@@ -11,6 +11,7 @@ import org.example.hsf301.enums.PaymentStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import lombok.ToString;
 
@@ -68,17 +69,20 @@ public class Bookings {
 
     //here mapping quotation table
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
-    private Set<Quotations> quotations;
+    private List<Quotations> quotations;
 
     //mapped By same name with ManyToOne annotation
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
-    private Set<BookingTourDetail> bookingTourDetails;
+    private List<BookingTourDetail> bookingTourDetails;
+//
+//    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//    private Set<BookingKoiDetail> bookingKoiDetails;
 
     @OneToOne(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Deposit deposit;
 
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
-    private Set<DeliveryHistory> deliveryHistory;
+    private List<DeliveryHistory> deliveryHistory;
 
     @OneToOne(mappedBy = "booking",cascade = CascadeType.ALL)
     private Delivery delivery;

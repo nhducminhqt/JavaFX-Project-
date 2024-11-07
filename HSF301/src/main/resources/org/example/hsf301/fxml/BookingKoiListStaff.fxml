@@ -23,7 +23,7 @@
             <TableColumn fx:id="totalAmount" prefWidth="124.0" text="Total Amount" />
             <TableColumn fx:id="totalAmountVAT" prefWidth="121.0" text="Total Amount VAT" />
             <TableColumn fx:id="paymentDate" prefWidth="111.0" text="Payment Date" />
-            <TableColumn fx:id="paymentDate1" prefWidth="92.0" text="Account Id" />
+            <TableColumn fx:id="account" prefWidth="92.0" text="Account Id" />
          </columns>
       </TableView>
       <Label layoutX="426.0" layoutY="7.0" prefHeight="23.0" prefWidth="158.0" text="Booking Koi List">
@@ -58,6 +58,12 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancel" layoutX="801.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="41.0" prefWidth="119.0" text="Cancel" />
+      <Button fx:id="btnCancel" layoutX="801.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="41.0" prefWidth="119.0" text="Search" />
+      <ComboBox fx:id="txtStatus" layoutX="196.0" layoutY="485.0" prefHeight="25.0" prefWidth="189.0" />
+      <Label fx:id="Status" layoutX="56.0" layoutY="487.0" text="Status">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

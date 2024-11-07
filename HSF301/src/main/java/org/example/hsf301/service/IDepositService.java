@@ -8,11 +8,15 @@ import java.util.List;
 public interface IDepositService {
     Deposit getDepositByBookingId(Long bookingId);
 
-    Deposit createDeposit(DepositRequest depositRequest, Long bookingId);
+    void createDeposit(DepositRequest depositRequest, Long bookingId);
 
-    Deposit deleteById(Long id);
+    void deleteById(Long id);
 
-    Deposit updateDeposit(Long id, DepositRequest depositRequest);
+    void updateDeposit(Long id, DepositRequest depositRequest);
+
+    List<Deposit> getAllDeposits();
+
+    Deposit getDepositById(Long id);
 
 
 }

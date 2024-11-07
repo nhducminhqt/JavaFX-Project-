@@ -43,15 +43,15 @@ public class Koi {
     @Column(name = "koi_image")
     private String koiImage;
 
+        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL} ,fetch = FetchType.LAZY)
+        @JsonIgnore
+        private List<KoiOfFarm> koiOfFarmList;
+
+        @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+        @JsonIgnore
+        private List<BookingKoiDetail> bookingKoiDetails;
+
     @Column(name = "is_active")
     private boolean isActive;
-
-    @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<KoiOfFarm> koiOfFarmList;
-
-    @OneToMany(mappedBy = "koi", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<BookingKoiDetail> bookingKoiDetails;
 
 }
