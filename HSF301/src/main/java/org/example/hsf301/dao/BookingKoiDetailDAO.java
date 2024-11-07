@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
-    private final SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
     private Configuration configuration;
 
     public BookingKoiDetailDAO(String name) {
@@ -44,9 +44,14 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         Transaction t =null;
         try {
             t = session.beginTransaction();
-            Query<BookingKoiDetail> query =session.createQuery("FROM BookingKoiDetail d WHERE d.booking.id = :bookingId", BookingKoiDetail.class);
+            Query<BookingKoiDetail> query = session.createQuery(
+                    "FROM BookingKoiDetail d "
+                            + "JOIN FETCH d.koiFarms "
+                            + "JOIN FETCH d.koi "
+                            + "JOIN FETCH d.booking "
+                            + "WHERE d.booking.id = :bookingId", BookingKoiDetail.class);
             query.setParameter("bookingId", bookingId);
-            bookingKoiDetails = query.list();
+            bookingKoiDetails = query.getResultList();
             t.commit();
         } catch (Exception e) {
             if (t != null) t.rollback();
@@ -78,7 +83,7 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
         try {
-            BookingKoiDetail student = session.get(BookingKoiDetail.class, studentID);
+            BookingKoiDetail student = (BookingKoiDetail) session.get(BookingKoiDetail.class,studentID);
             session.delete(student);
             t.commit();
             System.out.println("Delete saved");
@@ -97,7 +102,7 @@ public class BookingKoiDetailDAO implements IBookingKoiDetailDAO {
         // TODO Auto-generated method stub
         Session session = sessionFactory.openSession();
         try {
-            return session.get(BookingKoiDetail.class, studentID);
+            return (BookingKoiDetail) session.get(BookingKoiDetail.class,studentID);
         } catch (Exception e) {
             // TODO: handle exception
             throw e;

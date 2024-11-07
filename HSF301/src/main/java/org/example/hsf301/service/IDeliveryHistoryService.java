@@ -14,4 +14,6 @@ public interface IDeliveryHistoryService {
     void deleteDeliveryHistory(Long deliveryHistoryId);
 
     List<DeliveryHistory> getDeliveryHistory(Long bookingId);
+
+    DeliveryHistory getDeliveryHistoryById(Long deliveryHistoryId);
 }

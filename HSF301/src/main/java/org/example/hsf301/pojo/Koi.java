@@ -21,9 +21,10 @@ public class Koi {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         Long id;
-
         @Column(name = "koi_name")
         private String koiName;
+
+
 
         @Column(name = "origin")
         private String origin;

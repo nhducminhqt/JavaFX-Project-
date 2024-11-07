@@ -24,7 +24,7 @@ public class DeliveryHistoryDAO implements IDeliveryHistoryDAO{
         List<DeliveryHistory> students = null;
         Session session = sessionFactory.openSession();
         try {
-            students = session.createQuery("from delivery_history", DeliveryHistory.class).list();
+            students = session.createQuery("from DeliveryHistory", DeliveryHistory.class).list();
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("Error" + e.getMessage());

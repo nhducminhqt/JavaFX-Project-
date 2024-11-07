@@ -10,7 +10,9 @@ import org.example.hsf301.repo.DeliveryHistoryRepository;
 import org.example.hsf301.repo.IBookingRepository;
 import org.example.hsf301.repo.IDeliveryHistoryRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeliveryHistoryService implements IDeliveryHistoryService {
@@ -33,7 +35,7 @@ public class DeliveryHistoryService implements IDeliveryHistoryService {
         deliveryHistory.setBooking(bookings);
         deliveryHistory.setRoute(deliveryHistoryRequest.getRoute());
         deliveryHistory.setHealthKoiDescription(deliveryHistoryRequest.getHealthKoiDescription());
-        deliveryHistory.setCreatedDate(LocalDateTime.now());
+        deliveryHistory.setCreatedDate(LocalDate.now());
         deliveryHistoryRepo.save(deliveryHistory);
         return deliveryHistory;
     }
@@ -55,6 +57,18 @@ public class DeliveryHistoryService implements IDeliveryHistoryService {
 
     @Override
     public List<DeliveryHistory> getDeliveryHistory(Long bookingId) {
-        return deliveryHistoryRepo.getAll();
+        List<DeliveryHistory> list = deliveryHistoryRepo.getAll();
+        List<DeliveryHistory> result = new ArrayList<>();
+        for(DeliveryHistory deliveryHistory : list){
+            if(deliveryHistory.getBooking().getId().equals(bookingId)){
+                result.add(deliveryHistory);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public DeliveryHistory getDeliveryHistoryById(Long deliveryHistoryId) {
+        return deliveryHistoryRepo.findById(deliveryHistoryId);
     }
 }

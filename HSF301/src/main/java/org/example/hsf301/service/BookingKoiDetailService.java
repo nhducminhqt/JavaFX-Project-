@@ -1,30 +1,32 @@
 package org.example.hsf301.service;
 
 import org.example.hsf301.model.request.BookingKoiDetailRequest;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.pojo.BookingKoiDetail;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.pojo.Koi;
+import org.example.hsf301.pojo.*;
 import org.example.hsf301.repo.*;
 
 import java.util.List;
 
 public class BookingKoiDetailService implements IBookingKoiDetailService{
-    private final IBookingKoiDetailRepository bookingKoiDetailRepo;
-    private final IKoiRepository koiRepository;
-    private final IBookingRepository bookingRepository;
-    private final Account account;
-    public BookingKoiDetailService(String name, Account account) {
+    private IBookingKoiDetailRepository bookingKoiDetailRepo;
+    private IKoiRepository koiRepository;
+    private IBookingRepository bookingRepository;
+    private IKoiFarmService koiFarmService;
+
+    public BookingKoiDetailService(String name) {
         bookingKoiDetailRepo = new BookingKoiDetailRepository(name);
         koiRepository = new KoiRepository(name);
         bookingRepository = new BookingRepository(name);
-        this.account = account;
+        koiFarmService = new KoiFarmService(name);
     }
     @Override
     public BookingKoiDetail createKoiDetail(BookingKoiDetailRequest bookingKoiDetailRequest, Long bookingId) {
         Bookings bookings = bookingRepository.findById(bookingId);
         if(bookings == null) {
             throw new IllegalArgumentException("BookingKoiDetail with id " + bookingId + " not found");
+        }
+        KoiFarms koiFarms = koiFarmService.findById(bookingKoiDetailRequest.getFarmId());
+        if(koiFarms == null) {
+            throw new IllegalArgumentException("Koi Farm " + bookingKoiDetailRequest.getFarmId() + " not found");
         }
         Koi koi = koiRepository.findById(bookingKoiDetailRequest.getKoiId());
         if(koi == null) {
@@ -33,36 +35,38 @@ public class BookingKoiDetailService implements IBookingKoiDetailService{
         BookingKoiDetail bookingKoiDetail = new BookingKoiDetail();
         bookingKoiDetail.setBooking(bookings);
         bookingKoiDetail.setKoi(koi);
+        bookingKoiDetail.setKoiFarms(koiFarms);
         bookingKoiDetail.setQuantity(bookingKoiDetailRequest.getQuantity());
         bookingKoiDetail.setUnitPrice(bookingKoiDetailRequest.getUnitPrice());
         bookingKoiDetail.setTotalAmount(bookingKoiDetailRequest.getUnitPrice() * bookingKoiDetailRequest.getQuantity());
         bookingKoiDetailRepo.save(bookingKoiDetail);
 
-        float totalBookingAmount = bookingKoiDetail.getTotalAmount();
+        float totalBookingAmount = bookings.getTotalAmount();
         totalBookingAmount += bookingKoiDetail.getTotalAmount();
         bookings.setTotalAmount(totalBookingAmount);
+        bookings.setVatAmount((bookings.getTotalAmount()-bookings.getDiscountAmount())*bookings.getVat());
         bookings.setTotalAmountWithVAT(bookings.getTotalAmount() + bookings.getVatAmount() - bookings.getDiscountAmount());
-        bookingRepository.save(bookings);
+        bookingRepository.update(bookings);
 
         return bookingKoiDetail;
     }
 
     @Override
-    public void deletebyBookingKoiDetail(Long bookingKoiDetailId) {
+    public void deletebyBookingKoiDetail(Long bookingKoiDetailId,Account staff) {
         BookingKoiDetail bookingKoiDetail = bookingKoiDetailRepo.findById(bookingKoiDetailId);
         if(bookingKoiDetail == null) {
             throw new IllegalArgumentException("BookingKoiDetail with id " + bookingKoiDetailId + " not found");
         }
         Bookings bookings = bookingKoiDetail.getBooking();
-        float totalBookingAmount = bookingKoiDetail.getTotalAmount();
+        float totalBookingAmount = bookings.getTotalAmount();
         totalBookingAmount -= bookingKoiDetail.getTotalAmount();
         bookings.setTotalAmount(totalBookingAmount);
         bookings.setVatAmount(bookings.getVat()*(bookings.getTotalAmount()- bookings.getDiscountAmount()));
         bookings.setTotalAmountWithVAT(bookings.getTotalAmount() + bookings.getVatAmount() - bookings.getDiscountAmount());
-        bookings.setUpdatedBy(account);
+        bookings.setUpdatedBy(staff);
 
         bookingKoiDetailRepo.delete(bookingKoiDetailId);
-        bookingRepository.save(bookings);
+        bookingRepository.update(bookings);
 
     }
 
@@ -72,11 +76,7 @@ public class BookingKoiDetailService implements IBookingKoiDetailService{
     }
 
     @Override
-    public BookingKoiDetail updateBookingKoiDetail(Long id, BookingKoiDetailRequest bookingKoiDetailRequest) {
-        Koi koi = koiRepository.findById(bookingKoiDetailRequest.getKoiId());
-        if(koi == null) {
-            throw new IllegalArgumentException("Koi " + bookingKoiDetailRequest.getKoiId() + " not found");
-        }
+    public BookingKoiDetail updateBookingKoiDetail(Long id, BookingKoiDetailRequest bookingKoiDetailRequest,Account staff) {
         BookingKoiDetail bookingKoiDetail = bookingKoiDetailRepo.findById(id);
         if(bookingKoiDetail == null) {
             throw new IllegalArgumentException("BookingKoiDetail with id " + id + " not found");
@@ -85,7 +85,6 @@ public class BookingKoiDetailService implements IBookingKoiDetailService{
         float totalBookingAmount = bookings.getTotalAmount();
         totalBookingAmount -= bookingKoiDetail.getTotalAmount();
 
-        bookingKoiDetail.setKoi(koi);
         bookingKoiDetail.setQuantity(bookingKoiDetailRequest.getQuantity());
         bookingKoiDetail.setUnitPrice(bookingKoiDetailRequest.getUnitPrice());
         bookingKoiDetail.setTotalAmount(bookingKoiDetailRequest.getUnitPrice() * bookingKoiDetailRequest.getQuantity());
@@ -95,7 +94,7 @@ public class BookingKoiDetailService implements IBookingKoiDetailService{
         bookings.setTotalAmount(totalBookingAmount);
         bookings.setVatAmount(bookings.getVat()*(bookings.getTotalAmount()- bookings.getDiscountAmount()));
         bookings.setTotalAmountWithVAT(bookings.getTotalAmount() + bookings.getVatAmount() - bookings.getDiscountAmount());
-        bookings.setUpdatedBy(account);
+        bookings.setUpdatedBy(staff);
         bookingRepository.update(bookings);
 
 
