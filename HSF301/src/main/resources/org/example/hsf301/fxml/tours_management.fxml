@@ -23,16 +23,6 @@
           <Font size="24.0"/>
         </font>
       </Label>
-      <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 0 10 0 0;">
-        <Button fx:id="createButton" onAction="#onCreate" text="Create"
-          style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;"/>
-        <Button fx:id="readButton" onAction="#onRead" text="Read"
-          style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px;"/>
-        <Button fx:id="updateButton" onAction="#onUpdate" text="Update"
-          style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-size: 14px;"/>
-        <Button fx:id="deleteButton" onAction="#onDelete" text="Delete"
-          style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px;"/>
-      </HBox>
     </children>
   </HBox>
   <AnchorPane layoutY="69.0" prefHeight="781.0" prefWidth="1451.0">
