@@ -18,15 +18,10 @@ public class AdminMainController implements Initializable, Navigable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             // Set tours_home_page as the default content when the app starts
-            setContent("home", contentArea);
+            setContent("tours_management", contentArea);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void navigateHome() throws IOException {
-        navigateHome(contentArea);
     }
 
     @FXML
@@ -41,12 +36,12 @@ public class AdminMainController implements Initializable, Navigable {
 
     @FXML
     private void navigateBooking() throws IOException {
-        navigateBooking(contentArea);
+        navigateBookingManagement(contentArea);
     }
 
     @FXML
     private void navigateKoi() throws IOException {
-        navigateKoi(contentArea);
+        navigateKoiManagement(contentArea);
     }
 
     @FXML
@@ -66,7 +61,7 @@ public class AdminMainController implements Initializable, Navigable {
 
     @FXML
     private void navigateFarm() throws IOException {
-        navigateFarm(contentArea);
+        navigateFarmManagement(contentArea);
     }
 
 }

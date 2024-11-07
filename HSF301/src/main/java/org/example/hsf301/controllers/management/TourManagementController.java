@@ -1,4 +1,4 @@
-package org.example.hsf301.controllers;
+package org.example.hsf301.controllers.management;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -15,40 +15,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import lombok.RequiredArgsConstructor;
 import org.example.hsf301.pojo.Tours;
 import org.example.hsf301.service.TourService;
+import org.example.hsf301.utils.AppAlert;
 
-public class TourManagementController implements Initializable {
+@RequiredArgsConstructor
+public class TourManagementController extends Crud<Tours> implements Initializable {
 
     @FXML
     private GridPane tourGrid;
-    @FXML
-    private Button createButton;
-    @FXML
-    private Button readButton;
-    @FXML
-    private Button updateButton;
-    @FXML
-    private Button deleteButton;
 
     private final TourService tourService;
     private static final int COLUMNS = 4;
     private static final SimpleDateFormat DATE_FORMATTER =
         new SimpleDateFormat("MMM dd, yyyy HH:mm");
 
-    public TourManagementController(TourService tourService) {
-        this.tourService = tourService;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayTours();
-
-        // Add event handlers to the buttons
-        createButton.setOnAction(event -> onCreate());
-        readButton.setOnAction(event -> onRead());
-        updateButton.setOnAction(event -> onUpdate());
-        deleteButton.setOnAction(event -> onDelete());
     }
 
     private void displayTours() {
@@ -57,15 +42,13 @@ public class TourManagementController implements Initializable {
         int col = 0;
 
         for (Tours tour : tours) {
-            if ("active".equalsIgnoreCase(tour.getStatus())) {
-                VBox tourCard = createTourCard(tour);
-                tourGrid.add(tourCard, col, row);
+            VBox tourCard = createTourCard(tour);
+            tourGrid.add(tourCard, col, row);
 
-                col++;
-                if (col == COLUMNS) {
-                    col = 0;
-                    row++;
-                }
+            col++;
+            if (col == COLUMNS) {
+                col = 0;
+                row++;
             }
         }
     }
@@ -84,9 +67,9 @@ public class TourManagementController implements Initializable {
         // Image
         ImageView imageView = new ImageView();
         try {
-            String imagePath = tour.getTourImg(); // This is the relative path from your project resources
+            String imagePath = tour.getTourImg();
             Image image = new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream(imagePath))); // Load the image via the class loader
+                Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
             imageView.setImage(image);
             imageView.setFitWidth(320);
             imageView.setFitHeight(200);
@@ -119,10 +102,25 @@ public class TourManagementController implements Initializable {
         priceLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #e67e22;");
 
         Label availabilityLabel = new Label(
-            String.format("Available spots: %d/%d", tour.getRemaining(), tour.getMaxParticipants()));
+            String.format("Available spots: %d/%d", tour.getRemaining(),
+                          tour.getMaxParticipants()));
         availabilityLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #95a5a6;");
 
         priceBox.getChildren().addAll(priceLabel, availabilityLabel);
+
+        // CRUD Buttons
+        HBox crudButtons = new HBox(5);
+        crudButtons.setAlignment(Pos.CENTER);
+
+        Button editButton = createStyledButton("Edit", "#f39c12");
+        Button deleteButton = createStyledButton("Delete", "#e74c3c");
+        Button viewButton = createStyledButton("View", "#3498db");
+
+        editButton.setOnAction(event -> handleEdit(tour));
+        deleteButton.setOnAction(event -> handleDelete(tour));
+        viewButton.setOnAction(event -> handleView(tour));
+
+        crudButtons.getChildren().addAll(viewButton, editButton, deleteButton);
 
         // Book Button
         Button bookButton = new Button("Book Now");
@@ -140,7 +138,7 @@ public class TourManagementController implements Initializable {
             bookButton.setDisable(true);
         }
 
-        bookButton.setOnAction(event -> handleBooking(tour));
+        bookButton.setOnAction(event -> handleAdd(tour));
 
         // Add all elements to card
         card.getChildren().addAll(
@@ -149,41 +147,36 @@ public class TourManagementController implements Initializable {
             descriptionLabel,
             dateTimeLabel,
             priceBox,
+            crudButtons,
             bookButton
         );
 
         return card;
     }
 
-    private void handleBooking(Tours tour) {
+    @Override
+    public void handleAdd(Tours tour) {
         if (tour.getRemaining() > 0) {
             // TODO: Implement booking logic
             System.out.println("Booking tour: " + tour.getTourName());
         }
     }
 
-    // Event handler methods for the CRUD buttons
-    @FXML
-    private void onCreate() {
-        System.out.println("Create button clicked");
-        // TODO: Implement create tour logic
+    @Override
+    public void handleEdit(Tours tour) {
+        System.out.println("Editing tour: " + tour.getTourName());
+        // TODO: Implement edit logic
     }
 
-    @FXML
-    private void onRead() {
-        System.out.println("Read button clicked");
-        displayTours();  // Reload and display all tours
+    @Override
+    public void handleDelete(Tours tour) {
+        tourService.deleteTour(tour.getId());
+        AppAlert.showAlert("Success", "Tour deleted successfully");
     }
 
-    @FXML
-    private void onUpdate() {
-        System.out.println("Update button clicked");
-        // TODO: Implement update tour logic
-    }
-
-    @FXML
-    private void onDelete() {
-        System.out.println("Delete button clicked");
-        // TODO: Implement delete tour logic
+    @Override
+    public void handleView(Tours tour) {
+        System.out.println("Viewing tour: " + tour.getTourName());
+        // TODO: Implement view logic
     }
 }

@@ -1,4 +1,4 @@
-package org.example.hsf301.controllers;
+package org.example.hsf301.controllers.management;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -14,12 +14,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.pojo.Account;
 import org.example.hsf301.pojo.Bookings;
+import org.example.hsf301.pojo.KoiFarms;
 import org.example.hsf301.service.IBookingService;
+import org.example.hsf301.utils.AppAlert;
 
 @RequiredArgsConstructor
-public class BookingController implements Initializable {
+public class BookingManagementController implements Initializable {
 
     private final IBookingService bookingService;
 
@@ -30,12 +31,12 @@ public class BookingController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        displayBookings(LoginController.account);
+        displayBookings();
     }
 
-    private void displayBookings(Account account) {
+    private void displayBookings() {
         // Retrieve the list of bookings by account ID
-        List<Bookings> bookings = bookingService.findByAccountID(account.getUsername());
+        List<Bookings> bookings = bookingService.findAll();
         if (bookings.isEmpty()) {
             Label emptyLabel = new Label("No bookings found");
             emptyLabel.setStyle("-fx-text-fill: red; -fx-font-size: 16px; -fx-font-weight: bold;");
@@ -112,6 +113,20 @@ public class BookingController implements Initializable {
 
             paymentInfoBox.getChildren().addAll(paymentStatusLabel, amountLabel, paymentMethodLabel);
 
+            // CRUD Buttons
+            HBox crudButtons = new HBox(5);
+            crudButtons.setAlignment(Pos.CENTER);
+
+            Button editButton = createStyledButton("Edit", "#f39c12");
+            Button deleteButton = createStyledButton("Delete", "#e74c3c");
+            Button viewButton = createStyledButton("View", "#3498db");
+
+            editButton.setOnAction(event -> handleEdit(booking));
+            deleteButton.setOnAction(event -> handleDelete(booking));
+            viewButton.setOnAction(event -> handleView(booking));
+
+            crudButtons.getChildren().addAll(viewButton, editButton, deleteButton);
+
             // Add all elements to card
             card.getChildren().addAll(
                 titleBox,
@@ -126,5 +141,33 @@ public class BookingController implements Initializable {
         }
 
         return card;
+    }
+
+    private void handleEdit(Bookings bookings) {
+        System.out.println("Editing booking: " + bookings.getId());
+        // TODO: Implement edit logic
+    }
+
+    private void handleDelete(Bookings bookings) {
+        bookingService.delete(bookings.getId());
+        AppAlert.showAlert("Success", "Tour deleted successfully");
+    }
+
+    private void handleView(Bookings bookings) {
+        System.out.println("Viewing bookings: " + bookings.getId());
+        // TODO: Implement view logic
+    }
+
+    private Button createStyledButton(String text, String color) {
+        Button button = new Button(text);
+        button.setStyle(
+            String.format("-fx-background-color: %s; " +
+                              "-fx-text-fill: white; " +
+                              "-fx-font-size: 12px; " +
+                              "-fx-padding: 5 10; " +
+                              "-fx-cursor: hand; " +
+                              "-fx-background-radius: 3;", color)
+        );
+        return button;
     }
 }
