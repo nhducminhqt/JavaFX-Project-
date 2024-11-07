@@ -20,9 +20,9 @@ public class BookingTourDetail {
     @JoinColumn(name = "booking_id") //name same foreign key mapping
     private Bookings booking;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "tour_id")
-    private Tours tourId;
+    private Tours tour;
 
     @Column(name = "participant")
     private int participant;
@@ -30,9 +30,9 @@ public class BookingTourDetail {
     @Column(name = "total_amount")
     private float totalAmount;
 
-    public BookingTourDetail(Bookings booking, Tours tourId, int participant) {
+    public BookingTourDetail(Bookings booking, Tours tour, int participant) {
         this.booking = booking;
-        this.tourId = tourId;
+        this.tour = tour;
         this.participant = participant;
     }
 }

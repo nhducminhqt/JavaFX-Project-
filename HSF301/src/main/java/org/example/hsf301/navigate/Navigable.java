@@ -19,6 +19,8 @@ import org.example.hsf301.controllers.management.KoiManagementController;
 import org.example.hsf301.controllers.management.TourManagementController;
 import org.example.hsf301.service.AccountService;
 import org.example.hsf301.service.BookingService;
+import org.example.hsf301.service.BookingTourService;
+import org.example.hsf301.service.IBookingTourService;
 import org.example.hsf301.service.KoiFarmService;
 import org.example.hsf301.service.KoiService;
 import org.example.hsf301.service.TourService;
@@ -134,7 +136,8 @@ public interface Navigable {
         //preload data when customer login
         if (page.equals("tours_home_page")) {
             TourService tourService = new TourService(ResourcePaths.HIBERNATE_CONFIG);
-            TourController tourController = new TourController(tourService);
+            IBookingTourService bookingTourService = new BookingTourService(ResourcePaths.HIBERNATE_CONFIG);
+            TourController tourController = new TourController(tourService, bookingTourService);
             loader.setController(tourController);
         }
 
