@@ -1,5 +1,6 @@
 package org.example.hsf301.service;
 
+import org.example.hsf301.enums.CCSTATUS;
 import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.DeliveryRequest;
 import org.example.hsf301.pojo.Account;
@@ -31,9 +32,19 @@ public class DeliveryService implements IDeliveryService{
         Bookings bookings = bookingRepo.findById(bookingId);
         if(bookings == null){return null;}
         if(bookings.getDelivery()!=null) return null;
-        bookings.setPaymentStatus(PaymentStatus.COMPLETE);
-        bookings.setPaymentDate(LocalDate.now());
-        bookingRepo.update(bookings);
+        if(deliveryRequest.getStatus().equals(CCSTATUS.COMPLETED)) {
+            bookings.setPaymentStatus(PaymentStatus.COMPLETE);
+            bookings.setPaymentDate(LocalDate.now());
+            bookingRepo.update(bookings);
+        }
+        else {
+            if(deliveryRequest.getReason().isEmpty()){
+                throw new IllegalArgumentException("Cannot add cancelled delivery without reason");
+            }
+            bookings.setPaymentStatus(PaymentStatus.CANCELLED);
+//            bookings.setPaymentDate(LocalDate.now());
+            bookingRepo.update(bookings);
+        }
 
         delivery.setDeliveryStaff(staff);
         delivery.setBooking(bookings);
@@ -56,7 +67,7 @@ public class DeliveryService implements IDeliveryService{
         delivery.setReason(deliveryRequest.getReason());
         delivery.setCustomerName(deliveryRequest.getCustomerName());
         delivery.setHealthKoiDescription(deliveryRequest.getHealthKoiDescription());
-        delivery.setStatus(deliveryRequest.getStatus());
+//        delivery.setStatus(deliveryRequest.getStatus());
         delivery.setReceiveDate(deliveryRequest.getReceiveDate());
         deliveryRepo.update(delivery);
         return delivery;
@@ -71,6 +82,17 @@ public class DeliveryService implements IDeliveryService{
     @Override
     public Delivery getDelivery(Long deliveryId) {
         return  deliveryRepo.findById(deliveryId);
+    }
+
+    @Override
+    public Delivery getDeliveryByBookingid(Long bookingId) {
+        List<Delivery> deliveries = deliveryRepo.getAll();
+        for(Delivery delivery : deliveries){
+            if(delivery.getBooking().getId() == bookingId){
+                return delivery;
+            }
+        }
+        return null;
     }
 
     @Override

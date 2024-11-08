@@ -16,12 +16,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.hsf301.pojo.Tours;
 import org.example.hsf301.service.TourService;
 import org.example.hsf301.utils.AppAlert;
 
+@Slf4j
 @RequiredArgsConstructor
-public class TourManagementController extends Crud<Tours> implements Initializable {
+public class TourManagementController implements Initializable {
 
     @FXML
     private GridPane tourGrid;
@@ -57,7 +59,7 @@ public class TourManagementController extends Crud<Tours> implements Initializab
         VBox card = new VBox(10);
         card.setMaxWidth(300);
         card.setPrefWidth(300);
-        card.setStyle("-fx-background-color: white; " +
+        card.setStyle("-fx-background-color: #FFFFFF; " +
                           "-fx-border-color: #e0e0e0; " +
                           "-fx-border-radius: 8; " +
                           "-fx-background-radius: 8; " +
@@ -109,8 +111,6 @@ public class TourManagementController extends Crud<Tours> implements Initializab
         priceBox.getChildren().addAll(priceLabel, availabilityLabel);
 
         // CRUD Buttons
-        HBox crudButtons = new HBox(5);
-        crudButtons.setAlignment(Pos.CENTER);
 
         Button editButton = createStyledButton("Edit", "#f39c12");
         Button deleteButton = createStyledButton("Delete", "#e74c3c");
@@ -120,7 +120,8 @@ public class TourManagementController extends Crud<Tours> implements Initializab
         deleteButton.setOnAction(event -> handleDelete(tour));
         viewButton.setOnAction(event -> handleView(tour));
 
-        crudButtons.getChildren().addAll(viewButton, editButton, deleteButton);
+        HBox crudButtons = new HBox(5, viewButton, editButton, deleteButton);
+        crudButtons.setAlignment(Pos.CENTER);
 
         // Book Button
         Button bookButton = new Button("Book Now");
@@ -154,7 +155,6 @@ public class TourManagementController extends Crud<Tours> implements Initializab
         return card;
     }
 
-    @Override
     public void handleAdd(Tours tour) {
         if (tour.getRemaining() > 0) {
             // TODO: Implement booking logic
@@ -162,21 +162,36 @@ public class TourManagementController extends Crud<Tours> implements Initializab
         }
     }
 
-    @Override
     public void handleEdit(Tours tour) {
         System.out.println("Editing tour: " + tour.getTourName());
         // TODO: Implement edit logic
     }
 
-    @Override
     public void handleDelete(Tours tour) {
-        tourService.deleteTour(tour.getId());
-        AppAlert.showAlert("Success", "Tour deleted successfully");
+       try{
+           tourService.deleteTour(tour.getId());
+           AppAlert.showAlert("Success", "Tour deleted successfully");
+       } catch (Exception e) {
+           log.error("Error deleting tour", e);
+           AppAlert.showAlert("Error", "An error occurred while deleting the tour");
+       }
     }
 
-    @Override
     public void handleView(Tours tour) {
         System.out.println("Viewing tour: " + tour.getTourName());
         // TODO: Implement view logic
+    }
+
+    private Button createStyledButton(String text, String color) {
+        Button button = new Button(text);
+        button.setStyle(
+            String.format("-fx-background-color: %s; " +
+                              "-fx-text-fill: white; " +
+                              "-fx-font-size: 12px; " +
+                              "-fx-padding: 5 10; " +
+                              "-fx-cursor: hand; " +
+                              "-fx-background-radius: 3;", color)
+        );
+        return button;
     }
 }

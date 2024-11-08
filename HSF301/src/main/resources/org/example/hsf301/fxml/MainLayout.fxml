@@ -89,7 +89,7 @@
                       <!--  xem booking koi (read only) do staff tao -> get service len (nhan vao account) -->
                       <!--    View purchase -> show  bookings with status (PENDING|SHIPPING|CANCEL) ->
                        click to view detail show booking koi detail (fetch via booking id) -->
-                      <Button mnemonicParsing="false" onAction="#navigateBooking" prefHeight="60.0" prefWidth="153.0" style="-fx-background-color: transperant; -fx-font-weight: bold; -fx-font-size: 18;" text="Purchased Tour" textFill="WHITE">
+                      <Button mnemonicParsing="false" onAction="#navigatePurchasedTour" prefHeight="60.0" prefWidth="153.0" style="-fx-background-color: transperant; -fx-font-weight: bold; -fx-font-size: 18;" text="Purchased Tour" textFill="WHITE">
                            <font>
                               <Font size="1.0" />
                            </font>

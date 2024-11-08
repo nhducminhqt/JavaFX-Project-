@@ -11,6 +11,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.example.hsf301.enums.ERole;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "account")
 @Data
@@ -37,6 +39,7 @@ public class Account {
 
     @Column(name = "lastName",nullable = false,length = 20)
     private String lastName;
+
 
 
 }

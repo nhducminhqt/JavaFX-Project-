@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IKoiService {
     // Save a new Koi record
-    Koi addKoi(KoiRequest koi);
+    Koi save(KoiRequest koi);
 
     // Find all Koi records
     List<Koi> findAll();

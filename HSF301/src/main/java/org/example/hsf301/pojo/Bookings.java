@@ -2,6 +2,7 @@ package org.example.hsf301.pojo;
 
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.hsf301.enums.BookingType;
@@ -10,9 +11,11 @@ import org.example.hsf301.enums.PaymentStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import lombok.ToString;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -26,7 +29,7 @@ public class Bookings {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 
@@ -66,19 +69,22 @@ public class Bookings {
 
     //here mapping quotation table
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
-    private Set<Quotations> quotations;
+    private List<Quotations> quotations;
 
     //mapped By same name with ManyToOne annotation
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
-    private Set<BookingTourDetail> bookingTourDetails;
+    private List<BookingTourDetail> bookingTourDetails;
+//
+//    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//    private Set<BookingKoiDetail> bookingKoiDetails;
 
     @OneToOne(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Deposit deposit;
 
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
-    private Set<DeliveryHistory> deliveryHistory;
+    private List<DeliveryHistory> deliveryHistory;
 
-    @OneToOne(mappedBy = "booking",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "booking",cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Delivery delivery;
 
     @Column(name = "created_at")
@@ -87,11 +93,11 @@ public class Bookings {
     @Column(name = "updated_at")
     private LocalDateTime updatedDate;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
     private Account createdBy;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_by")
     private Account updatedBy;
 
