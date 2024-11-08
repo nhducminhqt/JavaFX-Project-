@@ -2,7 +2,6 @@ package org.example.hsf301.service;
 
 import org.example.hsf301.enums.BookingType;
 import org.example.hsf301.enums.CCSTATUS;
-import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.BookingKoiDetailRequest;
 import org.example.hsf301.model.request.BookingKoiRequest;
@@ -19,8 +18,8 @@ public class BookingKoiService implements IBookingKoiService {
     private final IKoiFarmsRepository koiFarmsRepository;
     private final IKoiRepository koiRepository;
     private final IBookingKoiDetailRepository bookingKoiDetailRepository;
-
-    public BookingKoiService(String name) {
+    public BookingKoiService(String name)
+    {
         bookingRepository = new BookingRepository(name);
         koiFarmsRepository = new KoiFarmsRepository(name);
         koiRepository = new KoiRepository(name);
@@ -29,10 +28,10 @@ public class BookingKoiService implements IBookingKoiService {
     }
 
     @Override
-    public Bookings createKoiBooking(BookingKoiRequest request, Long bookingTourId, Account staff) {
+    public Bookings createKoiBooking(BookingKoiRequest request, Long bookingTourId,Account staff) {
 
         Bookings bookingTour = bookingRepository.findById(bookingTourId);
-        if (bookingTour == null || bookingTour.getBookingType() == BookingType.KoiPurchase) {
+        if(bookingTour==null || bookingTour.getBookingType()==BookingType.KoiPurchase){
             throw new IllegalArgumentException("Bookings not found");
         }
         Bookings booking = new Bookings();

@@ -65,7 +65,7 @@ public class BookingTourDetailDAO implements IBookingTourDetailDAO {
             Query<BookingTourDetail> query = session.createQuery(
                     "FROM BookingTourDetail d "
                             + "JOIN FETCH d.booking "
-                            + "JOIN FETCH d.tour "
+                            + "JOIN FETCH d.tourId "
                             + "WHERE d.booking.id = :bookingId", BookingTourDetail.class);
             query.setParameter("bookingId", bookingId);
             bookingTourDetails = query.getResultList();

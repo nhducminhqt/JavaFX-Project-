@@ -42,10 +42,13 @@ public interface Navigable {
     default void navigateBookingManagement(StackPane contentArea) throws IOException {
         setContent("bookings_management", contentArea);
     }
+    default void navigateQuotationSaleStaff(StackPane contentArea) throws IOException {
+        setContent("Quotation", contentArea);
+    }
 
     // Default method to navigate to the Settings page
     default void navigateSetting(StackPane contentArea) throws IOException {
-        setContent("setting", contentArea);
+        setContent("quotationManagement", contentArea);
     }
 
     default void navigateKoi(StackPane contentArea) throws IOException {

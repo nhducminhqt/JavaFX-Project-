@@ -4,6 +4,7 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.hsf301.enums.ApproveStatus;
 
 import java.time.LocalDateTime;
 
@@ -30,14 +31,17 @@ public class Quotations {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "is_approve")
-    private String isApprove;
+    @Column(name = "status")
+    private ApproveStatus status;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//    @Column(name="is_Confirm",nullable = false )
+//    private boolean confirm = false;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     @JoinColumn(name = "approve_by")
     private Account approveBy;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
     private Account createdBy;
 
