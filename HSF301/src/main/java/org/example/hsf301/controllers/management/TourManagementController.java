@@ -23,7 +23,7 @@ import org.example.hsf301.utils.AppAlert;
 
 @Slf4j
 @RequiredArgsConstructor
-public class TourManagementController extends Crud<Tours> implements Initializable {
+public class TourManagementController implements Initializable {
 
     @FXML
     private GridPane tourGrid;
@@ -155,7 +155,6 @@ public class TourManagementController extends Crud<Tours> implements Initializab
         return card;
     }
 
-    @Override
     public void handleAdd(Tours tour) {
         if (tour.getRemaining() > 0) {
             // TODO: Implement booking logic
@@ -163,13 +162,11 @@ public class TourManagementController extends Crud<Tours> implements Initializab
         }
     }
 
-    @Override
     public void handleEdit(Tours tour) {
         System.out.println("Editing tour: " + tour.getTourName());
         // TODO: Implement edit logic
     }
 
-    @Override
     public void handleDelete(Tours tour) {
        try{
            tourService.deleteTour(tour.getId());
@@ -180,9 +177,21 @@ public class TourManagementController extends Crud<Tours> implements Initializab
        }
     }
 
-    @Override
     public void handleView(Tours tour) {
         System.out.println("Viewing tour: " + tour.getTourName());
         // TODO: Implement view logic
+    }
+
+    private Button createStyledButton(String text, String color) {
+        Button button = new Button(text);
+        button.setStyle(
+            String.format("-fx-background-color: %s; " +
+                              "-fx-text-fill: white; " +
+                              "-fx-font-size: 12px; " +
+                              "-fx-padding: 5 10; " +
+                              "-fx-cursor: hand; " +
+                              "-fx-background-radius: 3;", color)
+        );
+        return button;
     }
 }
