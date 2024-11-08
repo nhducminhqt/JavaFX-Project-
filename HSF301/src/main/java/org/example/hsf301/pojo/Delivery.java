@@ -47,7 +47,7 @@ public class Delivery {
     @JoinColumn(name = "delivery_staff_id")
     private Account deliveryStaff;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id",unique = true)
     private Bookings booking;
 }

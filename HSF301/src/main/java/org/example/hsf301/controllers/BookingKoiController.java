@@ -1,17 +1,22 @@
 package org.example.hsf301.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.pojo.Account;
@@ -101,13 +106,48 @@ public class BookingKoiController implements Initializable {
 
             HBox paymentBox = new HBox(15);
             paymentBox.setAlignment(Pos.CENTER);
-            if(booking.getPaymentStatus().equals(PaymentStatus.PROCESSING)){
-                Button purchaseButton = new Button("Purchase Now!");
+            if(booking.getPaymentStatus().equals(PaymentStatus.SHIPPING)) {
+                Button purchaseButton = new Button("View Delivery History!");
                 purchaseButton.setStyle("-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
-                Button cancelButton = new Button("Cancel");
-                cancelButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold");
-                paymentBox.getChildren().addAll(purchaseButton, cancelButton);
+                purchaseButton.setOnAction((event) -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/hsf301/fxml/DeliveryHistory.fxml"));
+                    Parent root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    DeliveryHistoryController bookingKoiDetailController = loader.getController();
+                    bookingKoiDetailController.setBookingId(booking.getId());
+                    bookingKoiDetailController.loadData();
+                    Stage primaryStage = new Stage();
+                    primaryStage.setScene(new Scene(root));
+                    primaryStage.show();
+                });
+                paymentBox.getChildren().addAll(purchaseButton);
             }
+               else if(booking.getPaymentStatus().equals(PaymentStatus.COMPLETE)||booking.getPaymentStatus().equals(PaymentStatus.CANCELLED)) {
+                Button cancelButton = new Button("View Delivery");
+                cancelButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold");
+                cancelButton.setOnAction((event) -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/hsf301/fxml/deliverycheckout.fxml"));
+                    Parent root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    DeliveryCheckout bookingKoiDetailController = loader.getController();
+                    bookingKoiDetailController.setBookings(booking);
+                    Stage primaryStage = new Stage();
+                    primaryStage.setScene(new Scene(root));
+                    primaryStage.show();
+                });
+                paymentBox.getChildren().addAll(cancelButton);
+            }
+//                    paymentBox.getChildren().addAll(purchaseButton, cancelButton);
+
+
 
             paymentMethodLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #34495e;");
 
