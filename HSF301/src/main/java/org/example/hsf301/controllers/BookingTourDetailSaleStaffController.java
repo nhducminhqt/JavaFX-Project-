@@ -67,8 +67,8 @@ public class BookingTourDetailSaleStaffController implements Initializable {
         bookingid.setCellValueFactory(cellData -> cellData.getValue().getBooking() != null
                 ? new SimpleStringProperty(String.valueOf(cellData.getValue().getBooking().getId()))
                 : new SimpleStringProperty("N/A"));
-        tourid.setCellValueFactory(cellData -> cellData.getValue().getTourId() != null
-                ? new SimpleStringProperty(String.valueOf(cellData.getValue().getTourId().getId()))
+        tourid.setCellValueFactory(cellData -> cellData.getValue().getTour() != null
+                ? new SimpleStringProperty(String.valueOf(cellData.getValue().getTour().getId()))
                 : new SimpleStringProperty("N/A"));
         tblBookingTour.setItems(tableModel);
 

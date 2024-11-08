@@ -46,7 +46,7 @@ public class NavigateUtil {
             Scene scene = new Scene(root, sceneWidth, sceneHeight);
             newStage.getIcons().add(new Image(
                 Objects.requireNonNull(NavigateUtil.class.getResource(ResourcePaths.URL_KOI_ICON_LOGO)).toExternalForm()));
-            newStage.setResizable(false);
+            newStage.setResizable(true);
             newStage.setScene(scene);
 
             // Set the title, default to "Application Title" if not specified
