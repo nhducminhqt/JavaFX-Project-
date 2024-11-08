@@ -10,57 +10,57 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.controllers.BookingKoiListStaffController">
+<AnchorPane prefHeight="850.0" prefWidth="1450.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.controllers.BookingKoiListStaffController">
    <children>
-      <TableView fx:id="tbData" layoutY="46.0" prefHeight="317.0" prefWidth="1000.0">
+      <TableView fx:id="tbData" layoutY="46.0" prefHeight="429.0" prefWidth="1450.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="46.666688323020935" text="ID" />
-            <TableColumn fx:id="bookingDate" prefWidth="93.0" text="Booking Date" />
-            <TableColumn fx:id="vat" prefWidth="76.0" text="VAT" />
-            <TableColumn fx:id="discountAmount" prefWidth="109.0" text="Discount Amount" />
-            <TableColumn fx:id="paymentMethod" prefWidth="130.0" text="Payment Method" />
-            <TableColumn fx:id="status" prefWidth="96.0" text="Status" />
-            <TableColumn fx:id="totalAmount" prefWidth="124.0" text="Total Amount" />
-            <TableColumn fx:id="totalAmountVAT" prefWidth="121.0" text="Total Amount VAT" />
-            <TableColumn fx:id="paymentDate" prefWidth="111.0" text="Payment Date" />
-            <TableColumn fx:id="account" prefWidth="92.0" text="Account Id" />
+            <TableColumn fx:id="bookingDate" prefWidth="129.9999656677246" text="Booking Date" />
+            <TableColumn fx:id="vat" prefWidth="109.99998474121094" text="VAT" />
+            <TableColumn fx:id="discountAmount" prefWidth="136.0" text="Discount Amount" />
+            <TableColumn fx:id="paymentMethod" prefWidth="163.99996948242188" text="Payment Method" />
+            <TableColumn fx:id="status" prefWidth="120.66668701171875" text="Status" />
+            <TableColumn fx:id="totalAmount" prefWidth="135.33319091796875" text="Total Amount" />
+            <TableColumn fx:id="totalAmountVAT" prefWidth="221.33343505859375" text="Total Amount VAT" />
+            <TableColumn fx:id="paymentDate" prefWidth="173.333251953125" text="Payment Date" />
+            <TableColumn fx:id="account" prefWidth="216.66668701171875" text="Account Id" />
          </columns>
       </TableView>
-      <Label layoutX="426.0" layoutY="7.0" prefHeight="23.0" prefWidth="158.0" text="Booking Koi List">
+      <Label layoutX="646.0" layoutY="8.0" prefHeight="23.0" prefWidth="158.0" text="Booking Koi List">
          <font>
             <Font name="Bodoni MT" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="396.0" text="Payment Method">
+      <Label layoutX="156.0" layoutY="537.0" text="Payment Method">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="522.0" layoutY="396.0" text="VAT">
+      <Label layoutX="622.0" layoutY="537.0" text="VAT">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="btnViewDeliveryHistory" layoutX="79.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnViewDeliveryHistoryAction" prefHeight="41.0" prefWidth="141.0" text="View Delivery History" />
-      <Button fx:id="btnUpdate" layoutX="307.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnUpdateAction" prefHeight="41.0" prefWidth="119.0" text="Update" />
-      <TextField fx:id="txtVAT" layoutX="661.0" layoutY="394.0" prefHeight="25.0" prefWidth="189.0" />
-      <ComboBox fx:id="txtPaymentMethod" layoutX="196.0" layoutY="394.0" prefHeight="25.0" prefWidth="189.0" />
-      <Label layoutX="55.0" layoutY="441.0" text="Discount Amount">
+      <Button fx:id="btnViewDeliveryHistory" layoutX="158.0" layoutY="749.0" mnemonicParsing="false" onAction="#btnViewDeliveryHistoryAction" prefHeight="41.0" prefWidth="141.0" text="View Delivery History" />
+      <Button fx:id="btnUpdate" layoutX="386.0" layoutY="749.0" mnemonicParsing="false" onAction="#btnUpdateAction" prefHeight="41.0" prefWidth="119.0" text="Update" />
+      <TextField fx:id="txtVAT" layoutX="761.0" layoutY="535.0" prefHeight="25.0" prefWidth="189.0" />
+      <ComboBox fx:id="txtPaymentMethod" layoutX="296.0" layoutY="535.0" prefHeight="25.0" prefWidth="189.0" />
+      <Label layoutX="155.0" layoutY="594.0" text="Discount Amount">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtDiscountAmount" layoutX="196.0" layoutY="439.0" prefHeight="25.0" prefWidth="189.0" />
-      <Button fx:id="btnViewDetail" layoutX="553.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnViewDetailAction" prefHeight="41.0" prefWidth="119.0" text="View detail" />
-      <DatePicker fx:id="txtBookingDate" layoutX="661.0" layoutY="439.0" prefHeight="25.0" prefWidth="189.0" />
-      <Label layoutX="522.0" layoutY="441.0" text="Booking Date">
+      <TextField fx:id="txtDiscountAmount" layoutX="296.0" layoutY="590.0" prefHeight="25.0" prefWidth="189.0" />
+      <Button fx:id="btnViewDetail" layoutX="632.0" layoutY="749.0" mnemonicParsing="false" onAction="#btnViewDetailAction" prefHeight="41.0" prefWidth="119.0" text="View detail" />
+      <DatePicker fx:id="txtBookingDate" layoutX="761.0" layoutY="590.0" prefHeight="25.0" prefWidth="189.0" />
+      <Label layoutX="622.0" layoutY="592.0" text="Booking Date">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="btnCancel" layoutX="801.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="41.0" prefWidth="119.0" text="Search" />
-      <ComboBox fx:id="txtStatus" layoutX="196.0" layoutY="485.0" prefHeight="25.0" prefWidth="189.0" />
-      <Label fx:id="Status" layoutX="56.0" layoutY="487.0" text="Status">
+      <Button fx:id="btnCancel" layoutX="880.0" layoutY="749.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="41.0" prefWidth="119.0" text="Search" />
+      <ComboBox fx:id="txtStatus" layoutX="296.0" layoutY="649.0" prefHeight="25.0" prefWidth="189.0" />
+      <Label fx:id="Status" layoutX="155.0" layoutY="651.0" text="Status">
          <font>
             <Font size="15.0" />
          </font>

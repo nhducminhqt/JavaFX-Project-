@@ -72,6 +72,6 @@
         </AnchorPane>
       </children>
     </VBox>
-    <StackPane fx:id="contentArea" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <StackPane fx:id="contentArea" layoutX="249.0" layoutY="1.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
   </children>
 </AnchorPane>

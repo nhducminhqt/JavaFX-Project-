@@ -163,4 +163,15 @@ public class BookingKoiService implements IBookingKoiService {
         }
         return bookingKoiList;
     }
+    @Override
+    public List<Bookings> getAllTourBookingStatus(PaymentStatus paymentStatus) {
+        List<Bookings> bookings = bookingRepository.findAll();
+        List<Bookings> bookingKoiList = new ArrayList<>();
+        for (Bookings booking : bookings) {
+            if (booking.getBookingType() == BookingType.TourBooking&& booking.getPaymentStatus().equals(paymentStatus)) {
+                bookingKoiList.add(booking);
+            }
+        }
+        return bookingKoiList;
+    }
 }

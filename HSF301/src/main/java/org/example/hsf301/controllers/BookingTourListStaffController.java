@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.enums.BookingType;
 import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.BookingKoiRequest;
@@ -22,6 +23,7 @@ import org.example.hsf301.service.IBookingKoiService;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -59,6 +61,8 @@ public class BookingTourListStaffController implements Initializable {
     private TextField txtDiscountAmount;
     @FXML
     private TextField txtVAT;
+    @FXML
+    private ComboBox<PaymentStatus> txtStatus;
     private IBookingKoiService bookingKoiService;
     private ObservableList<Bookings> tableModel;
     private IAccountService accountService;
@@ -70,6 +74,8 @@ public class BookingTourListStaffController implements Initializable {
     @FXML
     public void btnSearchAccountAction(){
 
+        tableModel = FXCollections.observableArrayList(bookingKoiService.getAllTourBookingStatus(txtStatus.getValue()));
+        tbData.setItems(tableModel);
     }
     @FXML
     public void btnCreateBookingKoiAction(){
@@ -115,6 +121,7 @@ public class BookingTourListStaffController implements Initializable {
 
             }
         });
+        txtStatus.setItems(FXCollections.observableArrayList(PaymentStatus.values()));
         List<Account> customers = accountService.findAllCustomers();
         txtAccount.setItems(FXCollections.observableArrayList(customers));
         txtPaymentMethod.setItems(FXCollections.observableArrayList(PaymentMethod.values()));
