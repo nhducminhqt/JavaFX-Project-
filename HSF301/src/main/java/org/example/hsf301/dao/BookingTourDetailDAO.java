@@ -3,11 +3,13 @@ package org.example.hsf301.dao;
 import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.BookingTourDetail;
 import org.example.hsf301.pojo.TourDetail;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookingTourDetailDAO implements IBookingTourDetailDAO {
@@ -51,6 +53,28 @@ public class BookingTourDetailDAO implements IBookingTourDetailDAO {
             session.close();
         }
 
+    }
+
+    @Override
+    public List<BookingTourDetail> findByBookingId(Long bookingId) {
+        List<BookingTourDetail> bookingTourDetails = new ArrayList<BookingTourDetail>();
+        Session session = sessionFactory.openSession();
+        Transaction t =null;
+        try {
+            t = session.beginTransaction();
+            Query<BookingTourDetail> query = session.createQuery(
+                    "FROM BookingTourDetail d "
+                            + "JOIN FETCH d.booking "
+                            + "JOIN FETCH d.tourId "
+                            + "WHERE d.booking.id = :bookingId", BookingTourDetail.class);
+            query.setParameter("bookingId", bookingId);
+            bookingTourDetails = query.getResultList();
+            t.commit();
+        } catch (Exception e) {
+            if (t != null) t.rollback();
+            e.printStackTrace();
+        }
+        return bookingTourDetails;
     }
 
     @Override

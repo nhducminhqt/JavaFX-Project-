@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,19 +11,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.fxml.Delivery">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0"
+            xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.hsf301.controllers.DeliveryController">
    <children>
-      <TableView layoutX="-1.0" layoutY="60.0" prefHeight="206.0" prefWidth="1000.0">
+      <TableView fx:id="tbData" layoutX="-1.0" layoutY="60.0" prefHeight="206.0" prefWidth="1000.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="124.00003051757812" text="Customer Name" />
-            <TableColumn prefWidth="124.00003051757812" text="Receive Date" />
-            <TableColumn prefWidth="165.3333740234375" text="Health Koi Description" />
-            <TableColumn prefWidth="103.33331298828125" text="Address" />
-            <TableColumn prefWidth="105.33331298828125" text="Status" />
-            <TableColumn prefWidth="113.3333740234375" text="Reason" />
-            <TableColumn prefWidth="104.6666259765625" text="Amount" />
-            <TableColumn prefWidth="81.3333740234375" text="Booking Id" />
+          <TableColumn fx:id="id" prefWidth="45.999969482421875" text="Id" />
+          <TableColumn fx:id="customerName" prefWidth="120.66665649414062" text="Customer Name" />
+            <TableColumn fx:id="receiveDate" prefWidth="102.0" text="Receive Date" />
+            <TableColumn fx:id="healthKoiDescription" prefWidth="145.33331298828125" text="Health Koi Description" />
+            <TableColumn fx:id="address" prefWidth="100.6666259765625" text="Address" />
+            <TableColumn fx:id="status" prefWidth="94.00006103515625" text="Status" />
+            <TableColumn fx:id="reason" prefWidth="131.33331298828125" text="Reason" />
+            <TableColumn fx:id="amount" prefWidth="84.6666259765625" text="Amount" />
+            <TableColumn fx:id="bookingId" prefWidth="82.6666259765625" text="Booking Id" />
+            <TableColumn fx:id="staff" prefWidth="90.6666259765625" text="Staff" />
         </columns>
       </TableView>
       <Label layoutX="460.0" layoutY="14.0" prefHeight="30.0" prefWidth="77.0" text="Delivery" textAlignment="CENTER">
@@ -30,10 +35,9 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="121.0" layoutY="622.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" text="Add" />
-      <TextField layoutX="201.0" layoutY="314.0" prefHeight="25.0" prefWidth="278.0" />
-      <TextField layoutX="698.0" layoutY="376.0" prefHeight="25.0" prefWidth="278.0" />
-      <TextField layoutX="698.0" layoutY="314.0" prefHeight="25.0" prefWidth="278.0" />
+      <Button fx:id="btnAdd" layoutX="121.0" layoutY="622.0" mnemonicParsing="false" onAction="#btnAddAction" prefHeight="41.0" prefWidth="119.0" text="Add" />
+      <TextField fx:id="txtCustomerName" layoutX="201.0" layoutY="314.0" prefHeight="25.0" prefWidth="278.0" />
+      <TextField fx:id="txtAddress" layoutX="698.0" layoutY="376.0" prefHeight="25.0" prefWidth="278.0" />
       <Label layoutX="27.0" layoutY="316.0" text="Customer Name">
          <font>
             <Font size="15.0" />
@@ -64,16 +68,17 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <DatePicker layoutX="201.0" layoutY="376.0" prefHeight="25.0" prefWidth="278.0" />
-      <TextArea layoutX="201.0" layoutY="446.0" prefHeight="91.0" prefWidth="278.0" />
-      <TextArea layoutX="698.0" layoutY="446.0" prefHeight="91.0" prefWidth="278.0" />
-      <Button layoutX="295.0" layoutY="622.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" text="Update" />
-      <TextField layoutX="201.0" layoutY="557.0" prefHeight="25.0" prefWidth="278.0" />
+      <DatePicker fx:id="txtReceiveDate" layoutX="201.0" layoutY="376.0" prefHeight="25.0" prefWidth="278.0" />
+      <TextArea fx:id="txtHealthDescription" layoutX="201.0" layoutY="446.0" prefHeight="91.0" prefWidth="278.0" />
+      <TextArea fx:id="txtReason" layoutX="698.0" layoutY="446.0" prefHeight="91.0" prefWidth="278.0" />
+      <Button fx:id="btnUpdate" layoutX="295.0" layoutY="622.0" mnemonicParsing="false" onAction="#btnUpdateAction" prefHeight="41.0" prefWidth="119.0" text="Update" />
       <Label layoutX="35.0" layoutY="559.0" text="Booking Id">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button layoutX="466.0" layoutY="622.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="119.0" text="Delete" />
+      <Button fx:id="btnDelete" layoutX="466.0" layoutY="622.0" mnemonicParsing="false" onAction="#btnDeleteAction" prefHeight="41.0" prefWidth="119.0" text="Delete" />
+      <ComboBox fx:id="txtBookingId" layoutX="201.0" layoutY="557.0" prefHeight="25.0" prefWidth="278.0" />
+      <ComboBox fx:id="txtStatus" layoutX="698.0" layoutY="314.0" prefHeight="25.0" prefWidth="278.0" />
    </children>
 </AnchorPane>

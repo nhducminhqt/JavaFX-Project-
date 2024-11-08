@@ -1,5 +1,6 @@
 package org.example.hsf301.dao;
 
+import org.example.hsf301.pojo.BookingKoiDetail;
 import org.example.hsf301.pojo.BookingTourDetail;
 
 import java.util.List;
@@ -8,6 +9,7 @@ public interface IBookingTourDetailDAO {
     List<BookingTourDetail> getAll();
 
     void save(BookingTourDetail bookingTourDetail);
+    List<BookingTourDetail> findByBookingId(Long bookingId);
 
     void delete(Long id);
 

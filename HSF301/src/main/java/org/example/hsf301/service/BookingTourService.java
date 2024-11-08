@@ -32,7 +32,7 @@ public class BookingTourService implements IBookingTourService {
         booking.setPaymentMethod(request.getPaymentMethod());
         booking.setCreatedBy(account);
         booking.setPaymentStatus(PaymentStatus.PENDING);
-        booking.setVat(request.getVat());
+        booking.setVat(request.getVat() == null ? 10 : request.getVat());
         booking.setDiscountAmount(request.getDiscountAmount());
         bookingRepository.save(booking);
 
@@ -45,7 +45,7 @@ public class BookingTourService implements IBookingTourService {
             BookingTourDetail bookingTourDetail = new BookingTourDetail();
             bookingTourDetail.setBooking(booking);
             bookingTourDetail.setParticipant(detailRequest.getParticipant());
-            bookingTourDetail.setTourId(tours);
+            bookingTourDetail.setTour(tours);
             bookingTourDetail.setTotalAmount(detailRequest.getParticipant()*tours.getUnitPrice());
             totalBookingAmount += bookingTourDetail.getTotalAmount();
             bookingTourDetailRepository.save(bookingTourDetail);

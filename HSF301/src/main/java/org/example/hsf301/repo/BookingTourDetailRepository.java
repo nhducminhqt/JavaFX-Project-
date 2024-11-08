@@ -36,4 +36,9 @@ public class BookingTourDetailRepository implements IBookingTourDetailRepository
     public void update(BookingTourDetail bookingTourDetail) {
     bookingTourDetailDAO.update(bookingTourDetail);
     }
+
+    @Override
+    public List<BookingTourDetail> findByBookingId(Long bookingId) {
+        return bookingTourDetailDAO.findByBookingId(bookingId);
+    }
 }

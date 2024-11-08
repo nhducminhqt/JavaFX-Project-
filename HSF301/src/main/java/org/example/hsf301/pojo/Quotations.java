@@ -34,23 +34,18 @@ public class Quotations {
     @Column(name = "status")
     private ApproveStatus status;
 
-    @Column(name="is_Confirm",nullable = false )
-    private boolean confirm = false;
+//    @Column(name="is_Confirm",nullable = false )
+//    private boolean confirm = false;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     @JoinColumn(name = "approve_by")
     private Account approveBy;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
     private Account createdBy;
 
     @Column(name = "approve_time")
     private LocalDateTime approveTime;
-  public void setConfirm(boolean confirm) {
-    this.confirm = confirm;
-    if (confirm) {
-      this.status = ApproveStatus.FINISH; // Replace with the actual enum value if different
-    }
-  }
+
 }

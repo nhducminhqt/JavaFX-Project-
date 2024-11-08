@@ -11,12 +11,12 @@
 
 <AnchorPane prefHeight="530.0" prefWidth="1145.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hsf301.controllers.QuotationController">
    <children>
-      <Label layoutX="413.0" layoutY="20.0" prefHeight="25.0" prefWidth="185.0" text="Quotation Booking ">
+      <Label layoutX="458.0" layoutY="20.0" prefHeight="25.0" prefWidth="185.0" text="Quotation Booking ">
          <font>
             <Font name="Bodoni MT" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tbData" layoutY="231.0" prefHeight="192.0" prefWidth="1145.0">
+      <TableView fx:id="tbData" layoutY="111.0" prefHeight="312.0" prefWidth="1145.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="81.0" text="ID" />
             <TableColumn fx:id="bookingID" prefWidth="249.0" text="BookingID" />
@@ -29,20 +29,11 @@
       </TableView>
       <Button fx:id="btnAdd" layoutX="166.0" layoutY="457.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="39.0" prefWidth="95.0" text="Add" />
       <Button fx:id="btnCancel" layoutX="803.0" layoutY="457.0" mnemonicParsing="false" onAction="#btnCancelOnAction" prefHeight="39.0" prefWidth="95.0" text="Cancel" />
-      <Button fx:id="btnView" layoutX="458.0" layoutY="457.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="View" />
-      <Label layoutX="41.0" layoutY="56.0" prefHeight="17.0" prefWidth="30.0" text="ID" />
-      <TextField id="txtId" fx:id="txtId" layoutX="119.0" layoutY="52.0" />
-      <TextField id="txtStaffName" fx:id="txtStaffName" layoutX="119.0" layoutY="97.0" />
-      <TextField fx:id="txtDescription" layoutX="119.0" layoutY="145.0" />
-      <TextField id="txtApproveTime" fx:id="txtApproveTime" layoutX="669.0" layoutY="97.0" />
-      <TextField id="txtAmount" fx:id="txtAmount" layoutX="669.0" layoutY="145.0" />
-      <Label id="bookingID" layoutX="38.0" layoutY="195.0" prefHeight="17.0" prefWidth="66.0" text="BookingID" />
-      <Label id="bookingID" layoutX="38.0" layoutY="101.0" prefHeight="17.0" prefWidth="66.0" text="Staff Name" />
-      <Label id="txtDescription" layoutX="38.0" layoutY="149.0" prefHeight="17.0" prefWidth="66.0" text="Description" />
-      <Label layoutX="568.0" layoutY="56.0" prefHeight="17.0" prefWidth="89.0" text="Approve Status" />
-      <Label layoutX="568.0" layoutY="101.0" prefHeight="17.0" prefWidth="89.0" text="Approve Time" />
-      <Label layoutX="568.0" layoutY="149.0" prefHeight="17.0" prefWidth="89.0" text="Amount" />
-      <ComboBox fx:id="txtBookingID" layoutX="119.0" layoutY="191.0" prefWidth="150.0" />
-      <ComboBox fx:id="txtApproveStatus" layoutX="669.0" layoutY="52.0" prefWidth="150.0" />
+      <TextField fx:id="txtDescription" layoutX="472.0" layoutY="58.0" />
+      <TextField id="txtAmount" fx:id="txtAmount" layoutX="865.0" layoutY="58.0" />
+      <Label id="bookingID" layoutX="53.0" layoutY="62.0" prefHeight="17.0" prefWidth="66.0" text="BookingID" />
+      <Label id="txtDescription" layoutX="392.0" layoutY="62.0" prefHeight="17.0" prefWidth="66.0" text="Description" />
+      <Label layoutX="776.0" layoutY="62.0" prefHeight="17.0" prefWidth="89.0" text="Amount" />
+      <ComboBox fx:id="txtBookingID" layoutX="152.0" layoutY="58.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

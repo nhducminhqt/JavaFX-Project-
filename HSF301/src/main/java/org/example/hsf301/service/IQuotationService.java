@@ -24,7 +24,7 @@ public interface IQuotationService {
 
     boolean deleteQuotations(Long quotationId) throws Exception;
 
-    Quotations adminUpdateStatusQuotations(Long quotationId,boolean confirm)throws Exception;
+    Quotations adminUpdateStatusQuotations(Long quotationId,ApproveStatus approveStatus)throws Exception;
 
     Quotations getQuotationById(Long quotationId) throws  Exception;
 }

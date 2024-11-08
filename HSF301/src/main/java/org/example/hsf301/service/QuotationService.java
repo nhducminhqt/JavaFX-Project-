@@ -94,18 +94,12 @@ public class QuotationService implements  IQuotationService{
     }
 
     @Override
-    public Quotations adminUpdateStatusQuotations(Long quotationId, boolean confirm) throws  Exception{
+    public Quotations adminUpdateStatusQuotations(Long quotationId, ApproveStatus approveStatus) throws  Exception{
         Quotations quotation = quotationRepository.findById(quotationId);
         if (quotation == null) {
             throw new ResourceNotFoundException("Quotation not found");
         }
-        if (confirm) {
-            quotation.setConfirm(true);
-            quotation.setStatus(ApproveStatus.FINISH); // Assuming FINISH is a constant in ApproveStatus
-        }else {
-            quotation.setConfirm(false);
-            quotation.setStatus(ApproveStatus.REJECTED); // Assuming REJECTED is a constant in ApproveStatus
-        }
+            quotation.setStatus(approveStatus);
             quotationRepository.save(quotation);
         return quotation;
     }

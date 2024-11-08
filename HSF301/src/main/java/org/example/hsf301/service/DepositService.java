@@ -10,7 +10,9 @@ import org.example.hsf301.repo.DepositRepository;
 import org.example.hsf301.repo.IBookingRepository;
 import org.example.hsf301.repo.IDepositRepository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class DepositService implements IDepositService{
     private final IBookingRepository bookingRepo;
@@ -25,11 +27,17 @@ public class DepositService implements IDepositService{
     }
 
     @Override
-    public Deposit createDeposit(DepositRequest depositRequest, Long bookingId) {
+    @Transactional
+    public void createDeposit(DepositRequest depositRequest, Long bookingId) {
         Deposit deposit = new Deposit();
         Bookings bookings = bookingRepo.findById(bookingId);
-        if(bookings == null){return null;}
-        if(bookings.getDeposit()!=null){return null;}
+        if (bookings == null) {
+            throw new IllegalArgumentException("Booking not found with ID: " + bookingId);
+        }
+        // Check if a deposit already exists for the booking
+        if (bookings.getDeposit() != null) {
+            throw new IllegalStateException("Deposit already exists for booking ID: " + bookingId);
+        }
         deposit.setBooking(bookings);
         deposit.setDepositStatus(CCSTATUS.COMPLETED);
         deposit.setDepositPercentage(depositRequest.getDepositPercentage());
@@ -42,21 +50,27 @@ public class DepositService implements IDepositService{
         depositRepo.save(deposit);
         bookings.setPaymentStatus(PaymentStatus.SHIPPING);
         bookingRepo.update(bookings);
-        return deposit;
     }
 
     @Override
-    public Deposit deleteById(Long id) {
+    public void deleteById(Long id) {
         Deposit deposit = depositRepo.findById(id);
         deposit.setDepositStatus(CCSTATUS.CANCELLED);
+        if(deposit.getDepositStatus()==CCSTATUS.CANCELLED){
+            Bookings bookings = bookingRepo.findById(deposit.getBooking().getId());
+            if (bookings == null) {
+                throw new IllegalArgumentException("Booking not found");
+            }
+            bookings.setPaymentStatus(PaymentStatus.CANCELLED);
+            bookingRepo.update(bookings);
+        }
         depositRepo.update(deposit);
-        return deposit;
     }
 
     @Override
-    public Deposit updateDeposit(Long id, DepositRequest depositRequest) {
+    public void updateDeposit(Long id, DepositRequest depositRequest) {
         Deposit deposit = depositRepo.findById(id);
-        if(deposit == null){return null;}
+        if(deposit == null){return;}
         deposit.setDeliveryExpectedDate(depositRequest.getDeliveryExpectedDate());
 
         deposit.setShippingAddress(depositRequest.getShippingAddress());
@@ -69,6 +83,15 @@ public class DepositService implements IDepositService{
 
         deposit.setRemainAmount(deposit.getBooking().getTotalAmountWithVAT()-deposit.getDepositAmount()+deposit.getShippingFee());
         depositRepo.update(deposit);
-        return deposit;
+    }
+
+    @Override
+    public List<Deposit> getAllDeposits() {
+        return depositRepo.getAll();
+    }
+
+    @Override
+    public Deposit getDepositById(Long id) {
+        return depositRepo.findById(id);
     }
 }
