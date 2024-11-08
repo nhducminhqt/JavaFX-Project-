@@ -10,6 +10,7 @@
     import javafx.scene.control.cell.PropertyValueFactory;
     import org.example.hsf301.constants.ResourcePaths;
     import org.example.hsf301.enums.ApproveStatus;
+    import org.example.hsf301.enums.PaymentStatus;
     import org.example.hsf301.model.request.QuotationRequest;
     import org.example.hsf301.navigate.Navigable;
     import org.example.hsf301.pojo.Bookings;
@@ -18,6 +19,7 @@
 
     import java.net.URL;
     import java.time.LocalDate;
+    import java.util.ArrayList;
     import java.util.List;
     import java.util.ResourceBundle;
 
@@ -89,7 +91,13 @@
             approveTime.setCellValueFactory(new PropertyValueFactory<>("approveTime"));
             tbData.setItems(tableModel);
             List<Bookings> list = bookingTourService.getAllTourBookings();
-            ObservableList<Bookings> bookingsList = FXCollections.observableArrayList(list);
+            List<Bookings> result = new ArrayList<>();
+            for(Bookings booking : list){
+                if(booking.getPaymentStatus().equals(PaymentStatus.PENDING)){
+                    result.add(booking);
+                }
+            }
+            ObservableList<Bookings> bookingsList = FXCollections.observableArrayList(result);
             txtBookingID.setItems(bookingsList);
 
             // Set cell factory to show only booking ID in the ComboBox
