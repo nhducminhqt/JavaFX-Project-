@@ -25,4 +25,5 @@ public interface IBookingKoiService {
     Bookings deleteKoiBooking(Long bookingId);
 
     List<Bookings> getAllKoiBookingStatus(PaymentStatus paymentStatus);
+    List<Bookings> getAllTourBookingStatus(PaymentStatus paymentStatus);
 }

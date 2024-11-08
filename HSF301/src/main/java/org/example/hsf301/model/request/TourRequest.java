@@ -2,6 +2,7 @@ package org.example.hsf301.model.request;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Data
 public class TourRequest {
@@ -9,7 +10,7 @@ public class TourRequest {
     private float unitPrice;
     private int maxParticipants;
     private String description;
-    private Date startTime;
-    private Date endTime;
+    private LocalDate startTime;
+    private LocalDate endTime;
     private String tourImg;
 }
