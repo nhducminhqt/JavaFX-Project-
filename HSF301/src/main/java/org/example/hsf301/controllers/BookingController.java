@@ -2,6 +2,7 @@ package org.example.hsf301.controllers;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
+import org.example.hsf301.enums.BookingType;
 import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.pojo.Account;
 import org.example.hsf301.pojo.Bookings;
@@ -35,7 +37,13 @@ public class BookingController implements Initializable {
 
     private void displayBookings(Account account) {
         // Retrieve the list of bookings by account ID
-        List<Bookings> bookings = bookingService.findByAccountID(account.getUsername());
+        List<Bookings> list = bookingService.findByAccountID(account.getUsername());
+        List<Bookings> bookings = new ArrayList<>();
+        for (Bookings booking : list) {
+            if(booking.getBookingType()== BookingType.TourBooking)
+                bookings.add(booking);
+        }
+
         if (bookings.isEmpty()) {
             Label emptyLabel = new Label("No bookings found");
             emptyLabel.setStyle("-fx-text-fill: red; -fx-font-size: 16px; -fx-font-weight: bold;");

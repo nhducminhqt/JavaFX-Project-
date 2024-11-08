@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.enums.ERole;
 import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.model.request.DeliveryHistoryRequest;
@@ -40,6 +41,12 @@ public class DeliveryHistoryController implements Initializable {
     private TableColumn<DeliveryHistory, LocalDate> time;
     @FXML
     private TableColumn<DeliveryHistory, String> staff;
+    @FXML
+    private Button btnAdd;
+    @FXML
+    private Button btnUpdate;
+    @FXML
+    private Button btnDelete;
     @FXML
     private Button btnExit;
     private IDeliveryHistoryService deliveryHistoryService;
@@ -132,6 +139,11 @@ public class DeliveryHistoryController implements Initializable {
         if (bookingId != null){
             tableModel=FXCollections.observableArrayList(deliveryHistoryService.getDeliveryHistory(bookingId));
         tbData.setItems(tableModel);
+        if(LoginController.account.getRole()!= ERole.DELIVERY_STAFF) {
+            btnAdd.setDisable(true);
+            btnDelete.setDisable(true);
+            btnUpdate.setDisable(true);
+        }
     }
     }
 }

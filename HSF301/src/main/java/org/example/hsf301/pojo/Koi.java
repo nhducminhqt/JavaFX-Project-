@@ -1,6 +1,8 @@
 package org.example.hsf301.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

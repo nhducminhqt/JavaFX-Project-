@@ -15,5 +15,7 @@ public interface IDeliveryService {
 
     Delivery getDelivery(Long deliveryId);
 
+    Delivery getDeliveryByBookingid(Long bookingId);
+
     List<Delivery> getAllDeliveries();
 }

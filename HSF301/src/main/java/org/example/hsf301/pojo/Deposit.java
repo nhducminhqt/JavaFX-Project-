@@ -46,7 +46,7 @@ public class Deposit {
     @Column(name = "shipping_fee")
     private float shippingFee;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id",unique = true)
     private Bookings booking;
 
