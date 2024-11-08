@@ -26,7 +26,8 @@ public class StaffMainController implements Navigable, Initializable {
         navigateBookingTourListSaleStaff(contentArea);
     }
 
-    public void btnQuotationAction(ActionEvent actionEvent) {
+    public void btnQuotationAction(ActionEvent actionEvent)  throws IOException{
+        navigateQuotationSaleStaff(contentArea);
     }
 
     @Override

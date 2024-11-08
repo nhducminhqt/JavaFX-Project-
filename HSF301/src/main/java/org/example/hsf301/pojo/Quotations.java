@@ -4,6 +4,7 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.hsf301.enums.ApproveStatus;
 
 import java.time.LocalDateTime;
 
@@ -30,8 +31,11 @@ public class Quotations {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "is_approve")
-    private String isApprove;
+    @Column(name = "status")
+    private ApproveStatus status;
+
+    @Column(name="is_Confirm",nullable = false )
+    private boolean confirm = false;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "approve_by")
@@ -43,5 +47,10 @@ public class Quotations {
 
     @Column(name = "approve_time")
     private LocalDateTime approveTime;
-
+  public void setConfirm(boolean confirm) {
+    this.confirm = confirm;
+    if (confirm) {
+      this.status = ApproveStatus.FINISH; // Replace with the actual enum value if different
+    }
+  }
 }

@@ -1,10 +1,14 @@
 package org.example.hsf301.test;
 
 
-import org.example.hsf301.service.KoiFarmService;
-import org.example.hsf301.service.KoiOfFarmService;
-import org.example.hsf301.service.KoiService;
+import org.example.hsf301.model.request.QuotationRequest;
+import org.example.hsf301.pojo.BookingTourDetail;
+import org.example.hsf301.pojo.Bookings;
+import org.example.hsf301.pojo.Quotations;
+import org.example.hsf301.service.*;
 import org.example.hsf301.views.LoginView;
+
+import java.util.List;
 
 
 public class HelloApplication extends LoginView {
@@ -15,9 +19,10 @@ public class HelloApplication extends LoginView {
         KoiService koiService = new KoiService("hibernate.cfg.xml");
         KoiOfFarmService koiOfFarmService = new KoiOfFarmService("hibernate.cfg.xml");
         KoiFarmService koiFarmService = new KoiFarmService("hibernate.cfg.xml");
-
-
+        QuotationService quotationService = new QuotationService("hibernate.cfg.xml");
+        BookingService bookingService = new BookingService("hibernate.cfg.xml");
         // Add these to a list
+        BookingTourService bookingTourService = new BookingTourService("hibernate.cfg.xml");
 
 
         // Create a KoiRequest object with all fields populated
@@ -58,6 +63,25 @@ public class HelloApplication extends LoginView {
 //       // koiFarmService.delete(1L);
 //        koiFarmService.updateKoiFarm(2L,koiFarmRequest);
 
+
+        QuotationRequest request = new QuotationRequest();
+        request.setBookingId(1L);  // ID giả định của booking
+        request.setAmount(2500.75f); // Số tiền mẫu
+        request.setDescription("This is a sample quotation description."); // Mô tả mẫu
+
+       try {
+           Quotations quotations = quotationService.createQuotations(request,null);
+           System.out.println(quotations);
+       }
+       catch (Exception e)
+       {
+
+       }
+//        List<Bookings> list = bookingTourService.getAllTourBookings();
+//        for (Bookings bookings : list)
+//        {
+//            System.out.println(bookings);
+//        }
     }
 
 }
