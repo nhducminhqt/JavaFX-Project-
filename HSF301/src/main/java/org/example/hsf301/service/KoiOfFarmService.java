@@ -33,7 +33,7 @@ public class KoiOfFarmService implements IKoiOfFarmService{
         else  {
 
             koiOfFarm.setQuantity(koiOfFarmRequest.getQuantity()+koiOfFarm.getQuantity());
-             koiOfFarmRepository.save(koiOfFarm);
+             koiOfFarmRepository.update(koiOfFarm);
              return koiOfFarm;
 
         }
