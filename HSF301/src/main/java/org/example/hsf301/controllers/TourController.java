@@ -99,8 +99,8 @@ public class TourController implements Initializable {
 
         // Date/Time
         Label dateTimeLabel = new Label(String.format("From: %s\nTo: %s",
-                                                      DATE_FORMATTER.format(tour.getStartTime()),
-                                                      DATE_FORMATTER.format(tour.getEndTime())));
+                tour.getStartTime(),
+                tour.getEndTime()));
         dateTimeLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #7f8c8d;");
 
         // Price and Availability HBox

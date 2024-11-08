@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
@@ -39,10 +40,10 @@ public class Tours {
     private String description;
 
     @Column(name = "start_time")
-    private Date startTime;
+    private LocalDate startTime;
 
     @Column(name = "end_time")
-    private Date endTime;
+    private LocalDate endTime;
 
     @Column(name = "tour_image")
     private String tourImg;
