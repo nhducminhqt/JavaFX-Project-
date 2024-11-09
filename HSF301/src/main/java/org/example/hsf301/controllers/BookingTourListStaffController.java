@@ -1,5 +1,6 @@
 package org.example.hsf301.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,13 +12,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.BookingKoiRequest;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.service.AccountService;
-import org.example.hsf301.service.BookingKoiService;
-import org.example.hsf301.service.IAccountService;
-import org.example.hsf301.service.IBookingKoiService;
+import org.example.hsf301.dtos.request.BookingKoiRequest;
+import org.example.hsf301.pojos.Account;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.services.AccountService;
+import org.example.hsf301.services.BookingKoiService;
+import org.example.hsf301.services.IAccountService;
+import org.example.hsf301.services.IBookingKoiService;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -45,6 +46,8 @@ public class BookingTourListStaffController implements Initializable {
     private TableColumn<Bookings, Float> totalAmountVAT;
     @FXML
     private TableColumn<Bookings, LocalDate> paymentDate;
+    @FXML
+    private TableColumn<Bookings, String> accountId;
 
     @FXML
     private ComboBox<Account> txtAccount;
@@ -56,9 +59,11 @@ public class BookingTourListStaffController implements Initializable {
     private TextField txtDiscountAmount;
     @FXML
     private TextField txtVAT;
-    private IBookingKoiService bookingKoiService;
+    @FXML
+    private ComboBox<PaymentStatus> txtStatus;
+    private final IBookingKoiService bookingKoiService;
     private ObservableList<Bookings> tableModel;
-    private IAccountService accountService;
+    private final IAccountService accountService;
     public BookingTourListStaffController(){
         accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
         bookingKoiService = new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG);
@@ -67,6 +72,8 @@ public class BookingTourListStaffController implements Initializable {
     @FXML
     public void btnSearchAccountAction(){
 
+        tableModel = FXCollections.observableArrayList(bookingKoiService.getAllTourBookingStatus(txtStatus.getValue()));
+        tbData.setItems(tableModel);
     }
     @FXML
     public void btnCreateBookingKoiAction(){
@@ -90,6 +97,9 @@ public class BookingTourListStaffController implements Initializable {
         totalAmount.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
         totalAmountVAT.setCellValueFactory(new PropertyValueFactory<>("totalAmountWithVAT"));
         paymentDate.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
+        accountId.setCellValueFactory(cellData -> cellData.getValue().getAccount() != null
+                ? new SimpleStringProperty(String.valueOf(cellData.getValue().getAccount().getUsername()))
+                : new SimpleStringProperty("N/A"));
         tbData.setItems(tableModel);
         tbData.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -101,7 +111,7 @@ public class BookingTourListStaffController implements Initializable {
                     Object bookingId = tablePosition.getTableColumn().getCellData(index);
                     try {
                         Bookings booking = bookingKoiService.getKoiBookings(Long.valueOf(bookingId.toString()));
-                        show(booking);
+//                        show(booking);
                     } catch (Exception ex) {
                         showAlert("Infomation Board!", "Please choose the First Cell !");
                     }
@@ -109,6 +119,7 @@ public class BookingTourListStaffController implements Initializable {
 
             }
         });
+        txtStatus.setItems(FXCollections.observableArrayList(PaymentStatus.values()));
         List<Account> customers = accountService.findAllCustomers();
         txtAccount.setItems(FXCollections.observableArrayList(customers));
         txtPaymentMethod.setItems(FXCollections.observableArrayList(PaymentMethod.values()));
@@ -116,7 +127,6 @@ public class BookingTourListStaffController implements Initializable {
     private void show(Bookings booking) {
         this.txtAccount.setValue(booking.getAccount());
         this.txtBookingDate.setValue(booking.getBookingDate());
-
     }
     public void showAlert(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

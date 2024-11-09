@@ -1,5 +1,6 @@
 package org.example.hsf301.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,13 +14,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
+import org.example.hsf301.enums.ERole;
 import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.BookingUpdate;
+import org.example.hsf301.dtos.request.BookingUpdate;
 import org.example.hsf301.navigate.Navigable;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.service.BookingKoiService;
-import org.example.hsf301.service.IBookingKoiService;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.services.BookingKoiService;
+import org.example.hsf301.services.IBookingKoiService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,9 +49,13 @@ public class BookingKoiListStaffController implements Initializable , Navigable 
     private TableColumn<Bookings, Float> totalAmountVAT;
     @FXML
     private TableColumn<Bookings, LocalDate> paymentDate;
+    @FXML
+    private TableColumn<Bookings, String> account;
 
     @FXML
     private ComboBox<PaymentMethod> txtPaymentMethod;
+    @FXML
+    private ComboBox<PaymentStatus> txtStatus;
     @FXML
     private TextField txtDiscountAmount;
     @FXML
@@ -57,7 +63,16 @@ public class BookingKoiListStaffController implements Initializable , Navigable 
     @FXML
     private DatePicker txtBookingDate;
 
-    private IBookingKoiService bookingKoiService;
+    @FXML
+    Button btnViewDeliveryHistory;
+    @FXML
+    Button btnUpdate;
+    @FXML
+    Button btnViewDetail;
+    @FXML
+    Button btnCancel;
+
+    private final IBookingKoiService bookingKoiService;
     private ObservableList<Bookings> tableModel;
     public BookingKoiListStaffController(){
         bookingKoiService = new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG);
@@ -118,7 +133,8 @@ public class BookingKoiListStaffController implements Initializable , Navigable 
     }
     @FXML
     public void btnCancelAction(){
-
+        tableModel = FXCollections.observableArrayList(bookingKoiService.getAllKoiBookingStatus(txtStatus.getValue()));
+        tbData.setItems(tableModel);
     }
 
     @Override
@@ -133,6 +149,9 @@ public class BookingKoiListStaffController implements Initializable , Navigable 
         totalAmountVAT.setCellValueFactory(new PropertyValueFactory<>("totalAmountWithVAT"));
         paymentDate.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
         txtPaymentMethod.setItems(FXCollections.observableArrayList(PaymentMethod.values()));
+        account.setCellValueFactory(cellData -> cellData.getValue().getAccount() != null
+                ? new SimpleStringProperty(String.valueOf(cellData.getValue().getAccount().getUsername()))
+                : new SimpleStringProperty("N/A"));
         tbData.setItems(tableModel);
         tbData.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -152,6 +171,13 @@ public class BookingKoiListStaffController implements Initializable , Navigable 
 
             }
         });
+        txtStatus.setItems(FXCollections.observableArrayList(PaymentStatus.values()));
+        if(LoginController.account.getRole()== ERole.DELIVERY_STAFF){
+            btnUpdate.setDisable(true);
+            btnViewDetail.setDisable(true);
+        } else {
+            btnViewDeliveryHistory.setDisable(true);
+        }
     }
     private void show(Bookings booking) {
         this.txtPaymentMethod.setValue(booking.getPaymentMethod());

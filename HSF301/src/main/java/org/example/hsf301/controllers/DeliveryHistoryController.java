@@ -13,14 +13,11 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.enums.PaymentMethod;
-import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.DeliveryHistoryRequest;
-import org.example.hsf301.pojo.BookingKoiDetail;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.pojo.DeliveryHistory;
-import org.example.hsf301.service.DeliveryHistoryService;
-import org.example.hsf301.service.IDeliveryHistoryService;
+import org.example.hsf301.enums.ERole;
+import org.example.hsf301.dtos.request.DeliveryHistoryRequest;
+import org.example.hsf301.pojos.DeliveryHistory;
+import org.example.hsf301.services.DeliveryHistoryService;
+import org.example.hsf301.services.IDeliveryHistoryService;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -41,6 +38,12 @@ public class DeliveryHistoryController implements Initializable {
     @FXML
     private TableColumn<DeliveryHistory, String> staff;
     @FXML
+    private Button btnAdd;
+    @FXML
+    private Button btnUpdate;
+    @FXML
+    private Button btnDelete;
+    @FXML
     private Button btnExit;
     private IDeliveryHistoryService deliveryHistoryService;
     private ObservableList<DeliveryHistory> tableModel;
@@ -52,13 +55,13 @@ public class DeliveryHistoryController implements Initializable {
     @FXML
     private TextField txtRoute;
     @FXML
-    private TextArea txtKoiHealth;
+    private TextArea txtDescription;
 
     @FXML
     public void btnAddAction() throws Exception {
         DeliveryHistoryRequest deliveryHistoryRequest = new DeliveryHistoryRequest();
         deliveryHistoryRequest.setRoute(txtRoute.getText());
-        deliveryHistoryRequest.setHealthKoiDescription(txtKoiHealth.getText());
+        deliveryHistoryRequest.setHealthKoiDescription(txtDescription.getText());
         deliveryHistoryService.addDeliveryHistory(deliveryHistoryRequest,bookingId,LoginController.account);
         refreshTable();
     }
@@ -67,7 +70,7 @@ public class DeliveryHistoryController implements Initializable {
         DeliveryHistory bookingKoiDetail = tbData.getSelectionModel().getSelectedItem();
         DeliveryHistoryRequest deliveryHistoryRequest = new DeliveryHistoryRequest();
         deliveryHistoryRequest.setRoute(txtRoute.getText());
-        deliveryHistoryRequest.setHealthKoiDescription(txtKoiHealth.getText());
+        deliveryHistoryRequest.setHealthKoiDescription(txtDescription.getText());
         deliveryHistoryService.updateDeliveryHistory(bookingKoiDetail.getId(),deliveryHistoryRequest);
         refreshTable();
     }
@@ -90,7 +93,7 @@ public class DeliveryHistoryController implements Initializable {
         koiHealth.setCellValueFactory(new PropertyValueFactory<>("healthKoiDescription"));
         time.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
         staff.setCellValueFactory(cellData -> cellData.getValue().getDeliveryStaff() != null
-                ? new SimpleStringProperty(String.valueOf(cellData.getValue().getDeliveryStaff().getFirstName()+" "+cellData.getValue().getDeliveryStaff().getLastName()))
+                ? new SimpleStringProperty(cellData.getValue().getDeliveryStaff().getFirstName() + " " + cellData.getValue().getDeliveryStaff().getLastName())
                 : new SimpleStringProperty("N/A"));
         if(tableModel!=null) {
             tbData.setItems(tableModel);
@@ -116,7 +119,7 @@ public class DeliveryHistoryController implements Initializable {
     }
         private void show(DeliveryHistory deliveryHistory) {
         this.txtRoute.setText(deliveryHistory.getRoute());
-        this.txtKoiHealth.setText(deliveryHistory.getHealthKoiDescription());
+        this.txtDescription.setText(deliveryHistory.getHealthKoiDescription());
     }
     public void showAlert(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -132,6 +135,11 @@ public class DeliveryHistoryController implements Initializable {
         if (bookingId != null){
             tableModel=FXCollections.observableArrayList(deliveryHistoryService.getDeliveryHistory(bookingId));
         tbData.setItems(tableModel);
+        if(LoginController.account.getRole()!= ERole.DELIVERY_STAFF) {
+            btnAdd.setDisable(true);
+            btnDelete.setDisable(true);
+            btnUpdate.setDisable(true);
+        }
     }
     }
 }

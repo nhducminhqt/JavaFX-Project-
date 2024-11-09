@@ -1,5 +1,6 @@
 package org.example.hsf301.controllers;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,8 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import lombok.RequiredArgsConstructor;
-import org.example.hsf301.pojo.Tours;
-import org.example.hsf301.service.TourService;
+import org.example.hsf301.enums.PaymentMethod;
+import org.example.hsf301.dtos.request.BookingTourDetailRequest;
+import org.example.hsf301.dtos.request.BookingTourRequest;
+import org.example.hsf301.pojos.Tours;
+import org.example.hsf301.services.IBookingTourService;
+import org.example.hsf301.services.TourService;
+import org.example.hsf301.utils.AppAlert;
 
 @RequiredArgsConstructor
 public class TourController implements Initializable {
@@ -27,6 +33,7 @@ public class TourController implements Initializable {
     private GridPane tourGrid;
 
     private final TourService tourService;
+    private final IBookingTourService bookingTourService;
     private static final int COLUMNS = 4;
     private static final SimpleDateFormat DATE_FORMATTER =
         new SimpleDateFormat("MMM dd, yyyy HH:mm");
@@ -92,8 +99,8 @@ public class TourController implements Initializable {
 
         // Date/Time
         Label dateTimeLabel = new Label(String.format("From: %s\nTo: %s",
-                                                      DATE_FORMATTER.format(tour.getStartTime()),
-                                                      DATE_FORMATTER.format(tour.getEndTime())));
+                tour.getStartTime(),
+                tour.getEndTime()));
         dateTimeLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #7f8c8d;");
 
         // Price and Availability HBox
@@ -145,8 +152,25 @@ public class TourController implements Initializable {
             // TODO: Implement booking logic
             System.out.println("Booking tour: " + tour.getTourName());
 
-            // Add booking logic here
+            List<BookingTourDetailRequest> bookingTourDetailRequestList = List.of(
+                BookingTourDetailRequest.builder()
+//                    .bookingID(1L)
+                    .tourID(tour.getId())
+                    .participant(1)
+                    .build()
+            );
 
+            BookingTourRequest request = BookingTourRequest.builder()
+                .paymentMethod(PaymentMethod.BANKING)
+                .details(bookingTourDetailRequestList)
+                .vat(0.2F)
+                .bookingDate(LocalDate.now())
+                .discountAmount(20F)
+                .build();
+
+            // Add booking logic here
+            bookingTourService.createTourBooking(request, LoginController.account);
+            AppAlert.showAlert("Success", "Tour booked successfully");
         }
     }
 }

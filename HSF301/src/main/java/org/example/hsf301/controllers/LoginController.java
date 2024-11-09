@@ -23,9 +23,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.controlsfx.control.Notifications;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.service.AccountService;
-import org.example.hsf301.service.IAccountService;
+import org.example.hsf301.pojos.Account;
+import org.example.hsf301.services.AccountService;
+import org.example.hsf301.services.IAccountService;
 import org.example.hsf301.utils.EnvUtils;
 import org.example.hsf301.utils.AppAlert;
 import org.example.hsf301.utils.NavigateUtil;
@@ -154,18 +154,7 @@ public class LoginController {
 
     @FXML
     private void loginViaGoogleAction() {
-        Platform.runLater(() -> {
-            String googleAuthUrl = EnvUtils.get("GOOGLE_AUTH_URL");
-            try {
-                URI uri = new URI(googleAuthUrl);
-                if (Desktop.isDesktopSupported() && Desktop.getDesktop()
-                    .isSupported(Action.BROWSE)) {
-                    Desktop.getDesktop().browse(uri);
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
+        Platform.runLater(AppAlert::IS_NOT_SUPPORT);
     }
 
     @FXML
@@ -201,20 +190,7 @@ public class LoginController {
 
 
     public void forgotPasswordAction(ActionEvent actionEvent) {
-        String api = "http://localhost:3000/forgot-password";
-        Platform.runLater(() -> {
-            try {
-                // Specify the URL of the website
-                URI uri = new URI(api);
-                // Open the website in the default browser
-                if (Desktop.isDesktopSupported() && Desktop.getDesktop()
-                    .isSupported(Action.BROWSE)) {
-                    Desktop.getDesktop().browse(uri);
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
+        Platform.runLater(AppAlert::IS_NOT_SUPPORT);
     }
 
 

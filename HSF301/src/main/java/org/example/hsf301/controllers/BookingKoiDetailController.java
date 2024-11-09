@@ -1,27 +1,21 @@
 package org.example.hsf301.controllers;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.enums.PaymentMethod;
-import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.BookingKoiDetailRequest;
-import org.example.hsf301.pojo.*;
-import org.example.hsf301.service.*;
+import org.example.hsf301.dtos.request.BookingKoiDetailRequest;
+import org.example.hsf301.pojos.*;
+import org.example.hsf301.services.*;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
