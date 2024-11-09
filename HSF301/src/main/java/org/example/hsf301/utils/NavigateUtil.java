@@ -1,8 +1,7 @@
 package org.example.hsf301.utils;
 
-import java.io.InputStream;
 import java.util.Objects;
-import java.util.Scanner;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -11,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.controllers.LoginController;
-import org.example.hsf301.service.AccountService;
+import org.example.hsf301.services.AccountService;
 
 public class NavigateUtil {
 

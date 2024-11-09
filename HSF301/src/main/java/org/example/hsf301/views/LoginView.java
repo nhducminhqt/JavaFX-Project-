@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.controllers.LoginController;
-import org.example.hsf301.service.AccountService;
+import org.example.hsf301.services.AccountService;
 
 public class LoginView extends Application {
     @Override

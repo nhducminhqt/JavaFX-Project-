@@ -1,19 +1,16 @@
 package org.example.hsf301.controllers;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.enums.CCSTATUS;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.pojo.Delivery;
-import org.example.hsf301.service.DeliveryService;
-import org.example.hsf301.service.IDeliveryService;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.pojos.Delivery;
+import org.example.hsf301.services.DeliveryService;
+import org.example.hsf301.services.IDeliveryService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,7 +33,7 @@ public class DeliveryCheckout implements Initializable {
     @FXML
     private TextArea txtdescription;
     private Bookings bookings;
-    private IDeliveryService deliveryService;
+    private final IDeliveryService deliveryService;
     public DeliveryCheckout() {
         deliveryService = new DeliveryService(ResourcePaths.HIBERNATE_CONFIG);
     }

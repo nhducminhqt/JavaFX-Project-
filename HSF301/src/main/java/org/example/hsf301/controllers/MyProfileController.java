@@ -4,9 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import lombok.Setter;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.service.AccountService;
-import org.example.hsf301.service.IAccountService;
+import org.example.hsf301.pojos.Account;
+import org.example.hsf301.services.AccountService;
+import org.example.hsf301.services.IAccountService;
 
 @Setter
 public class MyProfileController {

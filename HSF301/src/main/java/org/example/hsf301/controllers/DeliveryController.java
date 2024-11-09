@@ -11,16 +11,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.CCSTATUS;
-import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.DeliveryRequest;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.pojo.Delivery;
-import org.example.hsf301.service.BookingKoiService;
-import org.example.hsf301.service.DeliveryService;
-import org.example.hsf301.service.IBookingKoiService;
-import org.example.hsf301.service.IDeliveryService;
+import org.example.hsf301.dtos.request.DeliveryRequest;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.pojos.Delivery;
+import org.example.hsf301.services.BookingKoiService;
+import org.example.hsf301.services.DeliveryService;
+import org.example.hsf301.services.IBookingKoiService;
+import org.example.hsf301.services.IDeliveryService;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -65,9 +63,9 @@ public class DeliveryController implements Initializable {
     private TextArea txtHealthDescription;
     @FXML
     private TextArea txtReason;
-    private IDeliveryService deliveryService;
+    private final IDeliveryService deliveryService;
     private ObservableList<Delivery> tableModel;
-    private IBookingKoiService bookingKoiService;
+    private final IBookingKoiService bookingKoiService;
     public DeliveryController(){
         deliveryService = new DeliveryService(ResourcePaths.HIBERNATE_CONFIG);
         tableModel = FXCollections.observableArrayList(deliveryService.getAllDeliveries());

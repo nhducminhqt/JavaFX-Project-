@@ -10,20 +10,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.enums.BookingType;
 import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.BookingKoiRequest;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.service.AccountService;
-import org.example.hsf301.service.BookingKoiService;
-import org.example.hsf301.service.IAccountService;
-import org.example.hsf301.service.IBookingKoiService;
+import org.example.hsf301.dtos.request.BookingKoiRequest;
+import org.example.hsf301.pojos.Account;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.services.AccountService;
+import org.example.hsf301.services.BookingKoiService;
+import org.example.hsf301.services.IAccountService;
+import org.example.hsf301.services.IBookingKoiService;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -63,9 +61,9 @@ public class BookingTourListStaffController implements Initializable {
     private TextField txtVAT;
     @FXML
     private ComboBox<PaymentStatus> txtStatus;
-    private IBookingKoiService bookingKoiService;
+    private final IBookingKoiService bookingKoiService;
     private ObservableList<Bookings> tableModel;
-    private IAccountService accountService;
+    private final IAccountService accountService;
     public BookingTourListStaffController(){
         accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
         bookingKoiService = new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG);

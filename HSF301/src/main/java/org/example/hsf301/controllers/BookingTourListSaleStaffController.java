@@ -17,8 +17,8 @@ import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.navigate.Navigable;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.service.*;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.services.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,10 +46,10 @@ public class BookingTourListSaleStaffController implements Initializable, Naviga
     private TableColumn<Bookings, Float> totalAmountVAT;
     @FXML
     private TableColumn<Bookings, LocalDate> paymentDate;
-    private IBookingKoiService bookingKoiService;
-    private ObservableList<Bookings> tableModel;
-    private IAccountService accountService;
-    private IBookingTourService bookingTourService;
+    private final IBookingKoiService bookingKoiService;
+    private final ObservableList<Bookings> tableModel;
+    private final IAccountService accountService;
+    private final IBookingTourService bookingTourService;
     public BookingTourListSaleStaffController(){
         accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
         bookingKoiService = new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG);

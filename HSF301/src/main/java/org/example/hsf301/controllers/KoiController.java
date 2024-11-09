@@ -15,8 +15,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
-import org.example.hsf301.pojo.Koi;
-import org.example.hsf301.service.IKoiService;
+import org.example.hsf301.pojos.Koi;
+import org.example.hsf301.services.IKoiService;
 
 @RequiredArgsConstructor
 public class KoiController implements Initializable {

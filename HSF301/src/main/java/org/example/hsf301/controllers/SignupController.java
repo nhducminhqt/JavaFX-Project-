@@ -22,9 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.ERole;
 import org.example.hsf301.exceptions.BadCredentialsException;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.service.AccountService;
-import org.example.hsf301.service.IAccountService;
+import org.example.hsf301.pojos.Account;
+import org.example.hsf301.services.AccountService;
+import org.example.hsf301.services.IAccountService;
 import org.example.hsf301.utils.AppAlert;
 
 @Slf4j
@@ -68,11 +68,11 @@ public class SignupController {
     @FXML
     public void initialize() {
 
-        Image brandingImage = new Image(
-            Objects.requireNonNull(
-                    getClass().getResource("/org/example/hsf301/assets/img/branding.png"))
-                .toExternalForm());
-        brandingImageView.setImage(brandingImage);
+//        Image brandingImage = new Image(
+//            Objects.requireNonNull(
+//                    getClass().getResource("/org/example/hsf301/assets/img/branding.png"))
+//                .toExternalForm());
+//        brandingImageView.setImage(brandingImage);
 
         Image logoImage = new Image(
             Objects.requireNonNull(getClass().getResource("/org/example/hsf301/assets/img/koi.png"))

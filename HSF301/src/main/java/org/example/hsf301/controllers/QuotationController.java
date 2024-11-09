@@ -11,11 +11,11 @@
     import org.example.hsf301.constants.ResourcePaths;
     import org.example.hsf301.enums.ApproveStatus;
     import org.example.hsf301.enums.PaymentStatus;
-    import org.example.hsf301.model.request.QuotationRequest;
+    import org.example.hsf301.dtos.request.QuotationRequest;
     import org.example.hsf301.navigate.Navigable;
-    import org.example.hsf301.pojo.Bookings;
-    import org.example.hsf301.pojo.Quotations;
-    import org.example.hsf301.service.*;
+    import org.example.hsf301.pojos.Bookings;
+    import org.example.hsf301.pojos.Quotations;
+    import org.example.hsf301.services.*;
 
     import java.net.URL;
     import java.time.LocalDate;
@@ -60,11 +60,11 @@
         @FXML
         private TextField txtApproveTime;
 
-        private IQuotationService quotationService;
+        private final IQuotationService quotationService;
         private ObservableList<Quotations> tableModel;
-        private IBookingService bookingService;
-        private IAccountService accountService;
-        private  IBookingTourService bookingTourService;
+        private final IBookingService bookingService;
+        private final IAccountService accountService;
+        private final IBookingTourService bookingTourService;
 
         public QuotationController (){
             accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);

@@ -12,15 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.model.request.KoiOfFarmRequest;
-import org.example.hsf301.pojo.BookingKoiDetail;
-import org.example.hsf301.pojo.Koi;
-import org.example.hsf301.pojo.KoiFarms;
-import org.example.hsf301.pojo.KoiOfFarm;
-import org.example.hsf301.service.IKoiOfFarmService;
-import org.example.hsf301.service.IKoiService;
-import org.example.hsf301.service.KoiOfFarmService;
-import org.example.hsf301.service.KoiService;
+import org.example.hsf301.dtos.request.KoiOfFarmRequest;
+import org.example.hsf301.pojos.Koi;
+import org.example.hsf301.pojos.KoiFarms;
+import org.example.hsf301.pojos.KoiOfFarm;
+import org.example.hsf301.services.IKoiOfFarmService;
+import org.example.hsf301.services.IKoiService;
+import org.example.hsf301.services.KoiOfFarmService;
+import org.example.hsf301.services.KoiService;
 
 import java.net.URL;
 import java.util.List;
@@ -45,8 +44,8 @@ public class FarmDetailController implements Initializable {
     @FXML
     private TextField txtQuantity;
 
-    private IKoiOfFarmService koiOfFarmService;
-    private IKoiService koiService;
+    private final IKoiOfFarmService koiOfFarmService;
+    private final IKoiService koiService;
     private ObservableList<KoiOfFarm> tableModel;
     private KoiFarms koiFarms;
 

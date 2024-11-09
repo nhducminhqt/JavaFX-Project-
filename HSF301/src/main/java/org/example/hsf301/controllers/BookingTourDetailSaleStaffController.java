@@ -12,11 +12,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Data;
 import org.example.hsf301.constants.ResourcePaths;
-import org.example.hsf301.pojo.BookingKoiDetail;
-import org.example.hsf301.pojo.BookingTourDetail;
-import org.example.hsf301.service.*;
+import org.example.hsf301.pojos.BookingTourDetail;
+import org.example.hsf301.services.*;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 

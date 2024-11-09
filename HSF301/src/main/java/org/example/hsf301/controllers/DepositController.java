@@ -12,12 +12,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.CCSTATUS;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.DeliveryRequest;
-import org.example.hsf301.model.request.DepositRequest;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.pojo.Delivery;
-import org.example.hsf301.pojo.Deposit;
-import org.example.hsf301.service.*;
+import org.example.hsf301.dtos.request.DepositRequest;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.pojos.Deposit;
+import org.example.hsf301.services.*;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -57,9 +55,9 @@ public class DepositController implements Initializable {
     @FXML
     private TextField txtshippingfee;
 
-    private IDepositService depositService;
+    private final IDepositService depositService;
     private ObservableList<Deposit> tableModel;
-    private IBookingKoiService bookingService;
+    private final IBookingKoiService bookingService;
     public DepositController() {
         depositService = new DepositService(ResourcePaths.HIBERNATE_CONFIG);
         bookingService = new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG);

@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import lombok.RequiredArgsConstructor;
 import org.example.hsf301.enums.PaymentMethod;
-import org.example.hsf301.model.request.BookingTourDetailRequest;
-import org.example.hsf301.model.request.BookingTourRequest;
-import org.example.hsf301.pojo.Tours;
-import org.example.hsf301.service.IBookingTourService;
-import org.example.hsf301.service.TourService;
+import org.example.hsf301.dtos.request.BookingTourDetailRequest;
+import org.example.hsf301.dtos.request.BookingTourRequest;
+import org.example.hsf301.pojos.Tours;
+import org.example.hsf301.services.IBookingTourService;
+import org.example.hsf301.services.TourService;
 import org.example.hsf301.utils.AppAlert;
 
 @RequiredArgsConstructor

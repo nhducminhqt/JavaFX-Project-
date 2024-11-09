@@ -16,9 +16,9 @@ import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
 import org.example.hsf301.enums.BookingType;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.service.IBookingService;
+import org.example.hsf301.pojos.Account;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.services.IBookingService;
 
 @RequiredArgsConstructor
 public class BookingController implements Initializable {

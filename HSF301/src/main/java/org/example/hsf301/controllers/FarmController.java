@@ -15,8 +15,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.RequiredArgsConstructor;
-import org.example.hsf301.pojo.KoiFarms;
-import org.example.hsf301.service.IKoiFarmService;
+import org.example.hsf301.pojos.KoiFarms;
+import org.example.hsf301.services.IKoiFarmService;
 
 @RequiredArgsConstructor
 public class FarmController implements Initializable {

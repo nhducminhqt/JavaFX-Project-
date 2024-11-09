@@ -19,10 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.pojo.Account;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.service.IBookingKoiService;
-import org.example.hsf301.service.IBookingService;
+import org.example.hsf301.pojos.Account;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.services.IBookingKoiService;
 
 @RequiredArgsConstructor
 public class BookingKoiController implements Initializable {

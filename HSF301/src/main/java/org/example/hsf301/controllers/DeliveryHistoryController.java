@@ -14,14 +14,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.ERole;
-import org.example.hsf301.enums.PaymentMethod;
-import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.DeliveryHistoryRequest;
-import org.example.hsf301.pojo.BookingKoiDetail;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.pojo.DeliveryHistory;
-import org.example.hsf301.service.DeliveryHistoryService;
-import org.example.hsf301.service.IDeliveryHistoryService;
+import org.example.hsf301.dtos.request.DeliveryHistoryRequest;
+import org.example.hsf301.pojos.DeliveryHistory;
+import org.example.hsf301.services.DeliveryHistoryService;
+import org.example.hsf301.services.IDeliveryHistoryService;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -97,7 +93,7 @@ public class DeliveryHistoryController implements Initializable {
         koiHealth.setCellValueFactory(new PropertyValueFactory<>("healthKoiDescription"));
         time.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
         staff.setCellValueFactory(cellData -> cellData.getValue().getDeliveryStaff() != null
-                ? new SimpleStringProperty(String.valueOf(cellData.getValue().getDeliveryStaff().getFirstName()+" "+cellData.getValue().getDeliveryStaff().getLastName()))
+                ? new SimpleStringProperty(cellData.getValue().getDeliveryStaff().getFirstName() + " " + cellData.getValue().getDeliveryStaff().getLastName())
                 : new SimpleStringProperty("N/A"));
         if(tableModel!=null) {
             tbData.setItems(tableModel);

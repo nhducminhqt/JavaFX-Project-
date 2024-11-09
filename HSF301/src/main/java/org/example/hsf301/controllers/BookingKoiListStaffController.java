@@ -17,11 +17,11 @@ import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.ERole;
 import org.example.hsf301.enums.PaymentMethod;
 import org.example.hsf301.enums.PaymentStatus;
-import org.example.hsf301.model.request.BookingUpdate;
+import org.example.hsf301.dtos.request.BookingUpdate;
 import org.example.hsf301.navigate.Navigable;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.service.BookingKoiService;
-import org.example.hsf301.service.IBookingKoiService;
+import org.example.hsf301.pojos.Bookings;
+import org.example.hsf301.services.BookingKoiService;
+import org.example.hsf301.services.IBookingKoiService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -72,7 +72,7 @@ public class BookingKoiListStaffController implements Initializable , Navigable 
     @FXML
     Button btnCancel;
 
-    private IBookingKoiService bookingKoiService;
+    private final IBookingKoiService bookingKoiService;
     private ObservableList<Bookings> tableModel;
     public BookingKoiListStaffController(){
         bookingKoiService = new BookingKoiService(ResourcePaths.HIBERNATE_CONFIG);

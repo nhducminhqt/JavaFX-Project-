@@ -16,19 +16,19 @@
 		<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
 
 		<!-- Entity Mappings -->
-		<mapping class="org.example.hsf301.pojo.Account" />
-		<mapping class="org.example.hsf301.pojo.BookingKoiDetail" />
-		<mapping class="org.example.hsf301.pojo.Bookings" />
-		<mapping class="org.example.hsf301.pojo.BookingTourDetail" />
-		<mapping class="org.example.hsf301.pojo.Delivery" />
-		<mapping class="org.example.hsf301.pojo.DeliveryHistory" />
-		<mapping class="org.example.hsf301.pojo.Deposit" />
-		<mapping class="org.example.hsf301.pojo.Koi" />
-		<mapping class="org.example.hsf301.pojo.KoiOfFarm" />
-		<mapping class="org.example.hsf301.pojo.KoiFarms" />
-		<mapping class="org.example.hsf301.pojo.Quotations" />
-		<mapping class="org.example.hsf301.pojo.TourDetail" />
-		<mapping class="org.example.hsf301.pojo.Tours" />
+		<mapping class="org.example.hsf301.pojos.Account" />
+		<mapping class="org.example.hsf301.pojos.BookingKoiDetail" />
+		<mapping class="org.example.hsf301.pojos.Bookings" />
+		<mapping class="org.example.hsf301.pojos.BookingTourDetail" />
+		<mapping class="org.example.hsf301.pojos.Delivery" />
+		<mapping class="org.example.hsf301.pojos.DeliveryHistory" />
+		<mapping class="org.example.hsf301.pojos.Deposit" />
+		<mapping class="org.example.hsf301.pojos.Koi" />
+		<mapping class="org.example.hsf301.pojos.KoiOfFarm" />
+		<mapping class="org.example.hsf301.pojos.KoiFarms" />
+		<mapping class="org.example.hsf301.pojos.Quotations" />
+		<mapping class="org.example.hsf301.pojos.TourDetail" />
+		<mapping class="org.example.hsf301.pojos.Tours" />
 
 	</session-factory>
 

@@ -11,9 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.hsf301.constants.ResourcePaths;
 import org.example.hsf301.enums.ApproveStatus;
 import org.example.hsf301.navigate.Navigable;
-import org.example.hsf301.pojo.Bookings;
-import org.example.hsf301.pojo.Quotations;
-import org.example.hsf301.service.*;
+import org.example.hsf301.pojos.Quotations;
+import org.example.hsf301.services.*;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -47,11 +46,11 @@ public class QuotationManagementController implements Initializable , Navigable 
 
     @FXML
     private ComboBox<Quotations> txtQuotationID;
-    private IQuotationService quotationService;
-    private ObservableList<Quotations> tableModel;
-    private IBookingService bookingService;
-    private IAccountService accountService;
-    private IBookingTourService bookingTourService;
+    private final IQuotationService quotationService;
+    private final ObservableList<Quotations> tableModel;
+    private final IBookingService bookingService;
+    private final IAccountService accountService;
+    private final IBookingTourService bookingTourService;
     public QuotationManagementController()
     {
         accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
