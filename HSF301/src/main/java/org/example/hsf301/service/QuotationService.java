@@ -3,6 +3,7 @@ package org.example.hsf301.service;
 import org.example.hsf301.controllers.LoginController;
 import org.example.hsf301.enums.ApproveStatus;
 import org.example.hsf301.enums.BookingType;
+import org.example.hsf301.enums.PaymentStatus;
 import org.example.hsf301.exceptions.ResourceNotFoundException;
 import org.example.hsf301.model.request.QuotationRequest;
 
@@ -78,6 +79,13 @@ public class QuotationService implements  IQuotationService{
         if (quotations == null) {
             throw new ResourceNotFoundException("Quotation not found");
         }
+        if(approveStatus==ApproveStatus.FINISH)
+        {
+            Bookings bookings = bookingRepository.findById(quotations.getBooking().getId());
+            bookings.setPaymentStatus(PaymentStatus.PROCESSING);
+            bookingRepository.update(bookings);}
+         //   quotations.getBooking().setPaymentStatus(PaymentStatus.PROCESSING);}
+
         quotations.setStatus(approveStatus);
         quotationRepository.save(quotations);
 
@@ -99,6 +107,20 @@ public class QuotationService implements  IQuotationService{
         if (quotation == null) {
             throw new ResourceNotFoundException("Quotation not found");
         }
+        if(approveStatus==ApproveStatus.FINISH)
+        {
+            Bookings bookings = bookingRepository.findById(quotation.getBooking().getId());
+            bookings.setPaymentStatus(PaymentStatus.PROCESSING);
+            bookings.setTotalAmount(quotation.getAmount());
+            bookings.setVatAmount((quotation.getAmount() - bookings.getDiscountAmount()) * bookings.getVat()  );
+            bookings.setTotalAmountWithVAT(bookings.getTotalAmount() +bookings.getVatAmount() - bookings.getDiscountAmount());
+            bookingRepository.update(bookings);}
+        else if(approveStatus==ApproveStatus.REJECTED)
+        {
+            Bookings bookings = bookingRepository.findById(quotation.getBooking().getId());
+            bookings.setPaymentStatus(PaymentStatus.PENDING);
+            bookingRepository.update(bookings);}
+
             quotation.setStatus(approveStatus);
             quotationRepository.save(quotation);
         return quotation;

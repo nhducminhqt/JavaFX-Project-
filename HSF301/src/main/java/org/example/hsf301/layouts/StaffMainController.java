@@ -19,7 +19,7 @@ public class StaffMainController implements Navigable, Initializable {
 
     @FXML
     private void navigateLogout() throws IOException {
-        NavigateUtil.navigateTo(ResourcePaths.LOGIN_VIEW, contentArea, 1400, 700, "Hello!");
+        navigateLogout(contentArea);
     }
 
     public void btnTourListAction(ActionEvent actionEvent) throws IOException {

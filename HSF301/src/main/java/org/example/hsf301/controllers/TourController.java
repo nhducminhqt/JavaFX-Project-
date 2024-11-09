@@ -163,9 +163,9 @@ public class TourController implements Initializable {
             BookingTourRequest request = BookingTourRequest.builder()
                 .paymentMethod(PaymentMethod.BANKING)
                 .details(bookingTourDetailRequestList)
-                .vat(10.0F)
+                .vat(0.2F)
                 .bookingDate(LocalDate.now())
-                .discountAmount(0.0F)
+                .discountAmount(20F)
                 .build();
 
             // Add booking logic here
