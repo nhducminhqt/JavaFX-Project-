@@ -111,6 +111,14 @@ public class QuotationService implements  IQuotationService{
         {
             Bookings bookings = bookingRepository.findById(quotation.getBooking().getId());
             bookings.setPaymentStatus(PaymentStatus.PROCESSING);
+            bookings.setTotalAmount(quotation.getAmount());
+            bookings.setVatAmount((quotation.getAmount() - bookings.getDiscountAmount()) * bookings.getVat()  );
+            bookings.setTotalAmountWithVAT(bookings.getTotalAmount() +bookings.getVatAmount() - bookings.getDiscountAmount());
+            bookingRepository.update(bookings);}
+        else if(approveStatus==ApproveStatus.REJECTED)
+        {
+            Bookings bookings = bookingRepository.findById(quotation.getBooking().getId());
+            bookings.setPaymentStatus(PaymentStatus.PENDING);
             bookingRepository.update(bookings);}
 
             quotation.setStatus(approveStatus);
