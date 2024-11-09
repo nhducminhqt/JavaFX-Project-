@@ -139,7 +139,12 @@ public class SignupController {
         try {
             // Load the signup.fxml file
             URL url = getClass().getResource(ResourcePaths.LOGIN_VIEW);
+
+            // Create the controller with the service
+            LoginController controller = new LoginController(new AccountService(ResourcePaths.HIBERNATE_CONFIG));
+
             FXMLLoader loader = new FXMLLoader(url);
+            loader.setController(controller);
             Parent root = loader.load();
 
             // Get the current stage (the window that contains the login button)
